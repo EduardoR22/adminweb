@@ -1,0 +1,24 @@
+import { MagnifyingGlassIcon } from "@heroicons/react/24/solid"
+import { ChangeEvent } from 'react';
+
+export default function Searcher({search, setCurrentPage, setSearch}: 
+                {search:any, setCurrentPage:Function, setSearch:Function}){
+
+  function onSearchChange({target}: ChangeEvent<HTMLInputElement>){
+    console.log('onsearchhh')
+    setCurrentPage(0);
+    setSearch(target.value);
+  }
+
+  return(
+    <div className='flex rounded-lg items-center ml-2 border border-gray-300'>
+      <MagnifyingGlassIcon height={20} width={20} className='text-gray-500' />
+      <input className='ml-2 rounded-xl outline-0 outline-none'
+        type="text"
+        value={search}
+        placeholder='Buscar usuario'
+        onChange={(e) => {onSearchChange(e)}}  
+      />
+    </div>
+  )
+}
