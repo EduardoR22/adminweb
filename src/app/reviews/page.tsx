@@ -1,13 +1,13 @@
-import ListProyects from "@/components/proyects/ListProyects"
+import ListReviews from "@/components/reviews/ListReviews"
 import NavBar from "@/components/NavBar"
 
-export default function Proyects(){
-  return (
+export default function Reviews(){
+  return(
     <>
       <NavBar />
       <div className="p-10">
         <h1 className="font-semibold text-gray-900">Proyectos</h1>
-        <ListProyects />
+        <ListReviews />
       </div>
     </>
   )

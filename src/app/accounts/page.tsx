@@ -15,7 +15,7 @@ export default async function Users(){
   let table;
 
   if(users){
-    table = <Table users={users.data.data} token={token} link="/users/new" >
+    table = <Table users={users.data.data} token={token} link="/accounts/new" >
       <ArrowReturn height={30} width={30} url="/" />
     </Table>
   }else{
@@ -25,7 +25,7 @@ export default async function Users(){
   return(
     <>
       <NavBar />
-      <ContainerForm img="" subtitle="" title="" width="w-10/12 pl-10">
+      <ContainerForm img="" subtitle="" title="" width="w-7/12 pl-10">
         {table}
       </ContainerForm>
     </>

@@ -88,10 +88,11 @@ const NavLinks = () => {
   return(
     <>
       <Link href={'/proyects'}>PROYECTOS</Link>
-      <Link href={'/routesBuses'}>SLIDERS</Link>
+      <Link href={'/sliders'}>SLIDERS</Link>
       <Link href={'/users'}>CLIENTES</Link>
-      <Link href={'/users'}>REVIEWS</Link>
-      <Link href={'/catalogue'}>CONTACTOS</Link>
+      <Link href={'/reviews'}>REVIEWS</Link>
+      <Link href={'/'}>CONTACTOS</Link>
+      <Link href={'/accounts'}>CUENTAS</Link>
     </>
   )
 };

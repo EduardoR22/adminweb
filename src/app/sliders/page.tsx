@@ -1,12 +1,11 @@
-import Table from "@/components/Table"
-import { getUsers } from "../api/users/route";
 import { cookies } from "next/headers";
 import ContainerForm from "@/components/ContainerForm";
 import ArrowReturn from "@/components/ArrowReturn";
+import { getUsers } from "../api/users/route";
+import Table from "@/components/TableSliders";
 import NavBar from "@/components/NavBar";
 
-export default async function Users(){
-  
+export default async function Sliders(){
   const cookieStore = cookies();
   const token = cookieStore.get('token')?.value || '';
   
@@ -15,7 +14,7 @@ export default async function Users(){
   let table;
 
   if(users){
-    table = <Table users={users.data.data} token={token} link="/users/new" >
+    table = <Table users={users.data.data} token={token} link="/sliders/new" >
       <ArrowReturn height={30} width={30} url="/" />
     </Table>
   }else{
@@ -25,7 +24,7 @@ export default async function Users(){
   return(
     <>
       <NavBar />
-      <ContainerForm img="" subtitle="" title="" width="w-10/12 pl-10">
+      <ContainerForm img="" subtitle="" title="" width="w-7/12 pl-10">
         {table}
       </ContainerForm>
     </>

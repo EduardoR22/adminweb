@@ -1,13 +1,11 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid"
 import { ChangeEvent } from 'react';
 
-export default function Searcher({search, setCurrentPage, setSearch}: 
-                {search:any, setCurrentPage:Function, setSearch:Function}){
+export default function Searcher({search, searchChange}: 
+  {search:any, searchChange:Function}){
 
   function onSearchChange({target}: ChangeEvent<HTMLInputElement>){
-    console.log('onsearchhh')
-    setCurrentPage(0);
-    setSearch(target.value);
+    searchChange(target.value);
   }
 
   return(
@@ -17,7 +15,7 @@ export default function Searcher({search, setCurrentPage, setSearch}:
         type="text"
         value={search}
         placeholder='Buscar usuario'
-        onChange={(e) => {onSearchChange(e)}}  
+        onChange={(e) => {searchChange(e.target.value)}}  
       />
     </div>
   )
