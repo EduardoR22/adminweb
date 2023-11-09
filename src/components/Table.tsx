@@ -52,13 +52,53 @@ export default function Table({children, users, token, link} : {children:any, us
           <Button styleB='mr-10 bg-blue-600 text-white hover:bg-blue-500' textB='Nuevo' typeB='button'/>
         </Link>
       </div>
-      <div className='flex justify-between flex-wrap'>
-        <div className='mt-5'><Image src={'/cr7.jpg'} alt='image' width={300} height={100} /></div>
-        <div className='mt-5'><Image src={'/cr7.jpg'} alt='image' width={300} height={100} /></div>
-        <div className='mt-5'><Image src={'/cr7.jpg'} alt='image' width={300} height={100} /></div>
-        <div className='mt-5'><Image src={'/cr7.jpg'} alt='image' width={300} height={100} /></div>
-        <div className='mt-5'><Image src={'/cr7.jpg'} alt='image' width={300} height={100} /></div>
-      </div>
+      
+      <p className='mt-10 font-semibold'>Usuarios todos</p>
+
+      <table className='mt-5 w-11/12'>
+        <thead className='text-gray-400'>
+          <tr className='border-b'>
+            <th className='w-16 border-b border-slate-400'>Foto</th>
+            <th className='w-20 border-b border-slate-400'>Eliminar</th>
+            <th className='w-28 text-start border-b border-slate-400'>Nombre / Usuario</th>
+            <th className='w-28 text-start border-b border-slate-400'>Perfil / Status</th>
+            <th className='w-20 border-b border-slate-400'>Detalle</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filter.map( (user: any) => (
+            <tr key={user._id}>
+              <td>
+                <Link href={`/users/${user._id}/details`}>
+                  <Image src={user.photo} alt='profile' width={50} height={40} className='rounded-full' />
+                </Link>
+              </td>
+              <td> 
+                <div className=' flex justify-center'>
+                  <Delete token={token} user={user} />
+                </div>
+              </td>
+              <td>
+                <div>
+                  <p>{user.name}</p>
+                  <p className='text-gray-400'>{user.email}</p>
+                </div>
+              </td>
+              <td>
+                <div className='flex items-center'>
+                  <div className={`w-4 h-4 ${user.status ? 'bg-green-500' : 'bg-red-500'} mr-2`}></div>
+                  <p>{user.role}</p>
+                </div>
+              </td>
+              <td>
+                <div className='flex justify-center'>
+                  <CreditCardIcon width={25} height={25} className='text-gray-300' />
+                </div>
+              </td>
+            </tr>
+          ) )}
+        </tbody>
+      </table>
 
       <div className='flex justify-center items-center mt-3 w-9/12'>
         <Pagination IndexPages={IndexPages} currentPage={currentPage} num_rows={num_rows} 

@@ -89,9 +89,9 @@ const NavLinks = () => {
     <>
       <Link href={'/proyects'}>PROYECTOS</Link>
       <Link href={'/sliders'}>SLIDERS</Link>
-      <Link href={'/users'}>CLIENTES</Link>
+      <Link href={'/clients'}>CLIENTES</Link>
       <Link href={'/reviews'}>REVIEWS</Link>
-      <Link href={'/'}>CONTACTOS</Link>
+      <Link href={'/contact'}>CONTACTOS</Link>
       <Link href={'/accounts'}>CUENTAS</Link>
     </>
   )

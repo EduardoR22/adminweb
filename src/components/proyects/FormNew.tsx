@@ -3,15 +3,24 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Button from "@/components/Button";
+import { createProyect, updateProyect } from "@/app/api/proyects/route";
+import Alert, { showToastMessage, showToastMessageError } from '../Alert';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
-export default function FormNew(){
+export default function FormNew({token, title, subtitle, address, features, seg, id}: 
+                                {token:string, title:string, subtitle:string, 
+                                address:string, features:string, seg:string, id:string}){
   
+  //const [segment, setSegment] = useState<string>('industrial');
+  const [segment, setSegment] = useState<string>(seg);
+  const router = useRouter();
   const formikPass = useFormik({
     initialValues: {
-      title: '',
-      subtitle: '',
-      location:'',
-      features: '',
+      title: title,
+      subtitle: subtitle,
+      location:address,
+      features: features,
     }, 
     validationSchema: Yup.object({
       title: Yup.string()
@@ -24,22 +33,52 @@ export default function FormNew(){
                   .required('Las caracteristicas son obligatorias'),
     }),
     
-    onSubmit: async valores => {            
-      // const {passwordCurrent, password, passwordConfirm} = valores;            
-      // let res = await updateMePassword(_id, passwordCurrent, password, passwordConfirm, token);
-      // if(res.status === 'success') {
-      //   showToastMessage(`Password de ${email} modificado exitosamente!`);
-      //   setTimeout(() => {
-      //     logOut();
-      //   }, 2000)
-      // } else {
-      //   showToastMessageError(res);
-      // }                            
+    onSubmit: async valores => {
+      const {features, location, subtitle, title} = valores;
+      
+      const proyect = {
+        title,
+        subtitle,
+        'address': location,
+        segment,
+        features,
+        'images': '/public/prject.jpg'
+      };
+
+      if(title === ''){
+        try{
+          let res = await createProyect(proyect, token);
+          if(res === 201){
+            showToastMessage('Proyecto creado exitosamente!');
+            setTimeout(() => {
+              router.refresh();
+              router.push('/proyects');
+            }, 2000);
+          }
+        }catch{
+          showToastMessageError('Error al crear proyecto..');
+        }
+      }else{
+        let res = await updateProyect(id, JSON.stringify(proyect), token)
+        if(res.status === 200){
+          showToastMessage('Proyecto modificado exitosamente!');
+          setTimeout(() => {
+            router.refresh();
+            router.push('/proyects');
+          }, 2000);
+        }
+      }                                  
     },       
   });
   
+  const handleSelect = (event: any) => {
+    const target = event.target as HTMLButtonElement;
+    setSegment(target.value);
+  }
+
   return(
     <>
+      <Alert/>
       <form className="bg-white rounded shadow-md px-8 pt-6 pb-8" 
         onSubmit={formikPass.handleSubmit}>
         <div className="flex">
@@ -107,9 +146,13 @@ export default function FormNew(){
               <label className="block text-sm font-medium text-gray-500" htmlFor="segment">
                 Segmento
               </label>
-              <select className="bg-white mt-2 outline-none outline-0 shadow appearance-none border rounded w-full py-4 px-3 text-base text-gray-500 leading-tight font-sans font-ligth focus:outline-none focus:shadow-outline">
-                <option value="admin">Industrial</option>
-                <option value="user">Algun otro</option>
+              <select className="bg-white mt-2 outline-none outline-0 shadow appearance-none border 
+                      rounded w-full py-4 px-3 text-base text-gray-500 leading-tight font-sans 
+                      font-ligth focus:outline-none focus:shadow-outline"
+                onChange={handleSelect}
+              >
+                <option value="industrial">Industrial</option>
+                <option value="otro">Algun otro</option>
               </select>
             </div>
           </div>
@@ -119,6 +162,9 @@ export default function FormNew(){
             Caracteristicas
           </label>
           <textarea name="features" id="features" 
+            value={formikPass.values.features}
+            onChange={formikPass.handleChange}
+            onBlur={formikPass.handleChange} 
             className="w-full resize-none border border-gray-300 outline-none outline-0 mt-2 p-3 overflow-hidden " 
           />
         </div>
@@ -135,9 +181,6 @@ export default function FormNew(){
               id="photo" 
               name="photo" 
               multiple
-              //value={formik.values.photo}
-              //onChange={onFileChange}
-              //onBlur={formik.handleChange}
               className="opacity-0 absolute inset-0	">                                            
             </input>
             <p className='text-center	'>Subir fotos</p>
@@ -147,28 +190,6 @@ export default function FormNew(){
           <Button styleB="rounded-full bg-blue-600 w-1/5 text-white hover:bg-blue-500" textB="Guardar" typeB="submit" />
         </div>
       </form>
-      {/* <Alert></Alert>
-      <div className="flex justify-center mt-6">
-        <div className="w-2/3 shadow-2xl shadow-slate-300">
-          <div className="flex mt-2 pl-7">
-            <Image    
-              className="rounded-full"                      
-              // src={`/img/users/${photo}`}
-              src={'/profile'}
-              alt={'prifile'}
-              width={50}
-              height={50}                                    
-              priority={true}                                    
-            />
-            <div>
-              <p className="text-xl">{'Nuevo Proyecto'}</p>
-              <p className="text-gray-500 text-sm">{'Proyecto a publicar'}</p>
-            </div>
-          </div>
-                    
-          {children}
-        </div>                        
-      </div> */}
     </>
   )
 }

@@ -1,7 +1,6 @@
 import { cookies } from "next/headers"
 import {getUser} from '@/app/api/users/route'
 import ContainerHeaderForm from "@/components/ContainerHeaderForm"
-import Button from "@/components/Button";
 import FormChangePassword from "@/components/profile/FormChangePassword";
 import ContainerForm from "@/components/ContainerForm";
 

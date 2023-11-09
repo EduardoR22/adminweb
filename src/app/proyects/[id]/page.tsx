@@ -1,15 +1,38 @@
-// import Image from "next/image"
-// import { PencilIcon, TrashIcon } from "@heroicons/react/24/solid"
 import ViewProyect from "@/components/proyects/ViewProyect"
+import { getProyect } from "@/app/api/proyects/route";
+import { cookies } from "next/headers";
 
-export default function Proyect(){
+export default async function Proyect({params}: {params: {id:string}}){
+  
+  const id = params.id;
+  const cookieStore = cookies();
+  const token = cookieStore.get('token')?.value || '';
+
+  let proyect;
+
+  try {
+    proyect = await getProyect(id, token);
+    if(!proyect){
+      return(
+        <h1 className="font-bold text-center text-red-500">Error al obtener los datos del proyecto..</h1>
+      )
+    }
+    if(proyect.status !== 'success'){
+      return(
+        <h1 className="font-bold text-center text-red-500">Error al obtener los datos del proyecto...</h1>
+      )
+    }    
+  } catch (error) {
+    return(
+      <h1 className="font-bold text-center text-red-500">Ocurrio un error al obtener los datos del proyecto..</h1>
+    )
+  }
+
   return(
     <>
       <div className="flex justify-center">
         <div className="w-2/3 p-10">
-
-          <ViewProyect width="w-1/2" />
-
+          <ViewProyect width="w-full" proyect={proyect.data.data} />
         </div>
       </div>
     </>

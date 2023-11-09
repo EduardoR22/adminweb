@@ -6,7 +6,7 @@ export default function Pagination({IndexPages, num_rows, currentPage, setCurren
             
   function handleChange(event : any){
     setCurrentPage(0);
-    setNumRows(event.target.value);
+    setNumRows(parseInt(event.target.value));
   }
  
   function nextPage(){

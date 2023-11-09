@@ -160,3 +160,33 @@ export async function removeUser(id:string, auth_token:string) {
     return error;    
   }
 }
+
+//export async function createUser(user:FormData, auth_token:string){
+export async function createUser(user:any, auth_token:string){
+  const url=`${process.env.NEXT_PUBLIC_API_URL}/users`;
+  const config = {
+    headers: { 
+      'Content-Type': 'application/json',
+      //'Content-Type': 'multipart/form-data',
+      'Authorization': `Bearer ${auth_token}`
+    }
+  };
+  try {            
+    const res = await axios.patch(url, user, config)
+    .then( (response) => {      
+      if(!response){          
+        throw new Error('Algo salió mal con la solicitud');                      
+      } else {
+        if(response.status === 204) {        
+            return 204;
+          }        
+        }          
+        return response.status;
+      })
+      .catch( (err) => {          
+        console.log(err);
+      });
+  } catch (error:any) {
+    return error;    
+  }
+}

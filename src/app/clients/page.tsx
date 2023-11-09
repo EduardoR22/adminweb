@@ -1,23 +1,23 @@
-import Table from "@/components/Table"
-import { getUsers } from "../api/users/route";
+import ClientsList from "@/components/ClientsList";
 import { cookies } from "next/headers";
 import ContainerForm from "@/components/ContainerForm";
 import ArrowReturn from "@/components/ArrowReturn";
 import NavBar from "@/components/NavBar";
+import { getClients } from "../api/clients/route";
 
-export default async function Users(){
+export default async function Clients(){
   
   const cookieStore = cookies();
   const token = cookieStore.get('token')?.value || '';
   
-  const users = await getUsers(token);
+  const clients = await getClients(token);
 
   let table;
 
-  if(users){
-    table = <Table users={users.data.data} token={token} link="/users/new" >
+  if(clients){
+    table = <ClientsList users={clients.data.data} token={token} link="/clients/new" >
       <ArrowReturn height={30} width={30} url="/" />
-    </Table>
+    </ClientsList>
   }else{
     table = <><h1>Error al obtener los datos de los usuarios!!!</h1></>
   }
