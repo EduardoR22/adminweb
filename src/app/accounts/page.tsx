@@ -10,7 +10,13 @@ export default async function Users(){
   const cookieStore = cookies();
   const token = cookieStore.get('token')?.value || '';
   
-  const users = await getUsers(token);
+  let users
+
+  try {
+    users = await getUsers(token);
+  } catch (error) {
+    console.log(error);
+  }
 
   let table;
 

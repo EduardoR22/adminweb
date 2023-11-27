@@ -1,18 +1,19 @@
 import ContainerForm from "@/components/ContainerForm"
-import FormSlider from "@/components/sliders/FormSlider"
+import FormCompany from "@/components/companies/FormCompany"
+import { cookies } from "next/headers"
 import NavBar from "@/components/NavBar";
-import { cookies } from "next/headers";
 
 export default function New(){
   
   const cookiStore = cookies();
   const token = cookiStore.get('token')?.value || '';
-
+  
   return(
     <>
       <NavBar />
-      <ContainerForm title="Nuevo slider" subtitle="Imagenes de slider" width="w-2/3" img="/profile">
-        <FormSlider token={token} slider='' />
+      <ContainerForm img="/company.jpg" title="Nueva empresa" subtitle="Creacion de nueva empresa" 
+        width="2/3">
+          <FormCompany token={token} />
       </ContainerForm>
     </>
   )

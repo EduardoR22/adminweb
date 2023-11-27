@@ -9,8 +9,8 @@ export default function Searcher({search, searchChange}:
   }
 
   return(
-    <div className='flex rounded-lg items-center ml-2 border border-gray-300'>
-      <MagnifyingGlassIcon height={20} width={20} className='text-gray-500' />
+    <div className='flex rounded-full items-center ml-2 border border-gray-300 py-2'>
+      <MagnifyingGlassIcon height={20} width={20} className='text-gray-500 ml-2' />
       <input className='ml-2 rounded-xl outline-0 outline-none'
         type="text"
         value={search}

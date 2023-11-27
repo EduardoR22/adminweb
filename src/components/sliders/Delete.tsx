@@ -2,27 +2,28 @@
 
 import { TrashIcon } from '@heroicons/react/24/solid';
 import {confirmAlert} from 'react-confirm-alert';
-import { removeUser } from '@/app/api/users/route';
 import {showToastMessage, showToastMessageError, showToastMessageWarning, showToastMessageInfo} from "@/components/Alert";
 import { useRouter } from 'next/navigation';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import Alert from '@/components/Alert';
+import { removeSlider } from '@/app/api/sliders/route';
 
-export default function Delete({token, user} : {token : string, user: any}){
+export default function Delete({token, slider} : {token : string, slider: any}){
   
-  /**
-    * Metodo para eliminar un determinado usuario
-    * @param id Id del usuario
-    * @param user Nombre del usuario
-    */
+  // console.log('slider eliminarr');
+  // console.log(slider._id);
+  //console.log(slider)
 
   const router = useRouter()
 
-   const deleteUser = async (id:string, name:any)  => {
+   const deleteSlider = async (id:string, name:string)  => {
     
+    console.log('deleteslider');
+    console.log(id);
+
     confirmAlert({
-      title: 'Confirmacion para eliminar Usuario?',
-      message: `Desea eliminar al usuario ${name}`,
+      title: 'Confirmacion para eliminar Slider?',
+      message: `Desea eliminar slider ${name}`,
       buttons: [
       {
         label: 'Si',
@@ -33,25 +34,23 @@ export default function Delete({token, user} : {token : string, user: any}){
           switch('user'){
             case 'user':
               try {
-                res = await removeUser(id, token);
-                console.log(id);
-                console.log(res)
+                res = await removeSlider(token, id);
+                if(res === 204) {
+                  showToastMessage('Slider eliminado exitosamente!');
+                  setTimeout(() => {
+                    router.refresh();
+                    router.push('/sliders');
+                  }, 2000)
+                } else {
+                  showToastMessageError('El slider no pudo ser eliminado..');
+                  router.refresh()
+                }
               } catch (error) {
-                console.log('Error al eliminar usuario');
+                console.log('Error al eliminar slider');
               }
             break;
           }
-
-          if(res != undefined) {
-            if(res === 204) {
-              showToastMessage('Usuario eliminado exitosamente!');
-            } else {
-              showToastMessageError(res);
-            }
-          }else {
-          showToastMessageError('El usuario no pudo ser eliminado..');
-          }
-          router.refresh()
+          // router.refresh()
         }           
       },
       {
@@ -81,12 +80,12 @@ export default function Delete({token, user} : {token : string, user: any}){
   
     return(
     <>
-    <Alert />
-      <button type="button" onClick={() => {
-        deleteUser(user._id, user.name)
+      <Alert />
+      <button type="button" className='absolute right-9' onClick={() => {
+        deleteSlider(slider._id, slider.title)
         router.refresh()
         }}>
-        <TrashIcon className="h-6 w-6 text-gray-400"/>
+        <TrashIcon width={30} height={30} className="text-red-700"/>
       </button>
     </>
   )

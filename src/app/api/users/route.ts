@@ -137,10 +137,12 @@ export async function removeUser(id:string, auth_token:string) {
   const requestOptions = {
     method: 'DELETE',
     headers: { 
-      'Content-Type': 'application/json',
       'Authorization': `Bearer ${auth_token}`
     }
   };
+
+  console.log(url);
+
   try {            
     const res = await fetch(url, requestOptions)
     .then( (response) => {      
@@ -172,7 +174,7 @@ export async function createUser(user:any, auth_token:string){
     }
   };
   try {            
-    const res = await axios.patch(url, user, config)
+    const res = await axios.post(url, user, config)
     .then( (response) => {      
       if(!response){          
         throw new Error('Algo salió mal con la solicitud');                      

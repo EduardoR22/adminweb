@@ -60,8 +60,8 @@ export default function Login({}) {
               rel="noopener noreferrer"
               >         
                 <Image
-                  src="/maxion.jpg"
-                  alt="Maxion logo"
+                  src="/logo.jpg"
+                  alt="Logo"
                   width={150}
                   height={27}                                    
                   //className='w-auto h-auto'
@@ -109,7 +109,7 @@ export default function Login({}) {
                 </div>
               ) : null}
               <div className="mt-10 flex justify-center">
-                <button className="flex w-40 sm:w-full ease-in-out duration-300 rounded-lg justify-around bg-blue-600 sm:px-5 py-2 text-sm text-white transition-colors hover:bg-blue-500" type="submit">
+                <button className="flex w-40 sm:w-full ease-in-out duration-300 rounded-lg justify-around bg-blue-950 sm:px-5 py-2 text-sm text-white transition-colors hover:bg-blue-500" type="submit">
                   <LockClosedIcon className="h-8 sm:h-14 w-10 text-white"  />
                   <p className='sm:mt-4 text-2xl font-bold mr-5 sm:mr-20'>Entrar</p>
                 </button>

@@ -1,6 +1,7 @@
 import ViewProyect from "@/components/proyects/ViewProyect"
 import { getProyect } from "@/app/api/proyects/route";
 import { cookies } from "next/headers";
+import NavBar from "@/components/NavBar";
 
 export default async function Proyect({params}: {params: {id:string}}){
   
@@ -30,9 +31,10 @@ export default async function Proyect({params}: {params: {id:string}}){
 
   return(
     <>
+      <NavBar />
       <div className="flex justify-center">
         <div className="w-2/3 p-10">
-          <ViewProyect width="w-full" proyect={proyect.data.data} />
+          <ViewProyect token={token} width="w-full" proyect={proyect.data.data} />
         </div>
       </div>
     </>

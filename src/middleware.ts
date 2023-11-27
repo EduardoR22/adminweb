@@ -5,12 +5,18 @@ import { NextResponse, NextRequest } from "next/server";
 
  export async function middleware(request: NextRequest){
    
-  const token = request.cookies.get('token');
-  let user = request.cookies.get('user')?.value;
+  // const token = request.cookies.get('token');
+  // let user: any = request.cookies.get('user')?.value || '';
   
-  if(token === undefined || user === undefined){
-    return NextResponse.redirect(new URL('/login', request.url))
-  }
+  // if(token === undefined || user === undefined){
+  //   return NextResponse.redirect(new URL('/login', request.url))
+  // }
+
+  // user = JSON.parse(user);
+  
+  // if(user.role !== 'admin' && (request.url.includes('companies') || request.url.includes('accounts'))){
+  //   return NextResponse.redirect(new URL('/', request.url))
+  // }
 
 //    try{
 //     const {payload} = await jwtVerify(
@@ -28,7 +34,7 @@ import { NextResponse, NextRequest } from "next/server";
     //return NextResponse.next();
  }
 
- export const config = {
-   matcher: ['/', '/accounts/:path*', '/clients/:path*', 
-              '/contacts/:path*', '/profile/:path*', '/proyects/:path*', '/sliders/:path*'],
- }
+//  export const config = {
+//    matcher: ['/', '/accounts/:path*', '/clients/:path*', '/companies/:path*',
+//               '/contacts/:path*', '/profile/:path*', '/proyects/:path*', '/sliders/:path*'],
+//  }

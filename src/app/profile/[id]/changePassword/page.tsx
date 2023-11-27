@@ -3,6 +3,7 @@ import {getUser} from '@/app/api/users/route'
 import ContainerHeaderForm from "@/components/ContainerHeaderForm"
 import FormChangePassword from "@/components/profile/FormChangePassword";
 import ContainerForm from "@/components/ContainerForm";
+import NavBar from "@/components/NavBar";
 
 export default async function ChangePassword({ params }: { params: { id: string } }) {
 
@@ -21,6 +22,7 @@ export default async function ChangePassword({ params }: { params: { id: string 
 
   return(
     <>
+      <NavBar />
       <ContainerHeaderForm email={email} photo={photo} name={name} />
       <ContainerForm img="/profile" subtitle="Cambiar contraseña" title="Usuario" width="w-full max-w-sm">
             <FormChangePassword usr={user} token={token} />        

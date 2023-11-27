@@ -9,20 +9,20 @@ import Pagination from './Pagination';
 import Searcher from './Searcher';
 import Button from './Button';
 
-export default function Table({children, users, token, link} : {children:any, users: any, token: string, link:string}){
+export default function Table({children, sliders, token, link} : {children:any, sliders: any, token: string, link:string}){
   
   const [search, setSearch] = useState('');
   const [currentPage, setCurrentPage] = useState(0);
   const [num_rows, setNumRows] = useState(3);
-  const [length, setLength] = useState(users.length); 
-  const [filter, setFilter] = useState(users.slice(currentPage, currentPage + num_rows));
+  const [length, setLength] = useState(sliders.length); 
+  const [filter, setFilter] = useState(sliders.slice(currentPage, currentPage + num_rows));
 
   useEffect(() => {
     if(search.length === 0){
-      setLength(users.length)
-      setFilter(users.slice(currentPage, currentPage + num_rows))
+      setLength(sliders.length)
+      setFilter(sliders.slice(currentPage, currentPage + num_rows))
     }else{
-      const filtered = users.filter( (user: any) => user.name.toLowerCase().includes(search.toLowerCase()));
+      const filtered = sliders.filter( (user: any) => user.name.toLowerCase().includes(search.toLowerCase()));
       setLength(filtered.length);
       setFilter(filtered.slice(currentPage, currentPage + num_rows));
     }
@@ -49,7 +49,7 @@ export default function Table({children, users, token, link} : {children:any, us
           <Searcher search={search} searchChange={onSearchChange} />
         </div>
         <Link href={link} >
-          <Button styleB='mr-10 bg-blue-600 text-white hover:bg-blue-500' textB='Nuevo' typeB='button'/>
+          <Button styleB='mr-10 bg-blue-950 text-white hover:bg-blue-500' textB='Nuevo' typeB='button'/>
         </Link>
       </div>
       <table className='mt-5'>
@@ -63,34 +63,35 @@ export default function Table({children, users, token, link} : {children:any, us
           </tr>
         </thead>
         <tbody>
-          {filter.map( (user: any) => (
-            <tr key={user._id}>
+          {filter.map( (slider: any) => (
+            <tr key={slider._id}>
               <td>
-                <Link href={`/users/${user._id}/details`}>
+              <Image src={slider.images} alt='profile' width={50} height={40} className='rounded-full' />
+                {/* <Link href={`/users/${user._id}/details`}>
                   <Image src={user.photo} alt='profile' width={50} height={40} className='rounded-full' />
-                </Link>
+                </Link> */}
               </td>
               <td> 
                 <div className=' flex justify-center'>
                   {/* <Delete token={token} user={user} /> */}
-                  <div className={`w-4 h-4 rounded-full ${user.status ? 'bg-green-600' : 'bg-red-600'} mr-2`}></div>
+                  <div className={`w-4 h-4 rounded-full ${slider.status ? 'bg-green-600' : 'bg-red-600'} mr-2`}></div>
                 </div>
               </td>
               <td>
                 <div>
-                  <p>{user.name}</p>
+                  <p>{slider.title}</p>
                 </div>
               </td>
               <td>
                 <div className='flex items-center'>
-                  <p>{user.email}</p>
+                  <p>{slider.description}</p>
                 </div>
               </td>
               <td>
                 <div className=''>
-                  <Link href={`/sliders/${user._id}`}>
+                  <Link href={`/sliders/${slider._id}`}>
                     <Image 
-                      src={user.photo}
+                      src={slider.images}
                       alt='imagen'
                       width={60}
                       height={30}

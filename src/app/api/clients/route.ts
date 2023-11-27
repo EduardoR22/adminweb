@@ -4,8 +4,8 @@ export async function createClient(user:any, auth_token:string){
   const url=`${process.env.NEXT_PUBLIC_API_URL}/api/v1/clients`;
   const config = {
     headers: { 
-      'Content-Type': 'application/json',
-      //'Content-Type': 'multipart/form-data',
+      //'Content-Type': 'application/json',
+      'Content-Type': 'multipart/form-data',
       'Authorization': `Bearer ${auth_token}`
     }
   };

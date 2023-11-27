@@ -3,6 +3,7 @@ import {getUser} from '@/app/api/users/route'
 import ContainerHeaderForm from "@/components/ContainerHeaderForm"
 import ContainerForm from "@/components/ContainerForm";
 import FormEditUser from "@/components/profile/FormEditUser";
+import NavBar from "@/components/NavBar";
 
 export default async function EditUser({ params }: { params: { id: string } }) {
 
@@ -21,6 +22,7 @@ export default async function EditUser({ params }: { params: { id: string } }) {
 
   return(
     <>
+      <NavBar />
       <ContainerHeaderForm email={email} photo={photo} name={name} />
       <ContainerForm img="/profile" subtitle="Configuraci&oacute;n de su cuenta" title="Usuario" width="w-full max-w-sm">
             <FormEditUser usr={user} token={token} />        

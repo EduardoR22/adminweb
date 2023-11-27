@@ -47,12 +47,12 @@ export default function NavBar(){
 
   return(
     <>
-      <nav className="bg-blue-500 top-0 flex-wrap z-[20] mx-auto flex w-full items-center justify-between">
+      <nav className="bg-blue-950 top-0 flex-wrap z-[20] mx-auto flex w-full items-center justify-between">
         <Bars3Icon width={30} height={30} className="sm:hidden" onClick={toggleNavBar} />
-        <Image src={'/maxion.jpg'} alt="logo" width={50} height={50} priority />
+        <Image src={'/icono.jpg'} alt="logo" width={50} height={50} priority />
         <div className="w-1/12 sm:w-2/3 flex justify-end">
           <div className="hidden w-full text-white sm:flex justify-between ">
-            <NavLinks /> 
+            <NavLinks role={role} /> 
           </div>
         </div>
         
@@ -68,7 +68,7 @@ export default function NavBar(){
       </nav>
       {isOpen && (
           <div className="flex text-gray-200 bg-stone-400 sm:hidden flex-col items-start pl-2  basis-full">
-            <NavLinks />
+            <NavLinks role={role} />
           </div>
         )}
       {isOpenP && (
@@ -84,15 +84,15 @@ export default function NavBar(){
   ) 
 }
 
-const NavLinks = () => {
+const NavLinks = ({role}: {role:string}) => {
   return(
     <>
       <Link href={'/proyects'}>PROYECTOS</Link>
       <Link href={'/sliders'}>SLIDERS</Link>
       <Link href={'/clients'}>CLIENTES</Link>
       <Link href={'/reviews'}>REVIEWS</Link>
-      <Link href={'/contact'}>CONTACTOS</Link>
-      <Link href={'/accounts'}>CUENTAS</Link>
+      <Link href={'/contacts'}>CONTACTOS</Link>
+      {role === 'admin'? <><Link href={'/companies'}>COMPAÑIAS</Link> <Link href={'/accounts'}>CUENTAS</Link> </>: ''}
     </>
   )
 };

@@ -1,43 +1,30 @@
-"use client"
+import { getSlider } from "@/app/api/sliders/route";
+import { cookies } from "next/headers";
+import ViewSlider from "@/components/sliders/ViewSlider";
 
-import Image from "next/image"
-import { useState, useEffect } from "react"
-
-export default function Slider(){
+export default async function Slider({params}: {params:{id:string}}){
   
-  const slider = [
-    '/cr7.jpg',
-    '/CR7_2.jpg'
-  ]
+  const id = params.id;
   
-  const [img, setImg] = useState(slider[0]);
-  const [index, setIndex] = useState(0);
+  const cookiStore = cookies();
+  const token = cookiStore.get('token')?.value || '';
 
-  const timer = setTimeout(() => {
-    if(index >= slider.length - 1){
-      setIndex(0);
+  let slider;
+  try {
+    slider = await getSlider(token, id);
+    if(typeof(slider) !== 'string'){
+      return(
+        // <ViewSlider slider={"lll"} />
+        <ViewSlider slider={slider.data.data.data} token={token} />
+      )    
     }else{
-      setIndex(index + 1);
+      console.log(slider);
     }
-  }, 3000);
+  } catch (error) {
+    console.log(error);
+  }
 
-  useEffect(() => {
-    setImg(slider[index]);
-    return () => clearTimeout(timer);
-  }, [index])
-
-  return(
-    <>
-      <div className="flex justify-center">
-        <Image 
-          src={img}
-          alt="slider"
-          width={1200}
-          height={800}
-          className="ml-20 absolute"
-        />
-      <p className="relative w-2/3 top-1/2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi illo officia dolorum magnam quas dolorem molestias, temporibus unde iste ea explicabo repellendus! Culpa dignissimos eaque accusamus quasi illum tenetur quaerat!</p>
-      </div>
-    </>
-  )
+  // return(
+  //   <ViewSlider slider={slider} />
+  // )
 }

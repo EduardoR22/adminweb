@@ -2,6 +2,7 @@ import ContainerForm from "@/components/ContainerForm";
 import FormClient from "@/components/client/FormClient";
 import { cookies } from "next/headers"
 import { getClient } from "@/app/api/clients/route";
+import NavBar from "@/components/NavBar";
 
 export default async function Edit({ params }: { params: { id: string } }){
   const cookieStore = cookies();
@@ -27,6 +28,7 @@ export default async function Edit({ params }: { params: { id: string } }){
 
   return(
     <>
+      <NavBar />
       <ContainerForm img="/profile" subtitle="Cambiar contraseña" title="Usuario" width="w-full max-w-sm">
             <FormClient name={client.name} id={id} linkWeb={client.link} token={token} />        
       </ContainerForm>      

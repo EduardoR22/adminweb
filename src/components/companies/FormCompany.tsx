@@ -1,13 +1,12 @@
 "use client"
 import Button from "../Button"
-import Image from "next/image"
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { showToastMessageError, showToastMessage } from "@/components/Alert";
-import { createUser } from "@/app/api/users/route";
 import { useState} from "react";
+import Upload from "../Upload";
 
-export default function FormAccount({token}: {token:string}){
+export default function FormCompany({token}: {token:string}){
   const [role, setRol] = useState<string>('admin');
   const [file, setFile] : any = useState();
 
@@ -15,24 +14,22 @@ export default function FormAccount({token}: {token:string}){
     initialValues: {
       name: '',
       email: '',
-      password:'',
-      passwordConfirm:'',
+      phone: '',
+      address:'',
     }, 
     validationSchema: Yup.object({
       name: Yup.string()
                   .required('El nombre es obligatorio'),
       email: Yup.string()
                   .required('El email es obligatorio'),
-      password: Yup.string()
-                  .required('La contraseña es obligatoria')
-                  .min(6, 'Contraseña de almenos 6 caracteres'),
-      passwordConfirm: Yup.string()
-                  .required('La contraseña es obligatoria')
-                  .min(6, 'Contraseña de almenos 6 caracteres'),
+      phone: Yup.string()
+                  .required('El telefono es obligatorio'),
+      address: Yup.string()
+                  .required('La direccion es obligatoria'),
     }),
     
     onSubmit: async valores => {            
-      const {email, name, password, passwordConfirm} = valores;
+      const {email, name, address, phone} = valores;
       // const formData = new FormData();
       // formData.append('name', name);
       // formData.append('email', email);
@@ -42,23 +39,23 @@ export default function FormAccount({token}: {token:string}){
       // formData.append("company", "64fc0c23d0cdf022cf6eac3a");
       // formData.append('photo', file);
       
-      const user = {
+      const company = {
         name,
         email,
-        password,
-        passwordConfirm,
+        address,
+        phone,
         role,
         'company': "64fc0c23d0cdf022cf6eac3a",
         'photo': '/public/img/users/default.jpg'
       }
       
       //let res = await createUser(formData, token);
-      let res = await createUser(user, token);
-      if(res.status === 'success') {
-        showToastMessage(`Password de ${email} modificado exitosamente!`);
-      } else {
-        showToastMessageError(res);
-      }                            
+      // let res = await createUser(user, token);
+      // if(res.status === 'success') {
+      //   showToastMessage(`Password de ${email} modificado exitosamente!`);
+      // } else {
+      //   showToastMessageError(res);
+      // }                            
     },       
   });
   
@@ -94,7 +91,7 @@ export default function FormAccount({token}: {token:string}){
               className="shadow appearance-none border rounded w-full mt-2 py-4 px-3 text-base text-gray-500 leading-tight font-sans font-ligth focus:outline-none focus:shadow-outline"
               id="name"
               type="text"
-              placeholder="juan Perez"
+              placeholder="Nombre empresa"
               value={formikPass.values.name}
               onChange={formikPass.handleChange}
               onBlur={formikPass.handleChange}>
@@ -107,13 +104,13 @@ export default function FormAccount({token}: {token:string}){
           ) : null}
           <div className="mb-4 text-gray-700">
             <label className="block text-sm font-medium text-gray-500" htmlFor="email">
-              Usuario
+              Email
             </label>
             <input 
               className="shadow appearance-none border rounded w-full mt-2 py-4 px-3 text-base text-gray-500 leading-tight font-sans font-ligth focus:outline-none focus:shadow-outline"
               id="email"
               type="email"
-              placeholder="email@gmail.com"
+              placeholder="email@empresa.com"
               value={formikPass.values.email}
               onChange={formikPass.handleChange}
               onBlur={formikPass.handleChange}>
@@ -125,85 +122,51 @@ export default function FormAccount({token}: {token:string}){
             </div>
           ) : null}
           <div className="mb-4 text-gray-700">
-            <label className="block text-sm font-medium text-gray-500" htmlFor="">
-              Perfil
+            <label className="block text-sm font-medium text-gray-500" htmlFor="phone">
+              Telefono
             </label>
-            <select className="bg-white mt-2 outline-none outline-0 shadow appearance-none 
-                    border rounded w-full py-4 px-3 text-base text-gray-500 leading-tight 
-                    font-sans font-ligth focus:outline-none focus:shadow-outline"
-              onChange={handleSelect}
-            >
-              <option value="admin">Admin</option>
-              <option value="user">User</option>
-            </select>
+            <input 
+              className="shadow appearance-none border rounded w-full mt-2 py-4 px-3 text-base text-gray-500 leading-tight font-sans font-ligth focus:outline-none focus:shadow-outline"
+              id="phone"
+              type="text"
+              placeholder="444 4444 444"
+              value={formikPass.values.phone}
+              onChange={formikPass.handleChange}
+              onBlur={formikPass.handleChange}>
+            </input>
           </div>
+          {formikPass.touched.phone && formikPass.errors.phone ? (
+            <div className="my-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-4">
+              <p>{formikPass.errors.phone}</p>
+            </div>
+          ) : null}
         </div>
         <div className="w-1/2">
           <div className="mb-4 text-gray-700">
-            <label className="block text-sm font-medium text-gray-500" htmlFor="password">
-              Contraseña
+            <label className="block text-sm font-medium text-gray-500" htmlFor="address">
+              Direccion
             </label>
             <input 
               className="shadow appearance-none border rounded w-full py-4 px-3 mt-2 text-base text-gray-500 leading-tight font-sans font-ligth focus:outline-none focus:shadow-outline"
-              id="password"
-              type="password"
-              placeholder="****"
-              value={formikPass.values.password}
+              id="address"
+              type="text"
+              placeholder="calle #?? colonia"
+              value={formikPass.values.address}
               onChange={formikPass.handleChange}
               onBlur={formikPass.handleChange}>
             </input>
           </div>
-          {formikPass.touched.password && formikPass.errors.password ? (
+          {formikPass.touched.address && formikPass.errors.address ? (
             <div className="my-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-4">
-              <p>{formikPass.errors.password}</p>
+              <p>{formikPass.errors.address}</p>
             </div>
           ) : null}
           <div className="mb-4 text-gray-700">
-            <label className="block text-sm font-medium text-gray-500" htmlFor="passwordConfirm">
-              Confirmar Contraseña
+            <label className="block text-sm font-medium text-gray-500 mb-2" htmlFor="">
+              Logotipo
             </label>
-            <input 
-              className="shadow appearance-none border rounded w-full py-4 mt-2 px-3 text-base text-gray-500 leading-tight font-sans font-ligth focus:outline-none focus:shadow-outline"
-              id="passwordConfirm"
-              type="password"
-              placeholder="****"
-              value={formikPass.values.passwordConfirm}
-              onChange={formikPass.handleChange}
-              onBlur={formikPass.handleChange}>
-            </input>
-          </div>
-          {formikPass.touched.passwordConfirm && formikPass.errors.passwordConfirm ? (
-            <div className="my-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-4">
-              <p>{formikPass.errors.passwordConfirm}</p>
-            </div>
-          ) : null}
-          <div className="space-y-1 justify-center">
-            <div className="shrink-0 self-center">
-                <label htmlFor="" className='text-gray-500 mb-3'>Foto</label>
-                <div className='flex'>
-                  <Image    
-                      className="rounded-full"                      
-                      src={'/photo'}
-                      alt={'nameU'}
-                      width={56}
-                      height={56}                                    
-                      priority={true}                                    
-                  />
-                  <div className='border rounded-md border-gray-200 relative p-4 w-5/6'>
-                    <input 
-                      type="file" 
-                      id="photo" 
-                      name="photo" 
-                      //value={formik.values.photo}
-                      onChange={onFileChange}
-                      //onBlur={formik.handleChange}
-                      className="opacity-0 absolute inset-0	">                                            
-                    </input>
-                    <p className='text-center	'>Cambiar Foto</p>
-                  </div>  
-                </div>
-            </div>
-          </div>
+            <Upload setFile={setFile} />
+          </div>          
         </div>
       </div>
       <div className="flex justify-center mt-3">
