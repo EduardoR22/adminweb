@@ -5,19 +5,53 @@ import * as Yup from 'yup';
 import Button from "@/components/Button";
 import { createProyect, updateProyect } from "@/app/api/proyects/route";
 import Alert, { showToastMessage, showToastMessageError } from '../Alert';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import AddImage from './AddImage';
 
-export default function FormNew({token, title, subtitle, address, features, seg, id}: 
-                                {token:string, title:string, subtitle:string, 
+export default function FormNew({token, tittle, subtitle, address, features, seg, id}: 
+                                {token:string, tittle:string, subtitle:string, 
                                 address:string, features:string, seg:string, id:string}){
   
   //const [segment, setSegment] = useState<string>('industrial');
-  const [segment, setSegment] = useState<string>(seg);
+  const [segment, setSegment] = useState<string>(seg === ''? 'INDUSTRIAL': seg);
+  const [upFiles, setUpFiles] = useState([]);
+  const [countFiles, setCountFiles] = useState(0);
+  const [files, setFiles] = useState([]);
+  const [categories, setCategories] = useState([])
+
+  const pushFile = (file: any) => {
+    setFiles(((oldFile) => [...oldFile, file] ));
+  }
+
+  const pushCategory = (cat: string) => {
+    setCategories((oldCat) => [...oldCat, cat])
+  }
+
+  const printFiles = () => {
+    files.map(f => {
+      console.log('ffff');
+      console.log(f);
+    })
+    console.log(categories);
+    //console.log(files);
+  }
+
   const router = useRouter();
+  
+  const updateCount = () => {
+    setCountFiles(countFiles + 1);
+  }
+
+  useEffect(() => {
+    setUpFiles((oldArray) => [...oldArray, <AddImage updateCount={updateCount} 
+                                pushFile={pushFile} pushCategory={pushCategory}
+                              />])
+  }, [countFiles])
+
   const formikPass = useFormik({
     initialValues: {
-      title: title,
+      title: tittle,
       subtitle: subtitle,
       location:address,
       features: features,
@@ -45,8 +79,9 @@ export default function FormNew({token, title, subtitle, address, features, seg,
         'images': '/public/prject.jpg'
       };
 
-      if(title === ''){
+      if(tittle === ''){
         try{
+          console.log('create proyect')
           let res = await createProyect(proyect, token);
           if(res === 201){
             showToastMessage('Proyecto creado exitosamente!');
@@ -59,6 +94,7 @@ export default function FormNew({token, title, subtitle, address, features, seg,
           showToastMessageError('Error al crear proyecto..');
         }
       }else{
+        console.log('update proyect')
         let res = await updateProyect(id, JSON.stringify(proyect), token)
         if(res.status === 200){
           showToastMessage('Proyecto modificado exitosamente!');
@@ -78,6 +114,7 @@ export default function FormNew({token, title, subtitle, address, features, seg,
 
   return(
     <>
+      <button onClick={printFiles}>print</button>
       <Alert/>
       <form className="bg-white rounded shadow-md px-8 pt-6 pb-8" 
         onSubmit={formikPass.handleSubmit}>
@@ -151,8 +188,8 @@ export default function FormNew({token, title, subtitle, address, features, seg,
                       font-ligth focus:outline-none focus:shadow-outline"
                 onChange={handleSelect}
               >
-                <option value="industrial">Industrial</option>
-                <option value="otro">Algun otro</option>
+                <option value="INDUSTRIAL">Industrial</option>
+                <option value="OTRO">Algun otro</option>
               </select>
             </div>
           </div>
@@ -174,7 +211,11 @@ export default function FormNew({token, title, subtitle, address, features, seg,
           </div>
         ) : null}
         <div className="pl-5">
-          <label htmlFor="" className='text-gray-500 mb-3'>Fotografias</label>
+          {upFiles.map((elements) => (
+            elements
+          ))}
+          {/* <AddImage /> */}
+          {/* <label htmlFor="" className='text-gray-500 mb-3'>Fotografias</label>
           <div className='border-2 border-dashed rounded-md border-gray-200 relative p-4 w-full'>
             <input 
               type="file" 
@@ -184,7 +225,7 @@ export default function FormNew({token, title, subtitle, address, features, seg,
               className="opacity-0 absolute inset-0	">                                            
             </input>
             <p className='text-center	'>Subir fotos</p>
-          </div>
+          </div> */}
         </div>
         <div className="flex justify-center mt-3">
           <Button styleB="rounded-full bg-blue-600 w-1/5 text-white hover:bg-blue-500" textB="Guardar" typeB="submit" />

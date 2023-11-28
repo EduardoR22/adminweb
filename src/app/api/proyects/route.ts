@@ -26,6 +26,9 @@ export async function createProyect(project:any, auth_token:string){
       'Authorization': `Bearer ${auth_token}`
     }
   };
+  console.log('new poryect')
+  console.log(url);
+  console.log(project);
   try {            
     const res = await axios.post(url, JSON.stringify(project), config)
     

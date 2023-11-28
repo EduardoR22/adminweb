@@ -31,6 +31,7 @@ export default function DeleteProyect({token, proyect} : {token : string, proyec
               }
             } else {
               showToastMessageError('El proyecto no pudo ser eliminado..');
+              router.refresh();
               }
               router.refresh()
           } catch (error) {
