@@ -8,7 +8,6 @@ export default async function Proyects(){
   const cookieStore = cookies();
   const token = cookieStore.get('token')?.value || '';
   const proyects = await getProyects(token)
-  console.log(proyects);
   
   return (
     <>

@@ -2,48 +2,45 @@
 
 import { TrashIcon } from '@heroicons/react/24/solid';
 import {confirmAlert} from 'react-confirm-alert';
-import {showToastMessage, showToastMessageError, showToastMessageWarning, showToastMessageInfo} from "@/components/Alert";
+import Alert,{showToastMessage, showToastMessageError, showToastMessageWarning, showToastMessageInfo} from "@/components/Alert";
 import { useRouter } from 'next/navigation';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import { removeProyect } from '@/app/api/proyects/route';
-import Alert from '@/components/Alert';
+import { removeCompany } from '@/app/api/companies/route';
 
-export default function DeleteProyect({token, proyect} : {token : string, proyect: any}){
+export default function DeleteCompany({token, company} : {token : string, company: any}){
   
   const router = useRouter()
 
-  const deleteProyect = async (id:string, name:any)  => {
+  const deleteCompany = async (id:string, name:any)  => {
     confirmAlert({
-      title: 'Confirmacion para eliminar Proyecto?',
-      message: `Desea eliminar el proyecto ${name}`,
+      title: 'Confirmacion para eliminar Compañia?',
+      message: `Desea eliminar la compañia ${name}`,
       buttons: [
       {
         label: 'Si',
         onClick: async () => {
           let res;
           try {
-            res = await removeProyect(id, token);
-            console.log(res, 'response delete')
+            res = await removeCompany(token, id);
             if(res != undefined) {
               if(res === 204) {
-                showToastMessage('Proyecto eliminado exitosamente!');
+                showToastMessage('Compañia eliminada exitosamente!');
                 setTimeout(() =>{
                   router.refresh();
-                  router.push('/proyects');
+                  router.push('/companies');
                 }, 2000)
               } else {
                 showToastMessageError(res.toString());
               }
             } else {
-              showToastMessageError('El proyecto no pudo ser eliminado..');
+              showToastMessageError('La compañia no pudo ser eliminada..');
               router.refresh();
               }
               router.refresh()
           } catch (error) {
-            showToastMessageError('El proyecto no pudo ser eliminado...');
+            showToastMessageError('La compañia no pudo ser eliminada...');
           }
-        }
-          
+        }          
         },
         {
           label: 'No',
@@ -71,7 +68,7 @@ export default function DeleteProyect({token, proyect} : {token : string, proyec
 
   return(
     <div className='p-0 cursor-pointer' onClick={() => {
-      deleteProyect(proyect._id, proyect.title)
+      deleteCompany(company._id, company.name)
       router.refresh()
       }}>
       <TrashIcon className="h-6 w-6 text-red-500"/>

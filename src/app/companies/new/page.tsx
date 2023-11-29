@@ -13,7 +13,7 @@ export default function New(){
       <NavBar />
       <ContainerForm img="/company.jpg" title="Nueva empresa" subtitle="Creacion de nueva empresa" 
         width="2/3">
-          <FormCompany token={token} />
+          <FormCompany token={token} company=''/>
       </ContainerForm>
     </>
   )

@@ -26,9 +26,7 @@ export async function createProyect(project:any, auth_token:string){
       'Authorization': `Bearer ${auth_token}`
     }
   };
-  console.log('new poryect')
-  console.log(url);
-  console.log(project);
+
   try {            
     const res = await axios.post(url, JSON.stringify(project), config)
     
@@ -65,31 +63,21 @@ export async function getProyect(id:string, auth_token:string) {
 }
 
 export async function removeProyect(id:string, auth_token:string) {
-  const url=`${process.env.NEXT_PUBLIC_API_URL}/api/v1/projects/${id}`;
-  const requestOptions = {
-    method: 'DELETE',
-    headers: { 
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${auth_token}`
-    }
-  };
-  try {            
-    const res = await fetch(url, requestOptions)
-    .then( (response) => {      
-      if(!response.ok){          
-        throw new Error('Algo salió mal con la solicitud');                      
-      } else {
-          if(response.status === 204) {        
-            return 204;
-          }        
-        }          
-        return response.status;
-      })
-      .catch( (err) => {          
-        console.log(err);
-      });
-  } catch (error:any) {
-    return error;    
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/v1/projects/${id}`;
+
+  try {
+    const res = await axios.delete(url, {
+      headers: {
+        'Authorization': `Bearer ${auth_token}`
+      }
+    })
+    console.log('start back')
+    console.log(res);
+    console.log(res.status);
+    console.log('end back');
+    return res.status;
+  } catch (error) {
+    return error
   }
 }
 

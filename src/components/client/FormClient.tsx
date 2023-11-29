@@ -42,8 +42,8 @@ export default function FormClient({name, linkWeb, id, token}:
 
       if(id === ''){
         try{
-          let res = await createClient(formData, token);
-          //let res = await createClient(data, token);
+          //let res = await createClient(formData, token);
+          let res = await createClient(data, token);
           if(res === 201 || res === 'success') {
             showToastMessage(`Cliente ${client} creado exitosamente!`);
             setTimeout(() => {

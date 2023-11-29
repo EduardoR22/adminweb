@@ -3,7 +3,7 @@
 import { TrashIcon } from '@heroicons/react/24/solid';
 import {confirmAlert} from 'react-confirm-alert';
 import { removeClient } from '@/app/api/clients/route';
-import {showToastMessage, showToastMessageError, showToastMessageWarning, showToastMessageInfo} from "@/components/Alert";
+import Alert, {showToastMessage, showToastMessageError, showToastMessageWarning, showToastMessageInfo} from "@/components/Alert";
 import { useRouter } from 'next/navigation';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
@@ -22,16 +22,21 @@ export default function DeleteClient({token, client} : {token : string, client: 
         let res = await removeClient(id, token);
         if(res != undefined) {
           if(res === 204) {
-          showToastMessage('Usuario eliminado exitosamente!');
+            showToastMessage('Cliente eliminado exitosamente!');
+            setTimeout(() =>{
+              console.log('timer delete');
+              router.refresh();
+              router.push('/clients')
+            }, 3000)
           } else {
-            showToastMessageError(res);
+            showToastMessageError(res.toString());
+            router.refresh();
           }
         } else {
-          showToastMessageError('El usuario no pudo ser eliminado..');
+            showToastMessageError('El cliente no pudo ser eliminado..');
+            router.refresh()
           }
-          router.refresh()
-        }
-          
+        }          
         },
         {
           label: 'No',
@@ -58,11 +63,14 @@ export default function DeleteClient({token, client} : {token : string, client: 
   }
 
   return(
-    <button type="button" onClick={() => {
-      deleteClient(client._id, client.name)
-      router.refresh()
-      }}>
-      <TrashIcon className="h-6 w-6 text-red-500"/>
-    </button>
+    <>
+      <Alert />
+      <button type="button" onClick={() => {
+        deleteClient(client._id, client.name)
+        router.refresh()
+        }}>
+        <TrashIcon className="h-6 w-6 text-red-500"/>
+      </button>
+    </>
   )
 }
