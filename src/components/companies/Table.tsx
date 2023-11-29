@@ -16,6 +16,14 @@ export default function Table({companies, token}: {companies:any, token:string})
     setSearch(value);
   }
   
+  // function prueba(){
+  //   companies.map((company: any) =>{
+  //     console.log(company.phoneNumber[0] === undefined? '': company.phoneNumber[0].phone);
+  //   })
+  // }
+
+  // prueba()
+
   return(
     <>
       <div className="flex justify-between">
@@ -55,7 +63,7 @@ export default function Table({companies, token}: {companies:any, token:string})
                 </td>
                 <td>
                   <div>
-                    <p>444 444 4444</p>
+                    <p>{company.phoneNumber[0] === undefined? '': company.phoneNumber[0].phone}</p>
                     <p className="text-gray-400 text-xs">{company.address}</p>
                   </div>
                 </td>

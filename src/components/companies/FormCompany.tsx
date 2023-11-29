@@ -55,7 +55,10 @@ export default function FormCompany({token, company}:
         name,
         email,
         address,
-        //phone,
+        phoneNumber: {
+          "type": "trabajo",
+          phone
+        },
         logo: '/public/edit/img.png'
       }
       
