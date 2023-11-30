@@ -3,8 +3,6 @@ import axios from "axios";
 export async function createCompany(auth_token:string, companyData:any) {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/v1/companys`;
   
-  console.log(url)
-  console.log(JSON.stringify(companyData))
   try {
     const res = await axios.post(url, JSON.stringify(companyData), {
       headers: {

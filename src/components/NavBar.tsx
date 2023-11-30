@@ -1,6 +1,6 @@
 "use client"
 
-import { Bars3Icon, ChartBarIcon } from "@heroicons/react/24/solid"
+import { Bars3Icon, ChartBarIcon, Cog8ToothIcon } from "@heroicons/react/24/solid"
 import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
@@ -59,7 +59,8 @@ export default function NavBar(){
         <div className="flex items-center">
           <div className="flex justify-around items-center w-20 text-white">
             <p className="text-2xl"> | </p>
-            <Link href={'/'}><ChartBarIcon width={30} height={30} /></Link>
+            {/* <Link href={'/'}><ChartBarIcon width={30} height={30} /></Link> */}
+            <Link href={'/issues'}><Cog8ToothIcon width={30} height={30} /></Link>
           </div>
           <Image src={photo} alt="profile" width={50} height={50} 
                   onClick={toggleProfile} className="cursor-pointer"
