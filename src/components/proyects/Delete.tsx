@@ -28,8 +28,9 @@ export default function DeleteProyect({token, proyect} : {token : string, proyec
               if(res === 204) {
                 showToastMessage('Proyecto eliminado exitosamente!');
                 setTimeout(() =>{
-                  router.refresh();
-                  router.push('/proyects');
+                  window.location.reload();
+                  //router.refresh();
+                  //router.push('/proyects');
                 }, 2000)
               } else {
                 showToastMessageError(res.toString());

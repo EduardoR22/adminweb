@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import { StarIcon, PencilSquareIcon } from "@heroicons/react/24/solid";
 import Modal from "@/components/issues/ModalIssue";
 import DeleteIssue from "@/components/issues/DeleteIssue";
+import NavBar from "@/components/NavBar";
 
 export default async function Issues(){
   const cookiestore = cookies();
@@ -15,6 +16,7 @@ export default async function Issues(){
 
     return(
       <>
+        <NavBar />
         <div className="flex justify-center pt-4">
           <div>
             <div className="mt-4 flex justify-end">

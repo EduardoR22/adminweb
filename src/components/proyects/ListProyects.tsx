@@ -27,6 +27,10 @@ export default function ListProyects({proyects, token}: {proyects: any, token: s
     }
   }, [search, currentPage, num_rows])
 
+  useEffect(() =>{
+    setViewProyect(<></>)
+  }, [])
+  
   const onSearchChange = (value: string) => {
     setCurrentPage(0);
     setSearch(value);

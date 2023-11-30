@@ -71,10 +71,6 @@ export async function removeProyect(id:string, auth_token:string) {
         'Authorization': `Bearer ${auth_token}`
       }
     })
-    console.log('start back')
-    console.log(res);
-    console.log(res.status);
-    console.log('end back');
     return res.status;
   } catch (error) {
     return error
