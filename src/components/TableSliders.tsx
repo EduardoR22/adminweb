@@ -26,7 +26,7 @@ export default function Table({children, sliders, token, link} : {children:any, 
       setLength(filtered.length);
       setFilter(filtered.slice(currentPage, currentPage + num_rows));
     }
-  }, [search, currentPage])
+  }, [search, currentPage, num_rows])
 
   const onSearchChange = (value: string) => {
     setCurrentPage(0);
@@ -46,7 +46,7 @@ export default function Table({children, sliders, token, link} : {children:any, 
       <div className='flex justify-between'>
         <div className='flex'>
           {children}
-          <Searcher search={search} searchChange={onSearchChange} />
+          <Searcher search={search} searchChange={onSearchChange} placeholder='Buscar slider' />
         </div>
         <Link href={link} >
           <Button styleB='mr-10 bg-blue-950 text-white hover:bg-blue-500' textB='Nuevo' typeB='button'/>

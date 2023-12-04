@@ -1,33 +1,50 @@
 "use client"
 import Image from "next/image";
 import Searcher from "../Searcher";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Button from "../Button";
 import { PencilSquareIcon } from "@heroicons/react/24/solid";
 import DeleteCompany from "./DeleteCompany";
-//import Pagination from "../Pagination";
+import Pagination from "../Pagination";
 
 export default function Table({companies, token}: {companies:any, token:string}){
   
-  const [search, setSearch] = useState<string>();
-  
+  const [search, setSearch] = useState<string>('');
+  const [currentPage, setCurrentPage] = useState(0);
+  const [num_rows, setNumRows] = useState(3);
+  const [length, setLength] = useState(companies.length); 
+  const [filter, setFilter] = useState(companies.slice(currentPage, currentPage + num_rows));
+  const [height, setHeight] = useState('')
+
+  useEffect(() => {
+    if(search.length === 0){
+      setLength(companies.length)
+      setFilter(companies.slice(currentPage, currentPage + num_rows))
+    }else{
+      const filtered = companies.filter( (user: any) => user.name.toLowerCase().includes(search.toLowerCase()));
+      setLength(filtered.length);
+      setFilter(filtered.slice(currentPage, currentPage + num_rows));
+    }
+  }, [search, currentPage])
+
   const onSearchChange = (value: string) => {
+    setCurrentPage(0);
     setSearch(value);
   }
-  
-  // function prueba(){
-  //   companies.map((company: any) =>{
-  //     console.log(company.phoneNumber[0] === undefined? '': company.phoneNumber[0].phone);
-  //   })
-  // }
 
-  // prueba()
+  const IndexPages = [
+    {value: 1, text: '1'},
+    {value: 2, text: '2'},
+    {value: 3, text: '3'},
+    {value: 4, text: '4'},
+    {value: 5, text: '5'},
+  ];
 
   return(
     <>
       <div className="flex justify-between">
-        <Searcher search={search} searchChange={onSearchChange} />
+        <Searcher search={search} searchChange={onSearchChange} placeholder="Buscar compañia" />
         <Link href={'/companies/new'}>
           <Button styleB="text-white rounded-full bg-blue-950 hover:bg-blue-500" textB="Nuevo" typeB="Button" />
         </Link>
@@ -45,7 +62,7 @@ export default function Table({companies, token}: {companies:any, token:string})
             </tr>
           </thead>
           <tbody>
-            {companies.map((company: any) => (
+            {filter.map((company: any) => (
               <tr key={company._id}>
                 <td>
                   <div className="flex justify-center items-center">
@@ -53,7 +70,7 @@ export default function Table({companies, token}: {companies:any, token:string})
                   </div>
                 </td>
                 <td>
-                  <Image src={'/logo.jpg'} alt="logo" width={50} height={50} />
+                  <Image src={company.logo} alt="logo" width={50} height={50} />
                 </td>
                 <td>
                   <div>
@@ -85,6 +102,11 @@ export default function Table({companies, token}: {companies:any, token:string})
             ))}
           </tbody>
         </table>
+      </div>
+      <div className='flex justify-center items-center mt-3 w-9/12'>
+        <Pagination IndexPages={IndexPages} currentPage={currentPage} num_rows={num_rows} 
+                      setCurrentPage={setCurrentPage} setNumRows={setNumRows} 
+                      length={length}/>
       </div>
     </>
   )

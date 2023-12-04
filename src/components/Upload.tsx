@@ -17,7 +17,7 @@ export default function Upload({setFile}: {setFile: Function}){
   return (
     <>
       {/* <label htmlFor="" className='text-gray-500 mb-3'>Fotografias</label> */}
-      <div className='border-2 border-dashed rounded-md border-gray-200 relative p-4 w-full'>
+      <div className='border-2 border-dashed rounded-md border-gray-200 relative py-3 md:px-2 w-full'>
         <input 
           type="file" 
           id="photo" 

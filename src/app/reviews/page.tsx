@@ -1,5 +1,5 @@
 import ListReviews from "@/components/reviews/ListReviews"
-import NavBar from "@/components/NavBar"
+import NavBar from "@/components/Navigation/NavBar"
 
 export default function Reviews(){
   return(

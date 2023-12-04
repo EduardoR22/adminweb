@@ -1,6 +1,6 @@
 import ContainerForm from "@/components/ContainerForm"
 import FormSlider from "@/components/sliders/FormSlider"
-import NavBar from "@/components/NavBar";
+import NavBar from "@/components/Navigation/NavBar";
 import { cookies } from "next/headers";
 
 export default function New(){

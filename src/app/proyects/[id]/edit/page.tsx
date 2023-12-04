@@ -2,6 +2,7 @@ import FormNew from "@/components/proyects/FormNew";
 import ContainerForm from "@/components/ContainerForm";
 import { cookies } from "next/headers";
 import { getProyect } from "@/app/api/proyects/route";
+import NavBar from "@/components/Navigation/NavBar";
 
 export default async function Edit({params}: {params:{id:string}}){
   
@@ -24,10 +25,13 @@ export default async function Edit({params}: {params:{id:string}}){
   }
 
   return(
-    <ContainerForm img="/img" subtitle="Proyecto a modificar" title="Modificar Proyecto" width="w-2/3">
-      <FormNew token={token} address={proyect.data.data.address} features={proyect.data.data.features} 
-                seg={proyect.data.data.segment} subtitle={proyect.data.data.subtitle} 
-                tittle={proyect.data.data.title} id={id}/>
-    </ContainerForm>
+    <>
+      <NavBar />
+      <ContainerForm img="/img" subtitle="Proyecto a modificar" title="Modificar Proyecto" width="w-2/3">
+        <FormNew token={token} address={proyect.data.data.address} features={proyect.data.data.features} 
+                  seg={proyect.data.data.segment} subtitle={proyect.data.data.subtitle} 
+                  tittle={proyect.data.data.title} id={id}/>
+      </ContainerForm>
+    </>
   )
 }

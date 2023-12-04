@@ -2,7 +2,7 @@ import ClientsList from "@/components/ClientsList";
 import { cookies } from "next/headers";
 import ContainerForm from "@/components/ContainerForm";
 import ArrowReturn from "@/components/ArrowReturn";
-import NavBar from "@/components/NavBar";
+import NavBar from "@/components/Navigation/NavBar";
 import { getClients } from "../api/clients/route";
 
 export default async function Clients(){

@@ -24,7 +24,7 @@ export default function Table({contacts}: {contacts:any}){
       setLength(filtered.length);
       setFilter(filtered.slice(currentPage, currentPage + num_rows));
     }
-  }, [search, currentPage])
+  }, [search, currentPage, num_rows])
 
   const onSearchChange = (value: string) => {
     setCurrentPage(0);
@@ -47,7 +47,7 @@ export default function Table({contacts}: {contacts:any}){
   return(
     <>
       <div className="flex justify-end mr-10">
-        <Searcher search={search} searchChange={onSearchChange} />
+        <Searcher search={search} searchChange={onSearchChange} placeholder="Buscar contacto" />
       </div>
       <div className={`flex justify-center mt-10 ${height}`}>
         <table>

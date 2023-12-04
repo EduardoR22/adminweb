@@ -4,11 +4,11 @@ import { Bars3Icon, ChartBarIcon, Cog8ToothIcon } from "@heroicons/react/24/soli
 import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
-import { getCookie } from "cookies-next";
+//import { getCookie } from "cookies-next";
 import { useRouter } from "next/navigation"
-import RemoveCookies from "./RemoveCookies"
+import RemoveCookies from "../RemoveCookies"
 
-export default function NavBar(){
+export default function NavBarClient({user}: {user:any}){
 
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenP, setIsOpenP] = useState(false);
@@ -21,24 +21,33 @@ export default function NavBar(){
     setIsOpenP(!isOpenP);
   }
   
-  let name='NOAutorizado', photo='default.jpg', role='', ok=false, id='1234567890'; 
-  let user;
+  //let name='NOAutorizado', photo='/default.jpg', role='', ok=false, id='1234567890'; 
+  let name = user.name;
+  let photo = user.photo;
+  let role = user.role;
+  let id = user._id;
+  //let user;
   
   const router = useRouter();
-  try {
-    const userCookie: any = getCookie('user');
-    user = JSON.parse(userCookie);
+  // try {
+  //   const userCookie: any = getCookie('user');
+  //   user = JSON.parse(userCookie);
 
-    if(user){
-      name = user.name;
-      role = user.role;
-      photo = user.photo;
-      id = user._id;
-      ok = true;
-    }           
-  } catch (error) {
-      router.push('/login');
-  }
+  //   if(user){
+  //     name = user.name;
+  //     role = user.role;
+  //     photo = user.photo;
+  //     id = user._id;
+  //     ok = true;
+  //   }else{
+  //     return <h1>Error el usuario no ha iniciado sesion</h1>
+  //   }
+  // } catch (error) {
+  //     //router.push('/login');
+  //     return (
+  //       <h1>Error el usuario no se encuentra registrado..</h1>
+  //     )
+  // }
 
   function logOut(){
     RemoveCookies();

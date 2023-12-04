@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import NavBar from "@/components/NavBar";
+import NavBar from "@/components/Navigation/NavBar";
 import ContainerForm from "@/components/ContainerForm";
 import Table from "@/components/companies/Table";
 import { getCompanies } from "../api/companies/route";

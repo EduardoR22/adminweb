@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { getContact } from "@/app/api/contacts/route";
 import Chat from "@/components/contacts/Chat";
-import NavBar from "@/components/NavBar";
+import NavBar from "@/components/Navigation/NavBar";
 
 export default async function Contact({params}: {params:{id:string}}){
   const id = params.id;

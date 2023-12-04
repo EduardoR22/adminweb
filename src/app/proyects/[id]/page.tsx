@@ -1,7 +1,7 @@
 import ViewProyect from "@/components/proyects/ViewProyect"
 import { getProyect } from "@/app/api/proyects/route";
 import { cookies } from "next/headers";
-import NavBar from "@/components/NavBar";
+import NavBar from "@/components/Navigation/NavBar";
 
 export default async function Proyect({params}: {params: {id:string}}){
   

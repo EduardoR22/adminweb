@@ -1,8 +1,8 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid"
 import { ChangeEvent } from 'react';
 
-export default function Searcher({search, searchChange}: 
-  {search:any, searchChange:Function}){
+export default function Searcher({search, searchChange, placeholder}: 
+  {search:any, searchChange:Function, placeholder:string}){
 
   function onSearchChange({target}: ChangeEvent<HTMLInputElement>){
     searchChange(target.value);
@@ -14,7 +14,7 @@ export default function Searcher({search, searchChange}:
       <input className='ml-2 rounded-xl outline-0 outline-none'
         type="text"
         value={search}
-        placeholder='Buscar usuario'
+        placeholder={placeholder}
         onChange={(e) => {searchChange(e.target.value)}}  
       />
     </div>

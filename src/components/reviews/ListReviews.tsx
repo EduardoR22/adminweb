@@ -22,7 +22,7 @@ export default function ListReviews(){
     <div className="flex mt-5">
       <div className="w-2/3">
         <div className="flex">
-          <div className="w-1/3"><Searcher search={search} searchChange={onSearchChange} /></div>
+          <div className="w-1/3"><Searcher search={search} searchChange={onSearchChange} placeholder="Buscar review" /></div>
         </div>
         <table className="mt-5">
           <thead>

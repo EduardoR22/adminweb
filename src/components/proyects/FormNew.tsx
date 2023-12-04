@@ -15,10 +15,10 @@ export default function FormNew({token, tittle, subtitle, address, features, seg
   
   //const [segment, setSegment] = useState<string>('industrial');
   const [segment, setSegment] = useState<string>(seg === ''? 'INDUSTRIAL': seg);
-  const [upFiles, setUpFiles] = useState([]);
+  const [upFiles, setUpFiles] = useState<any[]>([]);
   const [countFiles, setCountFiles] = useState(0);
-  const [files, setFiles] = useState([]);
-  const [categories, setCategories] = useState([])
+  const [files, setFiles] = useState<any[]>([]);
+  const [categories, setCategories] = useState<string[]>([])
 
   const pushFile = (file: any) => {
     setFiles(((oldFile) => [...oldFile, file] ));
@@ -81,7 +81,6 @@ export default function FormNew({token, tittle, subtitle, address, features, seg
 
       if(tittle === ''){
         try{
-          console.log('create proyect')
           let res = await createProyect(proyect, token);
           if(res === 201){
             showToastMessage('Proyecto creado exitosamente!');
@@ -94,7 +93,6 @@ export default function FormNew({token, tittle, subtitle, address, features, seg
           showToastMessageError('Error al crear proyecto..');
         }
       }else{
-        console.log('update proyect')
         let res = await updateProyect(id, JSON.stringify(proyect), token)
         if(res.status === 200){
           showToastMessage('Proyecto modificado exitosamente!');

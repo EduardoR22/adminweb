@@ -15,17 +15,22 @@ export async function getSliders(auth_token: string){
 export async function getSlider(auth_token: string, id: string) {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/v1/sliders/${id}`;
 
-  const slider = await axios.get(url, {
-    headers: {
-      Authorization: `bearer ${auth_token}`,
+  try {
+    const slider = await axios.get(url, {
+      headers: {
+        Authorization: `bearer ${auth_token}`,
+      }
+    })
+  
+    if(slider.status === 200){
+      return slider;
     }
-  })
-
-  if(slider.status === 200){
-    return slider;
+    return 'Error al obtener slider..';
+  } catch (error) {
+    return 'Ocurrio un error al obtener slider..';
   }
   
-  return 'Error al obtener slider..';
+  
   
 }
 

@@ -2,7 +2,7 @@
 
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { createClient, updateClient } from "@/app/api/clients/route";
+import { createClient, updateClient, createClientPhoto, updateClientLogo } from "@/app/api/clients/route";
 import { showToastMessage, showToastMessageError } from "@/components/Alert";
 import Button from "@/components/Button";
 import Upload from "@/components/Upload";
@@ -37,37 +37,60 @@ export default function FormClient({name, linkWeb, id, token}:
       const data = {
         "name": client,
         link,
-        "logo": '/public/image.png'
       }
 
       if(id === ''){
         try{
-          //let res = await createClient(formData, token);
-          let res = await createClient(data, token);
-          if(res === 201 || res === 'success') {
-            showToastMessage(`Cliente ${client} creado exitosamente!`);
-            setTimeout(() => {
-              router.refresh();
-              router.push('/clients')       
-            }, 2000)
-          } else {
-            showToastMessageError(res);
+          if(file){
+            let res = await createClientPhoto(formData, token);
+            if(res === 201){
+              showToastMessage(`Cliente ${client} creado exitosamente!`);
+              setTimeout(() => {
+                router.refresh();
+                router.push('/clients');
+              }, 2000)
+            }else{
+              showToastMessageError(res.toString());
+            }
+          }else{
+            let res = await createClient(data, token);
+            if(res === 201 || res === 'success') {
+              showToastMessage(`Cliente ${client} creado exitosamente!`);
+              setTimeout(() => {
+                router.refresh();
+                router.push('/clients')
+              }, 2000)
+            } else {
+              showToastMessageError(res);
+            }
           }
         }catch(e){
           showToastMessageError('Error al agregar cliente..')
         }
       }else{
         try {
-          //let res = await updateClient(id, formData, token);
-          let res = await updateClient(id, data, token);
-          if(res.status === 200 || res.data.status === 'success'){
-            showToastMessage(`El cliente ha sido modificado exitosamente!`);
-            setTimeout(() => {
-              router.refresh();
-              router.push('/clients')       
-            }, 2000)
+          if(file){
+            let res = await updateClientLogo(formData, token, id);
+            if(res === 200){
+              showToastMessage(`El cliente ha sido modificado exitosamente!`);
+              setTimeout(() => {
+                router.refresh();
+                router.push('/clients')       
+              }, 2000)
+            }else{
+              showToastMessageError(res.toString());
+            }
           }else{
-            showToastMessageError(res);
+            let res = await updateClient(id, data, token);
+            if(res.status === 200 || res.data.status === 'success'){
+              showToastMessage(`El cliente ha sido modificado exitosamente!`);
+              setTimeout(() => {
+                router.refresh();
+                router.push('/clients')       
+              }, 2000)
+            }else{
+              showToastMessageError(res);
+            }
           }
         } catch (error) {
           showToastMessageError('Error al modificar cliente..');

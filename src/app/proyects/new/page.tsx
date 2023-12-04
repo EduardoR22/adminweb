@@ -1,7 +1,7 @@
 import FormNew from "@/components/proyects/FormNew";
 import ContainerForm from "@/components/ContainerForm";
 import { cookies } from "next/headers";
-import NavBar from "@/components/NavBar";
+import NavBar from "@/components/Navigation/NavBar";
 
 export default function New(){
   

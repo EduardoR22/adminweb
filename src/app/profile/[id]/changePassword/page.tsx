@@ -3,7 +3,7 @@ import {getUser} from '@/app/api/users/route'
 import ContainerHeaderForm from "@/components/ContainerHeaderForm"
 import FormChangePassword from "@/components/profile/FormChangePassword";
 import ContainerForm from "@/components/ContainerForm";
-import NavBar from "@/components/NavBar";
+import NavBar from "@/components/Navigation/NavBar";
 
 export default async function ChangePassword({ params }: { params: { id: string } }) {
 

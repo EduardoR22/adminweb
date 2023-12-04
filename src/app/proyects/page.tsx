@@ -1,5 +1,5 @@
 import ListProyects from "@/components/proyects/ListProyects"
-import NavBar from "@/components/NavBar"
+import NavBar from "@/components/Navigation/NavBar"
 import { getProyects } from "../api/proyects/route"
 import { cookies } from "next/headers"
 

@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import ContainerForm from "@/components/ContainerForm";
 import ArrowReturn from "@/components/ArrowReturn";
 import Table from "@/components/TableSliders";
-import NavBar from "@/components/NavBar";
+import NavBar from "@/components/Navigation/NavBar";
 import { getSliders } from "../api/sliders/route";
 
 export default async function Sliders(){

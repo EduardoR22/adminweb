@@ -1,9 +1,9 @@
-import Table from "@/components/Table"
+import Table from "@/components/accounts/Table"
 import { getUsers } from "../api/users/route";
 import { cookies } from "next/headers";
 import ContainerForm from "@/components/ContainerForm";
 import ArrowReturn from "@/components/ArrowReturn";
-import NavBar from "@/components/NavBar";
+import NavBar from "@/components/Navigation/NavBar";
 
 export default async function Users(){
   

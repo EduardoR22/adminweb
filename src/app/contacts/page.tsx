@@ -3,7 +3,7 @@ import { getContacts } from "../api/contacts/route";
 import Table from "@/components/contacts/Table";
 import NavTab from "@/components/companies/NavTab";
 import ContainerForm from "@/components/ContainerForm";
-import NavBar from "@/components/NavBar";
+import NavBar from "@/components/Navigation/NavBar";
 
 export default async function Contacts({searchParams}: {searchParams: {[opc:string]: string}}){
   

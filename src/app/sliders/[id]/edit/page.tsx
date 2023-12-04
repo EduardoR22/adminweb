@@ -1,4 +1,4 @@
-import NavBar from "@/components/NavBar";
+import NavBar from "@/components/Navigation/NavBar";
 import ContainerForm from "@/components/ContainerForm";
 import FormSlider from "@/components/sliders/FormSlider";
 import { cookies } from "next/headers";
@@ -15,14 +15,18 @@ export default async function Edit({params}: {params: {id: string}}){
   try {
     slider = await getSlider(token, id);
     
-    if(slider.status !== 200 ){
-      return (
-        <h1>Error al obtener registro del slider...</h1>
-      )
-    }
-    
+    if(typeof(slider) !== 'string'){
+      if(slider.status !== 200 ){
+        return (
+          <h1>Error al obtener registro del slider...</h1>
+        )
+      }
+    }else{
+      return <h1>{slider}</h1>
+    }    
   } catch (error) {
     console.log(error)
+    return <h1>Error al obtener los datos del slider</h1>
   }
 
   return (

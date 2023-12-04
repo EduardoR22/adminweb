@@ -46,7 +46,7 @@ export default function ClientsList({children, users, token, link} : {children:a
       <div className='flex justify-between'>
         <div className='flex'>
           {children}
-          <Searcher search={search} searchChange={onSearchChange} />
+          <Searcher search={search} searchChange={onSearchChange} placeholder='Buscar cliente' />
         </div>
         <Link href={link} >
           <Button styleB='mr-10 bg-blue-600 text-white hover:bg-blue-500' textB='Nuevo' typeB='button'/>
@@ -62,7 +62,7 @@ export default function ClientsList({children, users, token, link} : {children:a
               </Link>
               <DeleteClient client={client} token={token}/>
             </div>
-            <Image src={'/cr7.jpg'} alt='logo' width={200} height={200} />
+            <Image src={client.logo} alt='logo' width={200} height={200} />
           </div>
         ))}
       </div>

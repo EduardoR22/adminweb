@@ -23,7 +23,6 @@ export default function DeleteProyect({token, proyect} : {token : string, proyec
           let res;
           try {
             res = await removeProyect(id, token);
-            console.log(res, 'response delete')
             if(res != undefined) {
               if(res === 204) {
                 showToastMessage('Proyecto eliminado exitosamente!');

@@ -54,7 +54,9 @@ export default function ListProyects({proyects, token}: {proyects: any, token: s
     <div className="flex mt-5">
       <div className="w-2/3">
         <div className="flex justify-between">
-          <div className="w-1/3"><Searcher search={search} searchChange={onSearchChange} /></div>
+          <div className="w-1/3">
+            <Searcher search={search} searchChange={onSearchChange} placeholder="Buscar proyecto" />
+          </div>
           <Link href='/proyects/new'>
             <Button textB="Nuevo" typeB="Button" styleB="text-white bg-blue-950 hover:bg-blue-500 mr-10" />
           </Link>

@@ -2,7 +2,7 @@ import ContainerForm from "@/components/ContainerForm";
 import FormClient from "@/components/client/FormClient";
 import { cookies } from "next/headers"
 import { getClient } from "@/app/api/clients/route";
-import NavBar from "@/components/NavBar";
+import NavBar from "@/components/Navigation/NavBar";
 
 export default async function Edit({ params }: { params: { id: string } }){
   const cookieStore = cookies();

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export async function createClient(user:any, auth_token:string){
+export async function createClient(client:any, auth_token:string){
   const url=`${process.env.NEXT_PUBLIC_API_URL}/api/v1/clients`;
   const config = {
     headers: { 
@@ -10,7 +10,7 @@ export async function createClient(user:any, auth_token:string){
     }
   };
   try {            
-    const res = await axios.post(url, user, config)
+    const res = await axios.post(url, client, config)
     
     if(!res){
       throw new Error('Algo salió mal con la solicitud');
@@ -22,6 +22,26 @@ export async function createClient(user:any, auth_token:string){
       return res.data.status;      
     }catch (error:any) {
     return error;    
+  }
+}
+
+export async function createClientPhoto(client:FormData, auth_token:string) {
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/v1/clients/clientWithLogo`;
+  
+  try {
+    const res = await axios.post(url, client, {
+      headers: {
+        'Authorization': `Bearer ${auth_token}`,
+        'Content-Type': 'multipart/form-data',
+      }
+    })
+    if(res.status === 201){
+      return res.status;
+    }else{
+      return 'Error al crear usuario con logotipo';
+    }
+  } catch (error) {
+    return 'Ocurrio un error al crear usuario con logotipo';
   }
 }
 
@@ -57,36 +77,7 @@ export async function removeClient(id:string, auth_token:string) {
   }
 }
 
-// export async function removeClient(id:string, auth_token:string) {
-//   const url=`${process.env.NEXT_PUBLIC_API_URL}/api/v1/clients/${id}`;
-//   const requestOptions = {
-//     method: 'DELETE',
-//     headers: { 
-//       'Content-Type': 'application/json',
-//       'Authorization': `Bearer ${auth_token}`
-//     }
-//   };
-//   try {            
-//     const res = await fetch(url, requestOptions)
-//     .then( (response) => {      
-//       if(!response.ok){          
-//         throw new Error('Algo salió mal con la solicitud');                      
-//       } else {
-//         if(response.status === 204) {        
-//             return 204;
-//           }        
-//         }          
-//         return response.status;
-//       })
-//       .catch( (err) => {          
-//         console.log(err);
-//       });
-//   } catch (error:any) {
-//     return error;    
-//   }
-// }
-
-export async function updateClient(id:string, userData:any, auth_token:string) {
+export async function updateClient(id:string, clientData:any, auth_token:string) {
   const url=`${process.env.NEXT_PUBLIC_API_URL}/api/v1/clients/${id}`;
   const config = {
     headers: { 
@@ -98,10 +89,29 @@ export async function updateClient(id:string, userData:any, auth_token:string) {
     },
   };
   try {
-    const res = await axios.patch(url, userData, config);
+    const res = await axios.patch(url, clientData, config);
       return res;    
   } catch (error:any) {
     return error.response.data.message;
+  }
+}
+
+export async function updateClientLogo(client:FormData, auth_token:string, id:string) {
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/v1/clients/updateMeLogo/${id}`;
+  try {
+    const res = await axios.patch(url, client, {
+      headers: {
+        'Authorization': `Bearer ${auth_token}`,
+        'Content-Type': 'multipart/form-data',
+      }
+    })
+    if(res.status === 200){
+      return res.status;
+    }else{
+      return res.statusText;
+    }
+  } catch (error) {
+    return 'Ocurrio un error al actualizar logo cliente';
   }
 }
 

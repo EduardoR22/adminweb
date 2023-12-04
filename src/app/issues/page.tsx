@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import { StarIcon, PencilSquareIcon } from "@heroicons/react/24/solid";
 import Modal from "@/components/issues/ModalIssue";
 import DeleteIssue from "@/components/issues/DeleteIssue";
-import NavBar from "@/components/NavBar";
+import NavBar from "@/components/Navigation/NavBar";
 
 export default async function Issues(){
   const cookiestore = cookies();
