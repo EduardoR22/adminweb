@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import NavBar from "@/components/NavBar"
 import { ChevronLeftIcon, ChevronRightIcon, PencilSquareIcon } from "@heroicons/react/24/solid"
 import Link from "next/link"
 import Delete from "./Delete"
@@ -43,11 +42,14 @@ export default function ViewSlider({slider, token}: {slider:any, token:string}){
 
   return(
     <>
-      <NavBar />
       <div className="pt-20">
         <div className="flex justify-center h-80 w-full">
           <img src={img} alt="slider" className="w-full h-full" />
-          <p className="w-2/3 absolute top-96">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi illo officia dolorum magnam quas dolorem molestias, temporibus unde iste ea explicabo repellendus! Culpa dignissimos eaque accusamus quasi illum tenetur quaerat!</p>
+          {slider.features.map((feature:string, index:number) => (
+            <p className={`w-2/3 absolute text-xl text-white font-bold`} style={{top:`${(index * 50)+140}px`}} 
+              key={index}>{feature}</p>
+          ))}
+          {/* <p className="w-2/3 absolute top-96">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi illo officia dolorum magnam quas dolorem molestias, temporibus unde iste ea explicabo repellendus! Culpa dignissimos eaque accusamus quasi illum tenetur quaerat!</p> */}
           <ChevronLeftIcon width={40} height={40} onClick={Previous}
             className="absolute left-4 top-60 text-white cursor-pointer"
           />

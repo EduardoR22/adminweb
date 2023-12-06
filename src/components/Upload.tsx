@@ -26,7 +26,7 @@ export default function Upload({setFile}: {setFile: Function}){
           // multiple
           className="opacity-0 absolute inset-0	">                                            
         </input>
-        <p className='text-center	'>Subir fotos</p>
+        <p className='text-center	'>Subir imagen</p>
       </div>
     </>
   )

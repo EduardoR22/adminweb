@@ -15,6 +15,7 @@ export default function ListProyects({proyects, token}: {proyects: any, token: s
   const [num_rows, setNumRows] = useState(3);
   const [length, setLength] = useState(proyects.length); 
   const [filter, setFilter] = useState(proyects.slice(currentPage, currentPage + num_rows));
+  const [height, setHeight] = useState<string>((75 * num_rows).toString());
 
   useEffect(() => {
     if(search.length === 0){
@@ -26,6 +27,10 @@ export default function ListProyects({proyects, token}: {proyects: any, token: s
       setFilter(filtered.slice(currentPage, currentPage + num_rows));
     }
   }, [search, currentPage, num_rows])
+
+  useEffect(() => {
+    setHeight((75 * num_rows).toString());
+  }, [num_rows])
 
   useEffect(() =>{
     setViewProyect(<></>)
@@ -61,7 +66,7 @@ export default function ListProyects({proyects, token}: {proyects: any, token: s
             <Button textB="Nuevo" typeB="Button" styleB="text-white bg-blue-950 hover:bg-blue-500 mr-10" />
           </Link>
         </div>
-        <table className="mt-5">
+        <table className="mt-5" style={{height: `${height}px`}}>
           <thead>
             <tr className="text-gray-400 text-sm border-b border-gray-500">
               <th className="w-20">Usr</th>

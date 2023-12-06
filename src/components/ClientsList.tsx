@@ -16,6 +16,7 @@ export default function ClientsList({children, users, token, link} : {children:a
   const [num_rows, setNumRows] = useState(3);
   const [length, setLength] = useState(users.length); 
   const [filter, setFilter] = useState(users.slice(currentPage, currentPage + num_rows));
+  const [height, setHeight] = useState<string>((160 * Math.ceil(num_rows / 3)).toString());
 
   useEffect(() => {
     if(search.length === 0){
@@ -27,6 +28,10 @@ export default function ClientsList({children, users, token, link} : {children:a
       setFilter(filtered.slice(currentPage, currentPage + num_rows));
     }
   }, [search, currentPage, num_rows])
+
+  useEffect(() => {
+    setHeight((160 * Math.ceil(num_rows / 3)).toString());
+  }, [num_rows])
 
   const onSearchChange = (value: string) => {
     setCurrentPage(0);
@@ -52,9 +57,9 @@ export default function ClientsList({children, users, token, link} : {children:a
           <Button styleB='mr-10 bg-blue-600 text-white hover:bg-blue-500' textB='Nuevo' typeB='button'/>
         </Link>
       </div>
-      <div className='flex justify-between flex-wrap mt-10'>
+      <div className='flex justify-between flex-wrap mt-10' style={{height: `${height}px`}}>
         {filter.map((client: any) => (
-          <div key={client._id} className=''>
+          <div key={client._id} className='mt-2'>
             <div className='flex justify-end'>
               <p>{client.name}</p>
               <Link href={`/clients/${client._id}/edit`}>

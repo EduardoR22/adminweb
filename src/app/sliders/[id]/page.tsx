@@ -1,6 +1,7 @@
 import { getSlider } from "@/app/api/sliders/route";
 import { cookies } from "next/headers";
 import ViewSlider from "@/components/sliders/ViewSlider";
+import NavBar from "@/components/Navigation/NavBar";
 
 export default async function Slider({params}: {params:{id:string}}){
   
@@ -14,8 +15,10 @@ export default async function Slider({params}: {params:{id:string}}){
     slider = await getSlider(token, id);
     if(typeof(slider) !== 'string'){
       return(
-        // <ViewSlider slider={"lll"} />
-        <ViewSlider slider={slider.data.data.data} token={token} />
+        <>
+          <NavBar />
+          <ViewSlider slider={slider.data.data.data} token={token} />
+        </>
       )    
     }else{
       console.log(slider);

@@ -16,6 +16,7 @@ export default function Table({children, users, token, link} : {children:any, us
   const [num_rows, setNumRows] = useState(3);
   const [length, setLength] = useState(users.length); 
   const [filter, setFilter] = useState(users.slice(currentPage, currentPage + num_rows));
+  const [height, setHeight] = useState<string>(((60 * num_rows) + 50).toString());
 
   useEffect(() => {
     if(search.length === 0){
@@ -27,6 +28,10 @@ export default function Table({children, users, token, link} : {children:any, us
       setFilter(filtered.slice(currentPage, currentPage + num_rows));
     }
   }, [search, currentPage, num_rows])
+
+  useEffect(() => {
+    setHeight(((60 * num_rows)+ 50).toString());
+  }, [num_rows])
 
   const onSearchChange = (value: string) => {
     setCurrentPage(0);
@@ -55,7 +60,7 @@ export default function Table({children, users, token, link} : {children:any, us
       
       <p className='mt-10 font-semibold'>Usuarios todos</p>
 
-      <div className={`h-${num_rows * 20}`}>
+      <div className='' style={{height: `${height}px`}}>
         <table className='mt-5 w-11/12'>
           <thead className='text-gray-400'>
             <tr className='border-b'>
@@ -68,8 +73,8 @@ export default function Table({children, users, token, link} : {children:any, us
           </thead>
           <tbody>
             {filter.map( (user: any) => (
-              <tr key={user._id}>
-                <td>
+              <tr key={user._id} className=''>
+                <td className='pt-3'>
                   <Link href={`/users/${user._id}/details`}>
                     <Image src={user.photo} alt='profile' width={50} height={40} className='rounded-full' />
                   </Link>

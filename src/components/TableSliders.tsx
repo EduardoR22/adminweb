@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import {CreditCardIcon} from '@heroicons/react/24/solid';
+//import {CreditCardIcon} from '@heroicons/react/24/solid';
 import Image from 'next/image';
-import Delete from './Delete';
+//import Delete from './Delete';
 import Pagination from './Pagination';
 import Searcher from './Searcher';
 import Button from './Button';
@@ -16,6 +16,7 @@ export default function Table({children, sliders, token, link} : {children:any, 
   const [num_rows, setNumRows] = useState(3);
   const [length, setLength] = useState(sliders.length); 
   const [filter, setFilter] = useState(sliders.slice(currentPage, currentPage + num_rows));
+  const [height, setHeight] = useState<string>((90 * num_rows).toString());
 
   useEffect(() => {
     if(search.length === 0){
@@ -27,6 +28,10 @@ export default function Table({children, sliders, token, link} : {children:any, 
       setFilter(filtered.slice(currentPage, currentPage + num_rows));
     }
   }, [search, currentPage, num_rows])
+
+  useEffect(() => {
+    setHeight((90 * num_rows).toString());
+  }, [num_rows])
 
   const onSearchChange = (value: string) => {
     setCurrentPage(0);
@@ -52,13 +57,13 @@ export default function Table({children, sliders, token, link} : {children:any, 
           <Button styleB='mr-10 bg-blue-950 text-white hover:bg-blue-500' textB='Nuevo' typeB='button'/>
         </Link>
       </div>
-      <table className='mt-5'>
+      <table className='mt-5' style={{height: `${height}px`}}>
         <thead className='text-gray-400'>
           <tr className='border-b'>
             <th className='w-16 text-start border-b border-slate-400'>Foto</th>
             <th className='w-8 text-start border-b border-slate-400'>&nbsp;</th>
             <th className='w-48 text-start border-b border-slate-400'>Titulo</th>
-            <th className='w-56 text-start border-b border-slate-400'>Descripcion</th>
+            <th className='w-56 text-start border-b border-slate-400'>Caracteristicas</th>
             <th className='w-40 text-start border-b border-slate-400'>imagen</th>
           </tr>
         </thead>
@@ -67,13 +72,9 @@ export default function Table({children, sliders, token, link} : {children:any, 
             <tr key={slider._id}>
               <td>
               <Image src={slider.images} alt='profile' width={50} height={40} className='rounded-full' />
-                {/* <Link href={`/users/${user._id}/details`}>
-                  <Image src={user.photo} alt='profile' width={50} height={40} className='rounded-full' />
-                </Link> */}
               </td>
               <td> 
                 <div className=' flex justify-center'>
-                  {/* <Delete token={token} user={user} /> */}
                   <div className={`w-4 h-4 rounded-full ${slider.status ? 'bg-green-600' : 'bg-red-600'} mr-2`}></div>
                 </div>
               </td>
@@ -83,15 +84,19 @@ export default function Table({children, sliders, token, link} : {children:any, 
                 </div>
               </td>
               <td>
-                <div className='flex items-center'>
-                  <p>{slider.description}</p>
+                <div className=''>
+                  <ul>
+                    {slider.features.map((feature: string, index: number) => (
+                      <li key={index}>{feature}</li>
+                    ))}
+                  </ul>
                 </div>
               </td>
               <td>
                 <div className=''>
                   <Link href={`/sliders/${slider._id}`}>
                     <Image 
-                      src={slider.images}
+                      src={slider.image}
                       alt='imagen'
                       width={60}
                       height={30}

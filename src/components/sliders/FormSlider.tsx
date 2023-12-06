@@ -5,75 +5,143 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Button from "@/components/Button";
 import Upload from "@/components/Upload";
-import { useState } from "react";
-import { createSlider, updateSlider } from "@/app/api/sliders/route";
+import { useState, useEffect } from "react";
+import { createSlider, updateSlider, createSliderImage, updateSliderImage } from "@/app/api/sliders/route";
 import { showToastMessage, showToastMessageError } from "@/components/Alert";
 import {useRouter} from 'next/navigation'
+import SelectText from "../SelectText";
 
 export default function FormSlider({token, slider}: 
                         {token:string, slider: any}){
   
   const router = useRouter();
+  const [file, setFile] = useState<any>();
+  const [features, setFeatures] = useState<string[]>([])
+  const [countFiles, setCountFiles] = useState(0);
+  const [upFeatures, setUpFeatures] = useState<any[]>([]);
 
   let titleS: string = '';
   let linkS: string = '';
-  let descriptionS: string = '';
-
+  
+  const pushFeature = (feat: string) => {
+    setFeatures((oldFeat) => [...oldFeat, feat])
+  }
+  
   if(slider !== ''){
     titleS = slider.title;
     linkS = slider.link;
-    descriptionS = slider.description;
   }
+
+  useEffect(() => {
+    if(slider !== ''){
+      slider.features.map((feature:string, index:number) => {
+        console.log('index= ', index);
+        console.log(slider.features.length);
+        setUpFeatures((oldArray) => [...oldArray, <SelectText pushText={pushFeature} 
+          updateCount={updateCount} valueFeat={feature} bandPlus={index === slider.features.length-1 ? true: false} />])
+      })
+    }
+  },[])
+
+  const updateCount = () => {
+    setCountFiles(countFiles + 1);
+  }
+
+  useEffect(() => {
+    // console.log('count files');
+    // console.log(countFiles);
+    // console.log(typeof(slider));
+    // console.log(slider);
+    // if(slider === '')console.log('ifff')
+    if((slider === "" && countFiles < 5) || (slider !== '' && (countFiles !== 0 || slider.features.length === 0) && ((countFiles + slider.features.length) < 5)) ){
+      setUpFeatures((oldArray) => [...oldArray, <SelectText pushText={pushFeature} 
+        updateCount={updateCount} valueFeat="" bandPlus={true} />])
+    }
+  }, [countFiles])
 
   const formikPass = useFormik({
     initialValues: {
       title: titleS,
       link: linkS,
-      description: descriptionS
     }, 
     validationSchema: Yup.object({
       title: Yup.string()
                   .required('El cliente es obligatorio'),
       link: Yup.string()
                   .required('La direccion web es obligatoria'),
-      description: Yup.string()
-                  .required('La descripcion es obligatoria'),
     }),
     
     onSubmit: async valores => {            
-      const {title, link, description} = valores;
+      const {title, link} = valores;
       const data = {
         title,
         link,
-        description
+        features
       }            
       
+      const formData = new FormData();
+      formData.append('title', title);
+      formData.append('link', link);
+      formData.append('image', file);
+
+      features.map((feat) => {
+        formData.append('features', feat);
+      })
+
+      console.log(formData.getAll('features'))
+
       if(slider === ''){
         try {
-          let res = await createSlider(data, token);
-          if(res === 201) {
-            showToastMessage(`Slider ${title} creado exitosamente!`);
-            setTimeout(() => {
-              router.refresh();
-              router.push('/sliders');
-            }, 2000)
-          } else {
-            showToastMessageError('Error al crear slider..');
+          if(file){
+            let res = await createSliderImage(formData, token);
+            if(res === 201){
+              showToastMessage(`Slider ${title} creado exitosamente!`);
+              setTimeout(() => {
+                router.refresh();
+                router.push('/sliders');
+              }, 3000)
+            }else{
+              showToastMessageError(res.toString());
+            }
+          }else{
+            let res = await createSlider(data, token);
+            if(res === 201) {
+              showToastMessage(`Slider ${title} creado exitosamente!`);
+              setTimeout(() => {
+                router.refresh();
+                router.push('/sliders');
+              }, 3000)
+            } else {
+              showToastMessageError('Error al crear slider..');
+            }
           }
         } catch (error) {
           console.log(error);
         }
       }else{
         try {
-          let res = await updateSlider(token, data, slider._id);
-          if(res === 200) {
-            showToastMessage(`Slider ${title} actualizado exitosamente!`);
-            setTimeout(() => {
-              router.refresh();
-              router.push('/sliders');
-            }, 2000)
-          } else {
-            showToastMessageError('Error al actualizar slider..');
+          if(file){
+            let res = await updateSliderImage(token, formData, slider._id);
+            if(res === 200){
+              showToastMessage(`Slider ${title} actualizado exitosamente!`);
+              setTimeout(() => {
+                router.refresh();
+                router.push('/sliders');
+              }, 3000)
+            }else{
+              showToastMessageError(res.toString())
+            }
+          }else{
+            let res = await updateSlider(token, data, slider._id);
+            if(res === 200) {
+              showToastMessage(`Slider ${title} actualizado exitosamente!`);
+              setTimeout(() => {
+                router.refresh();
+                router.push('/sliders');
+              }, 3000)
+            } else {
+              showToastMessageError('Error al actualizar slider..');
+            }
           }
         } catch (error) {
           console.log(error);
@@ -81,8 +149,6 @@ export default function FormSlider({token, slider}:
       }
     },       
   });
-  
-  const [file, setFile] = useState();
 
   return(
     <>
@@ -133,27 +199,16 @@ export default function FormSlider({token, slider}:
           <div className="w-1/2">
             <div className="mb-4 text-gray-700">
               <label className="block text-sm font-medium text-gray-500" htmlFor="passwordConfirm">
-                Descripcion
+                Caracteristicas
               </label>
-              <input 
-                className="shadow appearance-none border rounded w-full py-4 mt-2 px-3 text-base text-gray-500 leading-tight font-sans font-ligth focus:outline-none focus:shadow-outline"
-                id="description"
-                type="text"
-                placeholder="Describa el slider"
-                value={formikPass.values.description}
-                onChange={formikPass.handleChange}
-                onBlur={formikPass.handleChange}>
-              </input>
-            </div>
-            {formikPass.touched.description && formikPass.errors.description ? (
-              <div className="my-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-4">
-                <p>{formikPass.errors.description}</p>
-              </div>
-            ) : null}
+              {upFeatures.map((elements) => (
+                elements
+              ))}
+            </div>            
           </div>
         </div>
         <div className="px-4">
-          <p className="text-gray-500 mb-3 font-medium text-sm">Fotografias</p>
+          <p className="text-gray-500 mb-3 font-medium text-sm">Fotografia</p>
           <Upload setFile={setFile} />
         </div>
         <div className="flex justify-center mt-3">

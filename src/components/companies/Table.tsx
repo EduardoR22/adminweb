@@ -15,7 +15,7 @@ export default function Table({companies, token}: {companies:any, token:string})
   const [num_rows, setNumRows] = useState(3);
   const [length, setLength] = useState(companies.length); 
   const [filter, setFilter] = useState(companies.slice(currentPage, currentPage + num_rows));
-  const [height, setHeight] = useState('')
+  const [height, setHeight] = useState((90 * num_rows).toString())
 
   useEffect(() => {
     if(search.length === 0){
@@ -26,7 +26,11 @@ export default function Table({companies, token}: {companies:any, token:string})
       setLength(filtered.length);
       setFilter(filtered.slice(currentPage, currentPage + num_rows));
     }
-  }, [search, currentPage])
+  }, [search, currentPage, num_rows])
+
+  useEffect(() => {
+    setHeight((90 * num_rows).toString());
+  }, [num_rows]);
 
   const onSearchChange = (value: string) => {
     setCurrentPage(0);
@@ -49,7 +53,7 @@ export default function Table({companies, token}: {companies:any, token:string})
           <Button styleB="text-white rounded-full bg-blue-950 hover:bg-blue-500" textB="Nuevo" typeB="Button" />
         </Link>
       </div>
-      <div className="flex justify-center mt-10">
+      <div className="flex justify-center mt-10" style={{height:`${height}px`}}>
         <table>
           <thead>
             <tr className="border-b border-gray-600 text-gray-400">

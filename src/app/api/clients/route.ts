@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export async function createClient(client:any, auth_token:string){
+export async function createClient(client:{name:string, link:string}, auth_token:string){
   const url=`${process.env.NEXT_PUBLIC_API_URL}/api/v1/clients`;
   const config = {
     headers: { 
@@ -77,11 +77,10 @@ export async function removeClient(id:string, auth_token:string) {
   }
 }
 
-export async function updateClient(id:string, clientData:any, auth_token:string) {
+export async function updateClient(id:string, clientData:{name:string, link:string}, auth_token:string) {
   const url=`${process.env.NEXT_PUBLIC_API_URL}/api/v1/clients/${id}`;
   const config = {
     headers: { 
-      //'Content-Type': 'multipart/form-data',
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${auth_token}`
     },

@@ -47,6 +47,26 @@ export async function createSlider(dataSlider: any, auth_token: string) {
   return slider.status;
 }
 
+export async function createSliderImage(dataSlider: any, auth_token:string) {
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/v1/sliders/sliderWithImage`;
+  
+  try {
+    const res = await axios.post(url, dataSlider, {
+      headers: {
+        'Authorization': `Bearer ${auth_token}`,
+        'Content-Type': 'multipart/form-data',
+      }
+    })
+    if(res.status === 201){
+      return res.status
+    }else{
+      return res.statusText;
+    }
+  } catch (error) {
+    return 'Ocurrio un problema al crear slider con imagen';
+  }  
+}
+
 export async function updateSlider(auth_token:string, dataSlider: any, id:string) {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/v1/sliders/${id}`;
 
@@ -58,6 +78,27 @@ export async function updateSlider(auth_token:string, dataSlider: any, id:string
   })
 
   return res.status;
+}
+
+export async function updateSliderImage(auth_token:string, dataSlider:FormData, id:string) {
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/v1/sliders/updateMeImage/${id}`;
+  try {
+    const res = await axios.patch(url, dataSlider, {
+      headers: {
+        'Authorization': `Bearer ${auth_token}`,
+        'Content-Type': 'multipart/form-data',
+      }
+    })
+    if(res.status === 200){
+      return res.status;
+    }else{
+      res.statusText;
+    }
+
+    return 'Ocurrio un evento inesperado en actualizar imagen slider'
+  } catch (error) {
+    return `Ocurrio un error al actualizar imagen slider`;
+  }
 }
 
 export async function removeSlider(auth_token:string, id:string) {

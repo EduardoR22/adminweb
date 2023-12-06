@@ -5,26 +5,26 @@ import {confirmAlert} from 'react-confirm-alert';
 import Alert,{showToastMessage, showToastMessageError, showToastMessageWarning, showToastMessageInfo} from "@/components/Alert";
 import { useRouter } from 'next/navigation';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import { removeIssue } from '@/app/api/issues/route';
+import { removeService } from '@/app/api/services/route';
 
-export default function DeleteIssue({token, issue} : {token : string, issue: any}){
+export default function DeleteService({token, service} : {token : string, service: any}){
   
   const router = useRouter()
 
   const deleteIssue = async (id:string, name:any)  => {
     confirmAlert({
-      title: 'Confirmacion para eliminar Issue?',
-      message: `Desea eliminar la issue ${name}`,
+      title: 'Confirmacion para eliminar Servicio?',
+      message: `Desea eliminar el servicio ${name}`,
       buttons: [
       {
         label: 'Si',
         onClick: async () => {
           let res;
           try {
-            res = await removeIssue(id, token);
+            res = await removeService(token, id);
             if(res != undefined) {
               if(res === 204) {
-                showToastMessage('Issue eliminado exitosamente!');
+                showToastMessage('Servicio eliminado exitosamente!');
                 setTimeout(() =>{
                   router.refresh();
                   router.push('/issues');
@@ -33,12 +33,12 @@ export default function DeleteIssue({token, issue} : {token : string, issue: any
                 showToastMessageError(res.toString());
               }
             } else {
-              showToastMessageError('El issue no pudo ser eliminado..');
+              showToastMessageError('El servicio no pudo ser eliminado..');
               router.refresh();
               }
               router.refresh()
           } catch (error) {
-            showToastMessageError('El issue no pudo ser eliminado...');
+            showToastMessageError('El servicio no pudo ser eliminado...');
           }
         }          
         },
@@ -68,7 +68,7 @@ export default function DeleteIssue({token, issue} : {token : string, issue: any
 
   return(
     <div className='p-0 cursor-pointer' onClick={() => {
-      deleteIssue(issue._id, issue.issue)
+      deleteIssue(service._id, service.name)
       router.refresh()
       }}>
       <TrashIcon className="h-6 w-6 text-red-500"/>

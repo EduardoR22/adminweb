@@ -10,7 +10,7 @@ const nextConfig = {
         pathname: '/public/**',
       },
     ],
-  }
+  },
 }
 
 module.exports = nextConfig
