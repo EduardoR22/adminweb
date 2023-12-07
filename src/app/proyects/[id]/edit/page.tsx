@@ -30,7 +30,7 @@ export default async function Edit({params}: {params:{id:string}}){
       <ContainerForm img="/img" subtitle="Proyecto a modificar" title="Modificar Proyecto" width="w-2/3">
         <FormNew token={token} address={proyect.data.data.address} features={proyect.data.data.features} 
                   seg={proyect.data.data.segment} subtitle={proyect.data.data.subtitle} 
-                  tittle={proyect.data.data.title} id={id}/>
+                  tittle={proyect.data.data.title} id={id} services=''/>
       </ContainerForm>
     </>
   )

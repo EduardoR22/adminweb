@@ -10,6 +10,7 @@ export default async function Proyects(){
   let proyects;
   try {
     proyects = await getProyects(token)
+    console.log(proyects.data.data);
   } catch (error) {
     return <h1>Error al consultar proyectos</h1>
   }

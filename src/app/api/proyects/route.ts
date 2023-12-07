@@ -43,6 +43,33 @@ export async function createProyect(project:any, auth_token:string){
   }
 }
 
+export async function createProyectImage(project:FormData, auth_token:string){
+  const url=`${process.env.NEXT_PUBLIC_API_URL}/api/v1/projects/projectWithImage`;
+  
+  const config = {
+    headers: { 
+      //'Content-Type': 'application/json',
+      'Content-Type': 'multipart/form-data',
+      'Authorization': `Bearer ${auth_token}`
+    }
+  };
+
+  try {            
+    const res = await axios.post(url, project, config)
+    
+    if(!res){
+      throw new Error('Algo salió mal con la solicitud');
+    }else{
+      if(res.status === 201) {        
+          return 201;
+        }        
+      }          
+      return res.data.status;      
+    }catch (error:any) {
+    return error;    
+  }
+}
+
 export async function getProyect(id:string, auth_token:string) {
       
   const headers = new Headers({

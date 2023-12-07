@@ -19,6 +19,7 @@ export default function FormSlider({token, slider}:
   const [features, setFeatures] = useState<string[]>([])
   const [countFiles, setCountFiles] = useState(0);
   const [upFeatures, setUpFeatures] = useState<any[]>([]);
+  const [indexDelete, setIndexDelete] = useState<number>(-1);
 
   let titleS: string = '';
   let linkS: string = '';
@@ -31,14 +32,32 @@ export default function FormSlider({token, slider}:
     titleS = slider.title;
     linkS = slider.link;
   }
+  
+  const deleteFeature = (index:number) => {
+    setIndexDelete(index);
+  }
+
+  useEffect(() => {
+    if(indexDelete !== -1){
+      const arrFeatures = features;
+      arrFeatures.splice(indexDelete, 1, '');
+      setFeatures(arrFeatures);
+      
+      const arrElements = upFeatures;
+      arrElements.splice(indexDelete, 1, <></>);
+      setUpFeatures(arrElements);
+      setCountFiles(countFiles - 1);
+    }
+  }, [indexDelete])
 
   useEffect(() => {
     if(slider !== ''){
       slider.features.map((feature:string, index:number) => {
-        console.log('index= ', index);
-        console.log(slider.features.length);
-        setUpFeatures((oldArray) => [...oldArray, <SelectText pushText={pushFeature} 
-          updateCount={updateCount} valueFeat={feature} bandPlus={index === slider.features.length-1 ? true: false} />])
+        let bandShow = true;
+        if(index === 5) bandShow=false;
+        setUpFeatures((oldArray) => [...oldArray, <SelectText pushText={pushFeature} index={upFeatures.length} 
+          deleteFeature={deleteFeature} updateCount={updateCount} valueFeat={feature} 
+          bandPlus={index === slider.features.length-1 ? true: false} bandShow={bandShow} />])
       })
     }
   },[])
@@ -48,14 +67,15 @@ export default function FormSlider({token, slider}:
   }
 
   useEffect(() => {
-    // console.log('count files');
-    // console.log(countFiles);
-    // console.log(typeof(slider));
-    // console.log(slider);
-    // if(slider === '')console.log('ifff')
-    if((slider === "" && countFiles < 5) || (slider !== '' && (countFiles !== 0 || slider.features.length === 0) && ((countFiles + slider.features.length) < 5)) ){
-      setUpFeatures((oldArray) => [...oldArray, <SelectText pushText={pushFeature} 
-        updateCount={updateCount} valueFeat="" bandPlus={true} />])
+    let bandShow = true; 
+    if((slider === '' && countFiles === 4) || (slider !== '' && (countFiles + slider.features.length === 5)) ) bandShow = false;
+    if((slider === "" && countFiles < 5 && (countFiles === features.length)) 
+              || (slider !== '' && (countFiles !== 0 || slider.features.length === 0) 
+              && (features.length >= slider.features.length) 
+              && ((countFiles + slider.features.length) <= 5)) ){
+                
+      setUpFeatures((oldArray) => [...oldArray, <SelectText pushText={pushFeature} deleteFeature={deleteFeature}
+        updateCount={updateCount} valueFeat="" bandPlus={true} index={upFeatures.length} bandShow={bandShow} />])
     }
   }, [countFiles])
 
@@ -85,7 +105,9 @@ export default function FormSlider({token, slider}:
       formData.append('image', file);
 
       features.map((feat) => {
-        formData.append('features', feat);
+        if(feat !== ''){
+          formData.append('features', feat);
+        }
       })
 
       console.log(formData.getAll('features'))

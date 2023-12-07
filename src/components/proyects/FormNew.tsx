@@ -3,38 +3,28 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Button from "@/components/Button";
-import { createProyect, updateProyect } from "@/app/api/proyects/route";
+import { createProyect, updateProyect, createProyectImage } from "@/app/api/proyects/route";
 import Alert, { showToastMessage, showToastMessageError } from '../Alert';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import AddImage from './AddImage';
 
-export default function FormNew({token, tittle, subtitle, address, features, seg, id}: 
-                                {token:string, tittle:string, subtitle:string, 
-                                address:string, features:string, seg:string, id:string}){
+export default function FormNew({token, tittle, subtitle, address, features, seg, id, services}: 
+                                {token:string, tittle:string, subtitle:string, address:string, 
+                                features:string, seg:string, id:string, services:any}){
   
-  //const [segment, setSegment] = useState<string>('industrial');
   const [segment, setSegment] = useState<string>(seg === ''? 'INDUSTRIAL': seg);
   const [upFiles, setUpFiles] = useState<any[]>([]);
   const [countFiles, setCountFiles] = useState(0);
   const [files, setFiles] = useState<any[]>([]);
-  const [categories, setCategories] = useState<string[]>([])
+  const [arrServices, setArrServices] = useState<string[]>([])
 
   const pushFile = (file: any) => {
     setFiles(((oldFile) => [...oldFile, file] ));
   }
 
-  const pushCategory = (cat: string) => {
-    setCategories((oldCat) => [...oldCat, cat])
-  }
-
-  const printFiles = () => {
-    files.map(f => {
-      console.log('ffff');
-      console.log(f);
-    })
-    console.log(categories);
-    //console.log(files);
+  const pushService = (serv: string) => {
+    setArrServices((oldServ) => [...oldServ, serv])
   }
 
   const router = useRouter();
@@ -44,10 +34,17 @@ export default function FormNew({token, tittle, subtitle, address, features, seg
   }
 
   useEffect(() => {
-    setUpFiles((oldArray) => [...oldArray, <AddImage updateCount={updateCount} 
-                                pushFile={pushFile} pushCategory={pushCategory}
-                              />])
+    if(services !== ''){
+      setUpFiles((oldArray) => [...oldArray, <AddImage updateCount={updateCount} 
+        pushFile={pushFile} pushService={pushService}
+        services={services}
+      />])
+    }
   }, [countFiles])
+
+  const selectFiles = upFiles.map((elements) => (
+    elements
+  ))
 
   const formikPass = useFormik({
     initialValues: {
@@ -69,7 +66,22 @@ export default function FormNew({token, tittle, subtitle, address, features, seg
     
     onSubmit: async valores => {
       const {features, location, subtitle, title} = valores;
+   
+      const formData = new FormData();
+      formData.append('title', title);
+      formData.append('subtitle', subtitle);
+      formData.append('address', location);
+      formData.append('segment', segment);
+      formData.append('features', features);
       
+      files.map((file:any) => {
+        formData.append('photos', file);
+      })
+      
+      arrServices.map((service:string) => {
+        formData.append('services', service);
+      })
+
       const proyect = {
         title,
         subtitle,
@@ -81,13 +93,24 @@ export default function FormNew({token, tittle, subtitle, address, features, seg
 
       if(tittle === ''){
         try{
-          let res = await createProyect(proyect, token);
-          if(res === 201){
-            showToastMessage('Proyecto creado exitosamente!');
-            setTimeout(() => {
-              router.refresh();
-              router.push('/proyects');
-            }, 2000);
+          if(files){
+            let res = await createProyectImage(formData, token);
+            if(res === 201){
+              showToastMessage('Proyecto creado exitosamente!');
+              setTimeout(() => {
+                router.refresh();
+                router.push('/proyects');
+              }, 2000);
+            }
+          }else{
+            let res = await createProyect(proyect, token);
+            if(res === 201){
+              showToastMessage('Proyecto creado exitosamente!');
+              setTimeout(() => {
+                router.refresh();
+                router.push('/proyects');
+              }, 2000);
+            }
           }
         }catch{
           showToastMessageError('Error al crear proyecto..');
@@ -112,7 +135,6 @@ export default function FormNew({token, tittle, subtitle, address, features, seg
 
   return(
     <>
-      <button onClick={printFiles}>print</button>
       <Alert/>
       <form className="bg-white rounded shadow-md px-8 pt-6 pb-8" 
         onSubmit={formikPass.handleSubmit}>
@@ -209,21 +231,7 @@ export default function FormNew({token, tittle, subtitle, address, features, seg
           </div>
         ) : null}
         <div className="pl-5">
-          {upFiles.map((elements) => (
-            elements
-          ))}
-          {/* <AddImage /> */}
-          {/* <label htmlFor="" className='text-gray-500 mb-3'>Fotografias</label>
-          <div className='border-2 border-dashed rounded-md border-gray-200 relative p-4 w-full'>
-            <input 
-              type="file" 
-              id="photo" 
-              name="photo" 
-              multiple
-              className="opacity-0 absolute inset-0	">                                            
-            </input>
-            <p className='text-center	'>Subir fotos</p>
-          </div> */}
+          {selectFiles}
         </div>
         <div className="flex justify-center mt-3">
           <Button styleB="rounded-full bg-blue-600 w-1/5 text-white hover:bg-blue-500" textB="Guardar" typeB="submit" />
