@@ -28,7 +28,8 @@ export default function AddOnlyImage({services, addImage}:
   return(
     <>
       <div className="flex items-center mt-2">
-        <div className="w-1/2 mr-2">
+        <div className="w-1/2 flex mr-2">
+          {file && <img src={URL.createObjectURL(file)} className="w-14 h-14" />}
           <Upload setFile={setFile} />   
         </div>
         <select name="" id="" 

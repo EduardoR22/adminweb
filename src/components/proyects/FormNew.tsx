@@ -113,9 +113,12 @@ export default function FormNew({token, tittle, subtitle, address, features, seg
             if(res === 201){
               showToastMessage('Proyecto creado exitosamente!');
               setTimeout(() => {
-                router.refresh();
+                //router.refresh();
                 router.push('/proyects');
               }, 2000);
+              setTimeout(() => {
+                window.location.reload();
+              }, 2500);
             }
           }
         }catch{
@@ -126,9 +129,12 @@ export default function FormNew({token, tittle, subtitle, address, features, seg
         if(res.status === 200){
           showToastMessage('Proyecto modificado exitosamente!');
           setTimeout(() => {
-            router.refresh();
+            //router.refresh();
             router.push('/proyects');
           }, 2000);
+          setTimeout(() => {
+            window.location.reload();
+          }, 2500);
         }
       }                                  
     },       
@@ -215,7 +221,9 @@ export default function FormNew({token, tittle, subtitle, address, features, seg
                 onChange={handleSelect}
               >
                 <option value="INDUSTRIAL">Industrial</option>
-                <option value="OTRO">Algun otro</option>
+                <option value="COMERCIAL">Comercial</option>
+                <option value="INSTITUCIONAL">Institucional</option>
+                <option value="PARTICULAR">Particular</option>
               </select>
             </div>
           </div>
@@ -241,7 +249,7 @@ export default function FormNew({token, tittle, subtitle, address, features, seg
         </div>
         <div className="flex flex-col items-center justify-center">
         {tittle===''? <p className='text-xs font-sans font-thin mt-5'>Adjunte una fotografia con un aspecto 16:9 (1920×1080 píxeles o 1280×720 píxeles).</p>: ''}
-          <Button styleB="rounded-full bg-blue-600 w-1/5 text-white hover:bg-blue-500 mt-1" textB="Guardar" typeB="submit" />
+          <Button styleB="rounded-full bg-blue-600 w-36 text-white hover:bg-blue-500 mt-1" textB="Guardar" typeB="submit" />
         </div>
       </form>
     </>

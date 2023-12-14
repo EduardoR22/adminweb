@@ -51,9 +51,11 @@ export default function FormClient({name, linkWeb, id, token, user, company}:
             if(res === 201){
               showToastMessage(`Cliente ${client} creado exitosamente!`);
               setTimeout(() => {
-                router.refresh();
                 router.push('/clients');
               }, 2000)
+              setTimeout(() => {
+                window.location.reload();
+              }, 2500);
             }else{
               showToastMessageError(res.toString());
             }
@@ -62,9 +64,11 @@ export default function FormClient({name, linkWeb, id, token, user, company}:
             if(res === 201 || res === 'success') {
               showToastMessage(`Cliente ${client} creado exitosamente!`);
               setTimeout(() => {
-                router.refresh();
                 router.push('/clients')
               }, 2000)
+              setTimeout(() => {
+                window.location.reload();
+              }, 2500);
             } else {
               showToastMessageError(res);
             }
@@ -79,9 +83,11 @@ export default function FormClient({name, linkWeb, id, token, user, company}:
             if(res === 200){
               showToastMessage(`El cliente ha sido modificado exitosamente!`);
               setTimeout(() => {
-                router.refresh();
                 router.push('/clients')       
               }, 2000)
+              setTimeout(() => {
+                window.location.reload();
+              }, 2500);
             }else{
               showToastMessageError(res.toString());
             }
@@ -90,9 +96,11 @@ export default function FormClient({name, linkWeb, id, token, user, company}:
             if(res.status === 200 || res.data.status === 'success'){
               showToastMessage(`El cliente ha sido modificado exitosamente!`);
               setTimeout(() => {
-                router.refresh();
                 router.push('/clients')       
               }, 2000)
+              setTimeout(() => {
+                window.location.reload();
+              }, 2000);
             }else{
               showToastMessageError(res);
             }

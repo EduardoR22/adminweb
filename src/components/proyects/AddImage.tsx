@@ -45,7 +45,8 @@ export default function AddImage({updateCount, pushFile, pushService, services}:
   return(
     <>
       <div className="flex items-center mt-2">
-        <div className="w-1/2 mr-2">
+        <div className="flex w-1/2 mr-2">
+          {file && <img src={URL.createObjectURL(file)} className="w-14 h-14" />}
           <Upload setFile={setFile} />  
           {!ok? (
             <p className="text-red-500">* El campo no debe estar vacio</p>

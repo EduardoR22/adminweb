@@ -111,7 +111,7 @@ export default function FormChangePassword({usr, token} : {usr: any, token: stri
           </div>
         ) : null}
         <Button textB='Guardar password' typeB='submit' 
-                styleB='w-full border border-blue-600 bg-blue-600 text-white transition-colors hover:bg-blue-500' 
+                styleB='w-36 border border-blue-600 bg-blue-600 text-white transition-colors hover:bg-blue-500' 
         />         
       </form>
     </>     

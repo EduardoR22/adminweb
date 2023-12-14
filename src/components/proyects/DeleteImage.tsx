@@ -28,8 +28,6 @@ export default function DeleteImage({token, image, idProyect} : {token : string,
                 showToastMessage('Imagen eliminada exitosamente!');
                 setTimeout(() =>{
                   window.location.reload();
-                  // router.refresh();
-                  // router.push('/proyects');
                 }, 2000)
               } else {
                 showToastMessageError(res.toString());

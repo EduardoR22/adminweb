@@ -24,10 +24,11 @@ export default function DeleteClient({token, client} : {token : string, client: 
           if(res === 204) {
             showToastMessage('Cliente eliminado exitosamente!');
             setTimeout(() =>{
-              console.log('timer delete');
-              router.refresh();
               router.push('/clients')
-            }, 3000)
+            }, 2000)
+            setTimeout(() => {
+              window.location.reload();
+            }, 2500);
           } else {
             showToastMessageError(res.toString());
             router.refresh();
@@ -67,7 +68,7 @@ export default function DeleteClient({token, client} : {token : string, client: 
       <Alert />
       <button type="button" onClick={() => {
         deleteClient(client._id, client.name)
-        router.refresh()
+        //router.refresh()
         }}>
         <TrashIcon className="h-6 w-6 text-red-500"/>
       </button>

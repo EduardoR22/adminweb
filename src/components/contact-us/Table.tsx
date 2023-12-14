@@ -9,7 +9,7 @@ export default function Table({contacts, token}: {contacts:any, token:string}){
   
   const [search, setSearch] = useState<string>('');
   const [currentPage, setCurrentPage] = useState(0);
-  const [num_rows, setNumRows] = useState(3);
+  const [num_rows, setNumRows] = useState(10);
   const [length, setLength] = useState(contacts.length); 
   const [filter, setFilter] = useState(contacts.slice(currentPage, currentPage + num_rows));
   const [height, setHeight] = useState('')
@@ -33,11 +33,10 @@ export default function Table({contacts, token}: {contacts:any, token:string}){
   }
 
   const IndexPages = [
-    {value: 1, text: '1'},
-    {value: 2, text: '2'},
-    {value: 3, text: '3'},
-    {value: 4, text: '4'},
-    {value: 5, text: '5'},
+    {value: 10, text: '10'},
+    {value: 25, text: '25'},
+    {value: 50, text: '50'},
+    {value: 100, text: '100'},
   ];
 
   useEffect(() => {

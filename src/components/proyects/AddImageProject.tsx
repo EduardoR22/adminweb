@@ -41,9 +41,10 @@ export default function AddImageProyect({services, token, idProyect}:
     <>
       <Alert />
       {addImage}
+      <p className='text-xs font-sans font-thin mt-5'>Adjunte una fotografia con un aspecto 16:9 (1920×1080 píxeles o 1280×720 píxeles).</p>
       <div onClick={showAddImage} className="w-full flex justify-center">
         <Button typeB="button" textB="Agregar"
-            styleB="bg-blue-950 hover:bg-blue-500 text-white mt-3" />
+            styleB="bg-blue-950 hover:bg-blue-500 w-36 text-white mt-3" />
       </div>
     </>
   )

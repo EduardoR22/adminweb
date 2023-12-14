@@ -12,7 +12,7 @@ export default function ListReviews({proyects, token, idP}: {proyects:any, token
   
   const [search, setSearch] = useState('');
   const [currentPage, setCurrentPage] = useState(0);
-  const [num_rows, setNumRows] = useState(3);
+  const [num_rows, setNumRows] = useState(10);
   const [length, setLength] = useState(proyects.length); 
   const [filter, setFilter] = useState(proyects.slice(currentPage, currentPage + num_rows));
   const [height, setHeight] = useState<string>((75 * num_rows).toString());
@@ -41,11 +41,10 @@ export default function ListReviews({proyects, token, idP}: {proyects:any, token
   }
   
   const IndexPages = [
-    {value: 1, text: '1'},
-    {value: 2, text: '2'},
-    {value: 3, text: '3'},
-    {value: 4, text: '4'},
-    {value: 5, text: '5'},
+    {value: 10, text: '10'},
+    {value: 25, text: '25'},
+    {value: 50, text: '50'},
+    {value: 100, text: '100'},
   ]
 
   const changeReview = (idProyect:string) =>{

@@ -71,7 +71,7 @@ export default function Modal({newIssue, issue, token, id}: {newIssue:boolean, i
     <>
       {newIssue? (
         <button
-          className="bg-blue-950 text-white active:bg-blue-500 font-bold text-sm px-4 py-2 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+          className="bg-blue-950 text-white w-36 active:bg-blue-500 font-bold text-sm px-4 py-2 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
           type="button"
           onClick={() => setShowModal(true)}
         >

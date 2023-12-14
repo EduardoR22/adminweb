@@ -133,7 +133,7 @@ export default function FormEditUser({usr, token} : {usr:any, token: string}){
         </div>
       </div>
       <Button textB='Guardar usuario' typeB='submit' 
-        styleB='w-full mt-5 border border-blue-600 bg-blue-600 text-white transition-colors hover:bg-blue-500' 
+        styleB='w-36 mt-5 border border-blue-600 bg-blue-600 text-white transition-colors hover:bg-blue-500' 
       />
     </form>      
   );

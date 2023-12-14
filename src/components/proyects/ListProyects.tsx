@@ -12,7 +12,7 @@ export default function ListProyects({proyects, services, token}: {proyects: any
   
   const [search, setSearch] = useState('');
   const [currentPage, setCurrentPage] = useState(0);
-  const [num_rows, setNumRows] = useState(3);
+  const [num_rows, setNumRows] = useState(10);
   const [length, setLength] = useState(proyects.length); 
   const [filter, setFilter] = useState(proyects.slice(currentPage, currentPage + num_rows));
   const [height, setHeight] = useState<string>((75 * num_rows).toString());
@@ -22,7 +22,7 @@ export default function ListProyects({proyects, services, token}: {proyects: any
       setLength(proyects.length)
       setFilter(proyects.slice(currentPage, currentPage + num_rows))
     }else{
-      const filtered = proyects.filter( (proyect: any) => proyect.name.toLowerCase().includes(search.toLowerCase()));
+      const filtered = proyects.filter( (proyect: any) => proyect.title.toLowerCase().includes(search.toLowerCase()));
       setLength(filtered.length);
       setFilter(filtered.slice(currentPage, currentPage + num_rows));
     }
@@ -42,11 +42,10 @@ export default function ListProyects({proyects, services, token}: {proyects: any
   }
 
   const IndexPages = [
-    {value: 1, text: '1'},
-    {value: 2, text: '2'},
-    {value: 3, text: '3'},
-    {value: 4, text: '4'},
-    {value: 5, text: '5'},
+    {value: 10, text: '10'},
+    {value: 25, text: '25'},
+    {value: 50, text: '50'},
+    {value: 100, text: '100'},
   ]
   
   const [viewProyect, setViewProyect] = useState(<></>)
@@ -63,7 +62,7 @@ export default function ListProyects({proyects, services, token}: {proyects: any
             <Searcher search={search} searchChange={onSearchChange} placeholder="Buscar proyecto" />
           </div>
           <Link href='/proyects/new'>
-            <Button textB="Nuevo" typeB="Button" styleB="text-white bg-blue-950 hover:bg-blue-500 mr-10" />
+            <Button textB="Nuevo" typeB="Button" styleB="text-white w-36 bg-blue-950 hover:bg-blue-500 mr-10" />
           </Link>
         </div>
         <table className="mt-5" style={{height: `${height}px`}}>

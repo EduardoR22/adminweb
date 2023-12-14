@@ -33,7 +33,7 @@ export default async function Edit({ params }: { params: { id: string } }){
   return(
     <>
       <NavBar />
-      <ContainerForm img="/profile" subtitle="Cambiar contraseña" title="Usuario" 
+      <ContainerForm img="/profile" subtitle="Actualizar cliente" title="Cliente" 
                     width="w-full max-w-sm">
             <FormClient name={client.name} id={id} linkWeb={client.link} 
                         token={token} user={user._id} company={user.company} /> 

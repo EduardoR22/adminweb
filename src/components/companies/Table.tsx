@@ -12,7 +12,7 @@ export default function Table({companies, token}: {companies:any, token:string})
   
   const [search, setSearch] = useState<string>('');
   const [currentPage, setCurrentPage] = useState(0);
-  const [num_rows, setNumRows] = useState(3);
+  const [num_rows, setNumRows] = useState(10);
   const [length, setLength] = useState(companies.length); 
   const [filter, setFilter] = useState(companies.slice(currentPage, currentPage + num_rows));
   const [height, setHeight] = useState((90 * num_rows).toString())
@@ -38,11 +38,10 @@ export default function Table({companies, token}: {companies:any, token:string})
   }
 
   const IndexPages = [
-    {value: 1, text: '1'},
-    {value: 2, text: '2'},
-    {value: 3, text: '3'},
-    {value: 4, text: '4'},
-    {value: 5, text: '5'},
+    {value: 10, text: '10'},
+    {value: 25, text: '25'},
+    {value: 50, text: '50'},
+    {value: 100, text: '100'},
   ];
 
   return(
@@ -50,7 +49,7 @@ export default function Table({companies, token}: {companies:any, token:string})
       <div className="flex justify-between">
         <Searcher search={search} searchChange={onSearchChange} placeholder="Buscar compañia" />
         <Link href={'/companies/new'}>
-          <Button styleB="text-white rounded-full bg-blue-950 hover:bg-blue-500" textB="Nuevo" typeB="Button" />
+          <Button styleB="text-white w-36 rounded-full bg-blue-950 hover:bg-blue-500" textB="Nuevo" typeB="Button" />
         </Link>
       </div>
       <div className="flex justify-center mt-10" style={{height:`${height}px`}}>
