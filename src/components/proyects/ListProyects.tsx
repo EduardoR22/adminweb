@@ -8,7 +8,7 @@ import ViewProyect from "./ViewProyect";
 import Button from "../Button";
 import Link from "next/link";
 
-export default function ListProyects({proyects, token}: {proyects: any, token: string}){
+export default function ListProyects({proyects, services, token}: {proyects: any, token: string, services:any[]}){
   
   const [search, setSearch] = useState('');
   const [currentPage, setCurrentPage] = useState(0);
@@ -52,7 +52,7 @@ export default function ListProyects({proyects, token}: {proyects: any, token: s
   const [viewProyect, setViewProyect] = useState(<></>)
   
   const changeProyect = (value: any) =>{
-    setViewProyect(<ViewProyect width="w-full" proyect={value} token={token} />);
+    setViewProyect(<ViewProyect width="w-full" proyect={value} token={token} services={services} />);
   }
   
   return(
@@ -73,7 +73,7 @@ export default function ListProyects({proyects, token}: {proyects: any, token: s
               <th className="w-20">Activo</th>
               <th className="w-56 text-left">Proyecto / Caracteristica</th>
               <th className="w-40 text-left">Año / Ubicacion</th>
-              <th className="w-20 text-left">Foto</th>
+              {/* <th className="w-20 text-left">Foto</th> */}
             </tr>
           </thead>
           <tbody>
@@ -81,7 +81,7 @@ export default function ListProyects({proyects, token}: {proyects: any, token: s
               <tr key={proyect._id} onClick={() =>changeProyect(proyect)} className="cursor-pointer">
                 <td>
                   <div className="flex justify-center">
-                    <Image src={'/pro'} alt="profile" width={30} height={30} />
+                    <Image src={proyect.user.photo} alt="profile" width={30} height={30} />
                   </div>
                 </td>
                 <td>
@@ -101,7 +101,7 @@ export default function ListProyects({proyects, token}: {proyects: any, token: s
                     <p className="text-gray-400">{proyect.address}</p>
                   </div>
                 </td>
-                <td><Image src={proyect.images[0]} alt="photo" width={30} height={30} /></td>
+                {/* <td><Image src={proyect.images[0]} alt="photo" width={30} height={30} /></td> */}
               </tr>
             ))}
           </tbody>

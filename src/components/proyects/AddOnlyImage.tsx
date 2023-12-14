@@ -1,35 +1,18 @@
 "use client"
 import Upload from "../Upload"
 import { useState } from "react"
-import { PlusCircleIcon, CheckCircleIcon } from "@heroicons/react/24/solid";
+import { CheckCircleIcon } from "@heroicons/react/24/solid";
 
-export default function AddImage({updateCount, pushFile, pushService, services}:
-                                {updateCount: Function, pushFile:Function, 
-                                pushService: Function, services:any[]}){
+export default function AddOnlyImage({services, addImage}: 
+                              {services:any[], addImage:Function}){
   
   const [file, setFile] = useState();
-  const [saved, setSaved] = useState(false);
-  const [add, setAdd] = useState(false);
   const [ok, setOk] = useState<boolean>(true);
   const [option, setOption] = useState(services[0]._id);
 
-  const onPlus = () =>{
-    if(saved){
-      setAdd(true);
-      updateCount();
-    }else{
-      setOk(false);
-      setTimeout(() => {
-        setOk(true);
-      }, 2000);
-    }
-  }
-
   const save = () => {
     if(file && option){
-      setSaved(true);
-      pushFile(file);
-      pushService(option);
+      addImage(file, option);
     }else{
       setOk(false);
       setTimeout(() => {
@@ -46,12 +29,8 @@ export default function AddImage({updateCount, pushFile, pushService, services}:
     <>
       <div className="flex items-center mt-2">
         <div className="w-1/2 mr-2">
-          <Upload setFile={setFile} />  
-          {!ok? (
-            <p className="text-red-500">* El campo no debe estar vacio</p>
-          ): ''}
+          <Upload setFile={setFile} />   
         </div>
-        {/* <InputText setText={setCategory} /> */}
         <select name="" id="" 
             className="bg-white outline-none outline-0 shadow appearance-none border 
             rounded w-1/2 py-4 px-3 text-base text-gray-500 leading-tight font-sans 
@@ -64,9 +43,11 @@ export default function AddImage({updateCount, pushFile, pushService, services}:
             >{service.name}</option>
           ))}
         </select>
-        <CheckCircleIcon width={50} height={50} className={`text-red-500 cursor-pointer ${saved? 'invisible': ''}`} onClick={save} />
-        <PlusCircleIcon width={50} height={50} className={`text-green-500 cursor-pointer ${add? 'invisible': ''}`} onClick={onPlus} />        
+        <CheckCircleIcon width={50} height={50} className={`text-red-500 cursor-pointer`} onClick={save} />
       </div>
+      {!ok? (
+              <p className="text-red-500">* El campo no debe estar vacio</p>
+            ): ''}
     </>
   )
 }

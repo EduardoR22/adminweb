@@ -2,12 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-//import {CreditCardIcon} from '@heroicons/react/24/solid';
 import Image from 'next/image';
-//import Delete from './Delete';
-import Pagination from './Pagination';
-import Searcher from './Searcher';
-import Button from './Button';
+import Pagination from '../Pagination';
+import Searcher from '../Searcher';
+import Button from '../Button';
 
 export default function Table({children, sliders, token, link} : {children:any, sliders: any, token: string, link:string}){
   

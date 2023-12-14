@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import ContainerForm from "@/components/ContainerForm";
 import ArrowReturn from "@/components/ArrowReturn";
-import Table from "@/components/TableSliders";
+import Table from "@/components/sliders/TableSliders";
 import NavBar from "@/components/Navigation/NavBar";
 import { getSliders } from "../api/sliders/route";
 

@@ -7,7 +7,11 @@ import NavBar from "@/components/Navigation/NavBar";
 export default async function Edit({ params }: { params: { id: string } }){
   const cookieStore = cookies();
   const token: string = cookieStore.get('token')?.value || '';
-  
+  let user;
+  user = cookieStore.get('user')?.value;
+  if(user) user = JSON.parse(user);
+  else return <h1>Error: Inicie sesion para continuar..</h1>
+
   const id = params.id;
   let client;
 
@@ -29,8 +33,10 @@ export default async function Edit({ params }: { params: { id: string } }){
   return(
     <>
       <NavBar />
-      <ContainerForm img="/profile" subtitle="Cambiar contraseña" title="Usuario" width="w-full max-w-sm">
-            <FormClient name={client.name} id={id} linkWeb={client.link} token={token} />        
+      <ContainerForm img="/profile" subtitle="Cambiar contraseña" title="Usuario" 
+                    width="w-full max-w-sm">
+            <FormClient name={client.name} id={id} linkWeb={client.link} 
+                        token={token} user={user._id} company={user.company} /> 
       </ContainerForm>      
     </>
   )

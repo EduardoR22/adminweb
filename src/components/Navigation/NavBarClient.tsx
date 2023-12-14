@@ -59,8 +59,8 @@ export default function NavBarClient({user}: {user:any}){
       <nav className="bg-blue-950 top-0 flex-wrap z-[20] mx-auto flex w-full items-center justify-between">
         <Bars3Icon width={30} height={30} className="sm:hidden" onClick={toggleNavBar} />
         <Image src={'/icono.jpg'} alt="logo" width={50} height={50} priority />
-        <div className="w-1/12 sm:w-2/3 flex justify-end">
-          <div className="hidden w-full text-white sm:flex justify-between ">
+        <div className="w-1/12 sm:w-9/12 flex justify-end">
+          <div className="hidden w-full text-white md:flex justify-between ">
             <NavLinks role={role} /> 
           </div>
         </div>
@@ -101,7 +101,7 @@ const NavLinks = ({role}: {role:string}) => {
       <Link href={'/sliders'}>SLIDERS</Link>
       <Link href={'/clients'}>CLIENTES</Link>
       <Link href={'/reviews'}>REVIEWS</Link>
-      <Link href={'/contacts'}>CONTACTOS</Link>
+      <Link href={'/contact-us'}>CONTACTOS</Link>
       {role === 'admin'? <><Link href={'/companies'}>COMPAÑIAS</Link> <Link href={'/accounts'}>CUENTAS</Link> </>: ''}
     </>
   )

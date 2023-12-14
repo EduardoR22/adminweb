@@ -9,9 +9,11 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import AddImage from './AddImage';
 
-export default function FormNew({token, tittle, subtitle, address, features, seg, id, services}: 
+export default function FormNew({token, tittle, subtitle, address, features, seg, id, services, 
+                                  user, company}: 
                                 {token:string, tittle:string, subtitle:string, address:string, 
-                                features:string, seg:string, id:string, services:any}){
+                                features:string, seg:string, id:string, services:any, 
+                                user:string, company:string}){
   
   const [segment, setSegment] = useState<string>(seg === ''? 'INDUSTRIAL': seg);
   const [upFiles, setUpFiles] = useState<any[]>([]);
@@ -73,7 +75,9 @@ export default function FormNew({token, tittle, subtitle, address, features, seg
       formData.append('address', location);
       formData.append('segment', segment);
       formData.append('features', features);
-      
+      formData.append('user', user);
+      formData.append('company', company);
+
       files.map((file:any) => {
         formData.append('photos', file);
       })
@@ -88,7 +92,9 @@ export default function FormNew({token, tittle, subtitle, address, features, seg
         'address': location,
         segment,
         features,
-        'images': '/public/prject.jpg'
+        'images': '/public/prject.jpg',
+        user,
+        company
       };
 
       if(tittle === ''){
@@ -233,8 +239,9 @@ export default function FormNew({token, tittle, subtitle, address, features, seg
         <div className="pl-5">
           {selectFiles}
         </div>
-        <div className="flex justify-center mt-3">
-          <Button styleB="rounded-full bg-blue-600 w-1/5 text-white hover:bg-blue-500" textB="Guardar" typeB="submit" />
+        <div className="flex flex-col items-center justify-center">
+        {tittle===''? <p className='text-xs font-sans font-thin mt-5'>Adjunte una fotografia con un aspecto 16:9 (1920×1080 píxeles o 1280×720 píxeles).</p>: ''}
+          <Button styleB="rounded-full bg-blue-600 w-1/5 text-white hover:bg-blue-500 mt-1" textB="Guardar" typeB="submit" />
         </div>
       </form>
     </>

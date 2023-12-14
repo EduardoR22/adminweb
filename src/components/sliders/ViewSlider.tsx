@@ -8,8 +8,9 @@ import Delete from "./Delete"
 export default function ViewSlider({slider, token}: {slider:any, token:string}){
   
   const sliderP = [
-    '/cr7.jpg',
-    '/CR7_2.jpg'
+    // '/cr7.jpg',
+    // '/CR7_2.jpg'
+    slider.image
   ]
   
   const [img, setImg] = useState(sliderP[0]);
@@ -31,12 +32,16 @@ export default function ViewSlider({slider, token}: {slider:any, token:string}){
   const Previous = () => {
     if(index > 0){
       setIndex(index -1);
+    }else{
+      setIndex(sliderP.length -1);
     }
   }
 
   const Next = () => {
     if(index < sliderP.length - 1){
       setIndex(index+1)
+    }else{
+      setIndex(0);
     }
   }
 

@@ -2,6 +2,7 @@ import ListProyects from "@/components/proyects/ListProyects"
 import NavBar from "@/components/Navigation/NavBar"
 import { getProyects } from "../api/proyects/route"
 import { cookies } from "next/headers"
+import { getServices } from "../api/services/route"
 
 export default async function Proyects(){
   
@@ -10,17 +11,23 @@ export default async function Proyects(){
   let proyects;
   try {
     proyects = await getProyects(token)
-    console.log(proyects.data.data);
   } catch (error) {
     return <h1>Error al consultar proyectos</h1>
   }
   
+  let services;
+  try {
+    services = await getServices(token);   
+  } catch (error) {
+    return <h1>Error al consultar los servicios</h1>
+  }
+
   return (
     <>
       <NavBar />
       <div className="p-10">
         <h1 className="font-semibold text-gray-900">Proyectos</h1>
-        <ListProyects proyects={proyects.data.data} token={token} />
+        <ListProyects proyects={proyects.data.data} token={token} services={services} />
       </div>
     </>
   )

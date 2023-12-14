@@ -7,9 +7,10 @@ import { showToastMessageError, showToastMessage } from "@/components/Alert";
 import { createUser } from "@/app/api/users/route";
 import { useState} from "react";
 
-export default function FormAccount({token}: {token:string}){
+export default function FormAccount({token, companies}: {token:string, companies:any}){
   const [role, setRol] = useState<string>('admin');
   const [file, setFile] : any = useState();
+  const [company, setCompany] = useState<string>(companies[0]._id);
 
   const formikPass = useFormik({
     initialValues: {
@@ -39,7 +40,7 @@ export default function FormAccount({token}: {token:string}){
       // formData.append('password', password);
       // formData.append('passwordConfirm', passwordConfirm);
       // formData.append('rol', rol);
-      // formData.append("company", "64fc0c23d0cdf022cf6eac3a");
+      // formData.append("company", company);
       // formData.append('photo', file);
       
       const user = {
@@ -48,7 +49,7 @@ export default function FormAccount({token}: {token:string}){
         password,
         passwordConfirm,
         role,
-        'company': "64fc0c23d0cdf022cf6eac3a",
+        company,
         'photo': '/public/img/users/default.jpg'
       }
       
@@ -79,6 +80,11 @@ export default function FormAccount({token}: {token:string}){
         showToastMessageError('Esta no es una imagen!, favor de agregar imagen');
       }
     }
+  }
+
+  const onCompanyChange = (value:string) => {
+    console.log('company', value);
+    setCompany(value);
   }
 
   return(
@@ -137,6 +143,33 @@ export default function FormAccount({token}: {token:string}){
               <option value="user">User</option>
             </select>
           </div>
+          <div className="space-y-1 justify-center">
+            <div className="shrink-0 self-center">
+                <label htmlFor="" className='text-gray-500 mb-3'>Foto</label>
+                <div className='flex'>
+                  <Image    
+                      className="rounded-full"                      
+                      src={'/photo'}
+                      alt={'nameU'}
+                      width={56}
+                      height={56}                                    
+                      priority={true}                                    
+                  />
+                  <div className='border rounded-md border-gray-200 relative p-4 w-5/6'>
+                    <input 
+                      type="file" 
+                      id="photo" 
+                      name="photo" 
+                      //value={formik.values.photo}
+                      onChange={onFileChange}
+                      //onBlur={formik.handleChange}
+                      className="opacity-0 absolute inset-0	">                                            
+                    </input>
+                    <p className='text-center	'>Cambiar Foto</p>
+                  </div>  
+                </div>
+            </div>
+          </div>
         </div>
         <div className="w-1/2">
           <div className="mb-4 text-gray-700">
@@ -179,28 +212,17 @@ export default function FormAccount({token}: {token:string}){
           ) : null}
           <div className="space-y-1 justify-center">
             <div className="shrink-0 self-center">
-                <label htmlFor="" className='text-gray-500 mb-3'>Foto</label>
-                <div className='flex'>
-                  <Image    
-                      className="rounded-full"                      
-                      src={'/photo'}
-                      alt={'nameU'}
-                      width={56}
-                      height={56}                                    
-                      priority={true}                                    
-                  />
-                  <div className='border rounded-md border-gray-200 relative p-4 w-5/6'>
-                    <input 
-                      type="file" 
-                      id="photo" 
-                      name="photo" 
-                      //value={formik.values.photo}
-                      onChange={onFileChange}
-                      //onBlur={formik.handleChange}
-                      className="opacity-0 absolute inset-0	">                                            
-                    </input>
-                    <p className='text-center	'>Cambiar Foto</p>
-                  </div>  
+                <label htmlFor="" className='text-gray-500'>Compañias</label>
+                <div>
+                  <select name="" id="" className="bg-white mt-1 outline-none outline-0 shadow appearance-none 
+                    border rounded w-full py-4 px-3 text-base text-gray-500 leading-tight 
+                    font-sans font-ligth focus:outline-none focus:shadow-outline"
+                    onChange={(e) => onCompanyChange(e.target.value)}
+                  >
+                    {companies.map((company:any) => (
+                      <option value={company._id} key={company._id}>{company.name}</option>
+                    ))}
+                  </select>
                 </div>
             </div>
           </div>

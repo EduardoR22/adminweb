@@ -10,8 +10,9 @@ import { useState } from 'react';
 import Alert from '@/components/Alert';
 import { useRouter } from 'next/navigation';
 
-export default function FormClient({name, linkWeb, id, token}: 
-                                    {name:string, linkWeb:string, id:string, token: string}){
+export default function FormClient({name, linkWeb, id, token, user, company}: 
+                                    {name:string, linkWeb:string, id:string, 
+                                    token: string, user:string, company:string}){
   const [file, setFile] = useState<any>();
   
   const formikPass = useFormik({
@@ -33,10 +34,14 @@ export default function FormClient({name, linkWeb, id, token}:
       formData.append("name", client);
       formData.append("link", link);
       formData.append("logo", file);
+      formData.append('user', user);
+      formData.append('company', company);
       
       const data = {
         "name": client,
         link,
+        user,
+        company
       }
 
       if(id === ''){
@@ -154,7 +159,8 @@ export default function FormClient({name, linkWeb, id, token}:
           <p className="text-gray-500 mb-3 font-medium text-sm">Logotipo</p>
           <Upload setFile={setFile} />
         </div>
-        <div className="flex justify-center mt-3">
+        <div className="flex flex-col items-center justify-center mt-3">
+          <p className='text-xs font-sans font-thin mt-5'>Adjunte una fotografia con un aspecto cuadrado (640x640 píxeles).</p>
           <Button styleB="rounded-full bg-blue-600 w-1/5 text-white hover:bg-blue-500" textB="Guardar" typeB="submit" />
         </div>
       </form>

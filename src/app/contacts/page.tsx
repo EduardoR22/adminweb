@@ -1,7 +1,7 @@
 import { cookies } from "next/headers"
 import { getContacts } from "../api/contacts/route";
-import Table from "@/components/contacts/Table";
-import NavTab from "@/components/companies/NavTab";
+import Table from "@/components/contacts-whith-chat/Table";
+import NavTab from "@/components/contacts-whith-chat/NavTab";
 import ContainerForm from "@/components/ContainerForm";
 import NavBar from "@/components/Navigation/NavBar";
 

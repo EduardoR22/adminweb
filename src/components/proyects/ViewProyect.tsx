@@ -1,16 +1,19 @@
-"use client"
+//"use client"
 
 import Image from "next/image"
-import { PencilIcon } from "@heroicons/react/24/solid"
-import Upload from "../Upload"
-import Button from "../Button"
-import { useState } from "react"
+import { PencilIcon} from "@heroicons/react/24/solid"
+import ShowImage from "./ShowImage"
+//import Upload from "../Upload"
+//import Button from "../Button"
+//import { useState } from "react"
 import Link from "next/link"
 import DeleteProyect from "./Delete"
+import AddImageProyect from "./AddImageProject"
 
-export default function ViewProyect({width, proyect, token}: {width:string, proyect:any, token: string}){
+export default function ViewProyect({width, proyect, token, services}: 
+                        {width:string, proyect:any, token: string, services:any[]}){
   
-  const [file, setFile] = useState();
+  // const [file, setFile] = useState();
   
   return(
     <div className="flex flex-col">
@@ -26,7 +29,6 @@ export default function ViewProyect({width, proyect, token}: {width:string, proy
         <Link href={`/proyects/${proyect._id}/edit`}>
           <PencilIcon width={20} height={20} className="text-green-500" />
         </Link>
-        {/* <TrashIcon width={20} height={20} className="text-red-500" /> */}
         <DeleteProyect proyect={proyect} token={token} />
       </div>
 
@@ -44,29 +46,25 @@ export default function ViewProyect({width, proyect, token}: {width:string, proy
       </div>
 
       <div className="w-full flex flex-wrap mt-5">
-        {proyect.images.map((img: string, index: number) => (
+        {/* {proyect.images.map((img: string, index: number) => (
           <div className="w-1/3 flex justify-center items-center" key={index}>
             <Image src={img} alt="img" width={50} height={50} />
           </div>
+        ))} */}
+        {proyect.images.map((img: any, index: number) => (
+          <ShowImage img={img} token={token} key={index} idProyect={proyect._id} />
+          // <div key={index} className="flex items-center justify-between w-full mb-3 outline-0 outline-none">
+          //   <div className="flex items-center">
+          //     <Image src={img.photo} alt="img" width={90} height={90} />
+          //     <p>{img.services.name}</p>
+          //   </div>
+          //   <TrashIcon width={30} height={30} className="text-red-500 ml-3" />
+          // </div>
         ))}
-        {/* <div className="w-1/3 flex justify-center items-center">
-          <Image src={'/img'} alt="img" width={50} height={50} />
-        </div>
-        <div className="w-1/3 flex justify-center items-center">
-          <Image src={'/img'} alt="img" width={50} height={50} />
-        </div>
-        <div className="w-1/3 flex justify-center items-center">
-          <Image src={'/img'} alt="img" width={50} height={50} />
-        </div>
-        <div className="w-1/3 flex justify-center items-center">
-          <Image src={'/img'} alt="img" width={50} height={50} />
-        </div>
-        <div className="w-1/3 flex justify-center items-center">
-          <Image src={'/img'} alt="img" width={50} height={50} />
-        </div> */}
       </div>
 
-      <div className={`${width} mt-5`}>
+      <AddImageProyect services={services} token={token} idProyect={proyect._id} />
+      {/* <div className={`${width} mt-5`}>
         <p className="text-gray-600">Agregar foto</p>
         <form onSubmit={(e) => {e.preventDefault}} className="pt-3">
           <Upload setFile={setFile} />
@@ -74,7 +72,7 @@ export default function ViewProyect({width, proyect, token}: {width:string, proy
             <Button styleB="mt-3 bg-blue-600 text-white hover:bg-blue-500" textB="Guardar" typeB="submit" />
           </div>
         </form>
-      </div>
+      </div> */}
 
     </div>
   )
