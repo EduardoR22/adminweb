@@ -48,7 +48,6 @@ export async function createProyectImage(project:FormData, auth_token:string){
   
   const config = {
     headers: { 
-      //'Content-Type': 'application/json',
       'Content-Type': 'multipart/form-data',
       'Authorization': `Bearer ${auth_token}`
     }
