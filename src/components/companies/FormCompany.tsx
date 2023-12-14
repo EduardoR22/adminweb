@@ -72,10 +72,15 @@ export default function FormCompany({token, company}:
             let res = await createCompanyLogo(formData, token);
             if(res === 201){
               showToastMessage(`Compañia creada exitosamente!`);
+              //router.push('/companies')
               setTimeout(() =>{
-                router.refresh();
+                // router.refresh();
                 router.push('/companies')
+                //window.location.reload();
               }, 3000)
+              setTimeout(() =>{
+                window.location.reload();
+              }, 4000)
             }else{
               showToastMessageError(res.toString());
             }

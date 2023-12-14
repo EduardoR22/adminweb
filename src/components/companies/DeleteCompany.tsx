@@ -26,8 +26,9 @@ export default function DeleteCompany({token, company} : {token : string, compan
               if(res === 204) {
                 showToastMessage('Compañia eliminada exitosamente!');
                 setTimeout(() =>{
-                  router.refresh();
-                  router.push('/companies');
+                  // router.refresh();
+                  // router.push('/companies');
+                  window.location.reload();
                 }, 2000)
               } else {
                 showToastMessageError(res.toString());
