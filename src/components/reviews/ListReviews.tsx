@@ -59,9 +59,14 @@ export default function ListReviews({proyects, token, idP}: {proyects:any, token
     try {
       const res = await getReviewsByProyect(token, idProyect);
       setReviews(res);
-      setViewReview(<ViewReview reviews={res} width="w-full" token={token} />)
-      if(typeof(reviews) === 'string')
+      if(typeof(res) === 'string')
         return <h1>{reviews}</h1>
+      
+      if(res.length > 0){
+        setViewReview(<ViewReview reviews={res} width="w-full" token={token} />)
+      }else{
+        setViewReview(<h1>No hay reviews..</h1>)
+      }
     } catch (error) {
       return <h1>Error al obtener las reviews del proyecto...</h1>
     }

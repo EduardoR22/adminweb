@@ -68,7 +68,7 @@ export default function Table({children, sliders, token, link} : {children:any, 
           {filter.map( (slider: any) => (
             <tr key={slider._id}>
               <td>
-              <Image src={slider.image} alt='profile' width={50} height={40} className='rounded-full' />
+              <Image src={slider.user? slider.user.photo : '/images.jpg'} alt='profile' width={50} height={40} className='rounded-full' />
               </td>
               <td> 
                 <div className=' flex justify-center'>

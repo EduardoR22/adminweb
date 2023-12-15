@@ -23,6 +23,17 @@ export default function ChangeStatus({status, token, idContact}: {status:string,
     <>
       <Alert />
       <div className="flex items-center">
+        <HandRaisedIcon width={30} height={30} onClick={() => changeStatus('EN ATENCION')}
+          className="text-orange-500 cursor-pointer" 
+        />
+        <HandThumbUpIcon width={30} height={30} onClick={() => changeStatus('SOLUCIONADO')}
+          className="text-green-500 cursor-pointer" 
+        />
+        <HandThumbDownIcon width={30} height={30} onClick={() => changeStatus('ANULADO')}
+          className="text-red-500 cursor-pointer" 
+        />
+      </div>
+      {/* <div className="flex items-center">
         {status==='PENDIENTE'? <HandRaisedIcon width={30} height={30} 
                                   className="text-orange-500 cursor-pointer" 
                                   onClick={() => changeStatus('EN ATENCION')}
@@ -33,7 +44,7 @@ export default function ChangeStatus({status, token, idContact}: {status:string,
         {status==='PENDIENTE' || status==='EN ATENCION'? <HandThumbDownIcon width={30} height={30} 
                                                           onClick={() => changeStatus('ANULADO')}
                                                           className="text-red-500 cursor-pointer" />: ''}
-      </div>
+      </div> */}
     </>
   )
 }

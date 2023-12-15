@@ -24,7 +24,7 @@ export default function Upload({setFile}: {setFile: Function}){
           name="photo"
           onChange={onFileChange} 
           // multiple
-          className="opacity-0 absolute inset-0	">                                            
+          className="opacity-0 absolute inset-0 w-full">                                            
         </input>
         <p className='text-center	'>Subir imagen</p>
       </div>

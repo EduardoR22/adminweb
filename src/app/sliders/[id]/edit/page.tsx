@@ -10,6 +10,11 @@ export default async function Edit({params}: {params: {id: string}}){
   const cookiStore = cookies();
   const token = cookiStore.get('token')?.value || '';
 
+  let user;
+  user = cookiStore.get('user')?.value;
+  if(user) user = JSON.parse(user);
+  else return <h1>Error: Inicie sesion para continuar..</h1>
+
   let slider
 
   try {
@@ -32,8 +37,8 @@ export default async function Edit({params}: {params: {id: string}}){
   return (
     <>
       <NavBar />
-      <ContainerForm title="Actualizar slider" subtitle="Imagenes de slider" img="/profile" width="w-2/3">
-        <FormSlider token={token} slider={slider.data.data.data} />
+      <ContainerForm title="Actualizar slider" subtitle="Imagenes de slider" img="/image.jpg" width="w-2/3">
+        <FormSlider token={token} slider={slider.data.data.data} user={user._id} company={user.company} />
       </ContainerForm>
     </>
   )

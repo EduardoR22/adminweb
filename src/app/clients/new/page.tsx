@@ -14,7 +14,7 @@ export default function New(){
   return(
     <>
       <NavBar />
-      <ContainerForm img="/profile" subtitle="Crear cliente" title="Cliente" width="w-full max-w-sm">
+      <ContainerForm img="/clients.jpg" subtitle="Crear cliente" title="Cliente" width="w-full max-w-sm">
             <FormClient name="" id="" linkWeb="" token={token} user={user._id} company={user.company} />        
       </ContainerForm>
     </>

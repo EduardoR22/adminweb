@@ -22,7 +22,7 @@ export default async function New(){
   return(
     <>
       <NavBar />
-      <ContainerForm img="/public/algo.jpg" subtitle="Creacion de nueva cuenta" 
+      <ContainerForm img="/account.jpg" subtitle="Creacion de nueva cuenta" 
                       title="Nueva Cuenta" width="w-2/3"
       >
         <FormAccount token={token} companies={companies} />

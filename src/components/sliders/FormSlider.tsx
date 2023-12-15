@@ -67,8 +67,13 @@ export default function FormSlider({token, slider, user, company}:
   }
 
   useEffect(() => {
-    let bandShow = true; 
+    let bandShow = true;
     if((slider === '' && countFiles === 4) || (slider !== '' && (countFiles + slider.features.length === 5)) ) bandShow = false;
+    
+    // console.log('bandshow',bandShow);
+    // console.log('countfiles', countFiles);
+    // console.log()
+
     if((slider === "" && countFiles < 5 && (countFiles === features.length)) 
               || (slider !== '' && (countFiles !== 0 || slider.features.length === 0) 
               && (features.length >= slider.features.length) 

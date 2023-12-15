@@ -65,46 +65,48 @@ export default function ListProyects({proyects, services, token}: {proyects: any
             <Button textB="Nuevo" typeB="Button" styleB="text-white w-36 bg-blue-950 hover:bg-blue-500 mr-10" />
           </Link>
         </div>
-        <table className="mt-5" style={{height: `${height}px`}}>
-          <thead>
-            <tr className="text-gray-400 text-sm border-b border-gray-500">
-              <th className="w-20">Usr</th>
-              <th className="w-20">Activo</th>
-              <th className="w-56 text-left">Proyecto / Caracteristica</th>
-              <th className="w-40 text-left">Año / Ubicacion</th>
-              {/* <th className="w-20 text-left">Foto</th> */}
-            </tr>
-          </thead>
-          <tbody>
-            {filter.map((proyect: any) => (
-              <tr key={proyect._id} onClick={() =>changeProyect(proyect)} className="cursor-pointer">
-                <td>
-                  <div className="flex justify-center">
-                    <Image src={proyect.user.photo} alt="profile" width={30} height={30} />
-                  </div>
-                </td>
-                <td>
-                  <div className="flex justify-center items-center text-green-600">
-                    <EllipsisHorizontalCircleIcon width={40} height={25} />
-                  </div>
-                </td>
-                <td>
-                  <div>
-                    <p className="text-gray-800">{proyect.title}</p>
-                    <p className="text-gray-400">{proyect.subtitle}</p>
-                  </div>
-                </td>
-                <td>
-                  <div>
-                    <p className="text-gray-800">2023</p>
-                    <p className="text-gray-400">{proyect.address}</p>
-                  </div>
-                </td>
-                {/* <td><Image src={proyect.images[0]} alt="photo" width={30} height={30} /></td> */}
+        <div style={{height: `${height}px`}}>
+          <table className="mt-5">
+            <thead>
+              <tr className="text-gray-400 text-sm border-b border-gray-500">
+                <th className="w-20">Usr</th>
+                <th className="w-20">Activo</th>
+                <th className="w-56 text-left">Proyecto / Caracteristica</th>
+                <th className="w-40 text-left">Año / Ubicacion</th>
+                {/* <th className="w-20 text-left">Foto</th> */}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {filter.map((proyect: any) => (
+                <tr key={proyect._id} onClick={() =>changeProyect(proyect)} className="cursor-pointer">
+                  <td className="p-0">
+                    <div className="flex justify-center m-0">
+                      <Image src={proyect.user.photo} alt="profile" width={30} height={30} />
+                    </div>
+                  </td>
+                  <td className="p-0">
+                    <div className="flex justify-center items-center text-green-600 m-0">
+                      <EllipsisHorizontalCircleIcon width={40} height={25} />
+                    </div>
+                  </td>
+                  <td className="p-0">
+                    <div>
+                      <p className="text-gray-800 m-0">{proyect.title}</p>
+                      <p className="text-gray-400 m-0">{proyect.subtitle}</p>
+                    </div>
+                  </td>
+                  <td className="p-0">
+                    <div>
+                      <p className="text-gray-800 m-0">2023</p>
+                      <p className="text-gray-400 m-0">{proyect.address}</p>
+                    </div>
+                  </td>
+                  {/* <td><Image src={proyect.images[0]} alt="photo" width={30} height={30} /></td> */}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
         <div className="flex mt-5 justify-center items-center">
           <Pagination IndexPages={IndexPages} currentPage={currentPage} num_rows={num_rows} 
                       setCurrentPage={setCurrentPage} setNumRows={setNumRows} 
