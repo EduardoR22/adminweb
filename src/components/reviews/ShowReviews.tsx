@@ -30,7 +30,7 @@ export default function ShowReview({width, review, token}: {width:string, review
 
   return(
     <>
-      <div className={`${width} flex justify-between mt-10`} key={review._id}>
+      <div className={`${width} flex justify-between`} key={review._id}>
         <div className="flex">
           <Rating defaultValue={review.ratingAverage} precision={0.5} readOnly />
         </div>

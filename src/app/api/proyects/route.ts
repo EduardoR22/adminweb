@@ -122,6 +122,10 @@ export async function removeImageProyect(id:string, auth_token:string, idProyect
 
 export async function updateProyect(id:string, data:any, auth_token:string) {
   const url=`${process.env.NEXT_PUBLIC_API_URL}/api/v1/projects/${id}`;
+  
+  console.log(url);
+  console.log(data);
+  
   const config = {
     headers: { 
       'content-type': 'application/json',
@@ -152,5 +156,24 @@ export async function insertImage(auth_token:string, idProyect:string, data:Form
     return res.statusText;
   } catch (error) {
     return 'Ocurrio un problema al guardar imagen';
+  }
+}
+
+export async function getSegments(auth_token:string) {
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/v1/segments`;
+  try {
+    const res = await axios.get(url, {
+      headers: {
+        'Authorization': `Bearer ${auth_token}`,
+      }
+    })
+    console.log(res.status);
+    if(res.status === 200){
+      return res.data.data.data;
+    }else{
+      return res.statusText;
+    }
+  } catch (error) {
+    return 'Ocurrio un problema al consultar segmentos';
   }
 }

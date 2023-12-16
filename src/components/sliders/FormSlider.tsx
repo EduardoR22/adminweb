@@ -46,7 +46,11 @@ export default function FormSlider({token, slider, user, company}:
       const arrElements = upFeatures;
       arrElements.splice(indexDelete, 1, <></>);
       setUpFeatures(arrElements);
+      console.log('deelete');
+      console.log(countFiles);
       setCountFiles(countFiles - 1);
+      console.log('res');
+      console.log(countFiles);
     }
   }, [indexDelete])
 
@@ -63,16 +67,25 @@ export default function FormSlider({token, slider, user, company}:
   },[])
 
   const updateCount = () => {
+    //console.log('updateconunt');
+    //console.log(updateCount);
     setCountFiles(countFiles + 1);
+    //console.log('resss');
+    //console.log(countFiles);
   }
 
   useEffect(() => {
     let bandShow = true;
+    console.log('useefect')
+    console.log(countFiles);
     if((slider === '' && countFiles === 4) || (slider !== '' && (countFiles + slider.features.length === 5)) ) bandShow = false;
+    //if((slider === '' && upFeatures.length === 4) || (slider !== '' && (countFiles + slider.features.length === 5)) ) bandShow = false;
     
-    // console.log('bandshow',bandShow);
-    // console.log('countfiles', countFiles);
-    // console.log()
+    // if(slider === '' && countFiles === 4){
+    //   console.log('porqueeee');
+    //   bandShow = false;
+    // }
+
 
     if((slider === "" && countFiles < 5 && (countFiles === features.length)) 
               || (slider !== '' && (countFiles !== 0 || slider.features.length === 0) 
@@ -124,22 +137,30 @@ export default function FormSlider({token, slider, user, company}:
           if(file){
             let res = await createSliderImage(formData, token);
             if(res === 201){
+              router.push('/sliders');
               showToastMessage(`Slider ${title} creado exitosamente!`);
               setTimeout(() => {
-                router.refresh();
-                router.push('/sliders');
-              }, 3000)
+                window.location.reload();
+              }, 500);
+              // setTimeout(() => {
+              //   router.refresh();
+              //   router.push('/sliders');
+              // }, 3000)
             }else{
               showToastMessageError(res.toString());
             }
           }else{
             let res = await createSlider(data, token);
             if(res === 201) {
+              router.push('/sliders');
               showToastMessage(`Slider ${title} creado exitosamente!`);
               setTimeout(() => {
-                router.refresh();
-                router.push('/sliders');
-              }, 3000)
+                window.location.reload();
+              }, 500);
+              // setTimeout(() => {
+              //   router.refresh();
+              //   router.push('/sliders');
+              // }, 3000)
             } else {
               showToastMessageError('Error al crear slider..');
             }
@@ -152,22 +173,30 @@ export default function FormSlider({token, slider, user, company}:
           if(file){
             let res = await updateSliderImage(token, formData, slider._id);
             if(res === 200){
+              router.push('/sliders');
               showToastMessage(`Slider ${title} actualizado exitosamente!`);
               setTimeout(() => {
-                router.refresh();
-                router.push('/sliders');
-              }, 3000)
+                window.location.reload();
+              }, 500);
+              // setTimeout(() => {
+              //   router.refresh();
+              //   router.push('/sliders');
+              // }, 3000)
             }else{
               showToastMessageError(res.toString())
             }
           }else{
             let res = await updateSlider(token, data, slider._id);
             if(res === 200) {
+              router.push('/sliders');
               showToastMessage(`Slider ${title} actualizado exitosamente!`);
               setTimeout(() => {
-                router.refresh();
-                router.push('/sliders');
-              }, 3000)
+                window.location.reload();
+              }, 500);
+              // setTimeout(() => {
+              //   router.refresh();
+              //   router.push('/sliders');
+              // }, 3000)
             } else {
               showToastMessageError('Error al actualizar slider..');
             }

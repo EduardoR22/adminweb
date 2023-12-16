@@ -3,6 +3,7 @@ import ContainerForm from "@/components/ContainerForm";
 import { cookies } from "next/headers";
 import NavBar from "@/components/Navigation/NavBar";
 import { getServices } from "@/app/api/services/route";
+import { getSegments } from "@/app/api/proyects/route";
 
 export default async function New(){
   
@@ -25,12 +26,22 @@ export default async function New(){
     return <h1>Ocurrio un problema al consultar servicios!!!</h1>
   }
 
+  let segments;
+  try {
+    segments = await getSegments(token);
+    if(typeof(segments) === 'string'){
+      return <h1>{segments}</h1>
+    }
+  } catch (error) {
+    return <h1>Ocurrio un problema al consultar servicios!!!</h1>
+  }
+
   return(
     <>
       <NavBar />
       <ContainerForm img="/projects.jpg" subtitle="Proyecto a publicar" title="Nuevo Proyecto" width="w-2/3">
         <FormNew token={token} address="" features="" id="" seg="" subtitle="" 
-                  tittle="" services={services} user={user._id} company={company} />
+                  tittle="" services={services} user={user._id} company={company} segments={segments} />
       </ContainerForm>
     </>
   )

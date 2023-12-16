@@ -10,12 +10,12 @@ import { useRouter } from 'next/navigation';
 import AddImage from './AddImage';
 
 export default function FormNew({token, tittle, subtitle, address, features, seg, id, services, 
-                                  user, company}: 
+                                  user, company, segments}: 
                                 {token:string, tittle:string, subtitle:string, address:string, 
                                 features:string, seg:string, id:string, services:any, 
-                                user:string, company:string}){
+                                user:string, company:string, segments:any}){
   
-  const [segment, setSegment] = useState<string>(seg === ''? 'INDUSTRIAL': seg);
+  const [segment, setSegment] = useState<string>(seg === ''? segments[0]._id: seg);
   const [upFiles, setUpFiles] = useState<any[]>([]);
   const [countFiles, setCountFiles] = useState(0);
   const [files, setFiles] = useState<any[]>([]);
@@ -54,6 +54,7 @@ export default function FormNew({token, tittle, subtitle, address, features, seg
       subtitle: subtitle,
       location:address,
       features: features,
+      year: ''
     }, 
     validationSchema: Yup.object({
       title: Yup.string()
@@ -64,10 +65,12 @@ export default function FormNew({token, tittle, subtitle, address, features, seg
                   .required('La ubicacion es obligatoria'),
       features: Yup.string()
                   .required('Las caracteristicas son obligatorias'),
+      year: Yup.string()
+                  .required('El año es obligatorio'),
     }),
     
     onSubmit: async valores => {
-      const {features, location, subtitle, title} = valores;
+      const {features, location, subtitle, title, year} = valores;
    
       const formData = new FormData();
       formData.append('title', title);
@@ -77,6 +80,7 @@ export default function FormNew({token, tittle, subtitle, address, features, seg
       formData.append('features', features);
       formData.append('user', user);
       formData.append('company', company);
+      formData.append('year', year);
 
       files.map((file:any) => {
         formData.append('photos', file);
@@ -92,9 +96,9 @@ export default function FormNew({token, tittle, subtitle, address, features, seg
         'address': location,
         segment,
         features,
-        'images': '/public/prject.jpg',
         user,
-        company
+        company,
+        year        
       };
 
       if(tittle === ''){
@@ -103,10 +107,12 @@ export default function FormNew({token, tittle, subtitle, address, features, seg
             let res = await createProyectImage(formData, token);
             if(res === 201){
               showToastMessage('Proyecto creado exitosamente!');
+              router.push('/proyects');
               setTimeout(() => {
-                router.refresh();
-                router.push('/proyects');
-              }, 2000);
+                //router.refresh();
+                //router.push('/proyects');
+                window.location.reload();
+              }, 500);
             }
           }else{
             let res = await createProyect(proyect, token);
@@ -179,7 +185,7 @@ export default function FormNew({token, tittle, subtitle, address, features, seg
                 className="shadow appearance-none border rounded w-full mt-2 py-4 px-3 text-base text-gray-500 leading-tight font-sans font-ligth focus:outline-none focus:shadow-outline"
                 id="subtitle"
                 type="text"
-                placeholder="45,000 m2"
+                placeholder="Subtitulo"
                 value={formikPass.values.subtitle}
                 onChange={formikPass.handleChange}
                 onBlur={formikPass.handleChange}>
@@ -188,6 +194,25 @@ export default function FormNew({token, tittle, subtitle, address, features, seg
             {formikPass.touched.subtitle && formikPass.errors.subtitle ? (
               <div className="my-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-4">
                 <p>{formikPass.errors.subtitle}</p>
+              </div>
+            ) : null}
+            <div className="mb-4 text-gray-700">
+              <label className="block text-sm font-medium text-gray-500" htmlFor="year">
+                Año
+              </label>
+              <input 
+                className="shadow appearance-none border rounded w-full mt-2 py-4 px-3 text-base text-gray-500 leading-tight font-sans font-ligth focus:outline-none focus:shadow-outline"
+                id="year"
+                type="text"
+                placeholder="2015"
+                value={formikPass.values.year}
+                onChange={formikPass.handleChange}
+                onBlur={formikPass.handleChange}>
+              </input>
+            </div>
+            {formikPass.touched.year && formikPass.errors.year ? (
+              <div className="my-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-4">
+                <p>{formikPass.errors.year}</p>
               </div>
             ) : null}
           </div>
@@ -220,10 +245,13 @@ export default function FormNew({token, tittle, subtitle, address, features, seg
                       font-ligth focus:outline-none focus:shadow-outline"
                 onChange={handleSelect}
               >
-                <option value="INDUSTRIAL">Industrial</option>
+                {segments.map((segmen:any) => (
+                  <option value={segmen._id}>{segmen.name}</option>
+                ))}
+                {/* <option value="INDUSTRIAL">Industrial</option>
                 <option value="COMERCIAL">Comercial</option>
                 <option value="INSTITUCIONAL">Institucional</option>
-                <option value="PARTICULAR">Particular</option>
+                <option value="PARTICULAR">Particular</option> */}
               </select>
             </div>
           </div>

@@ -22,12 +22,18 @@ export default function AddImageProyect({services, token, idProyect}:
       formData.append('services', service);
       const res = await insertImage(token, idProyect, formData);
       if(res === 200) {
-        showToastMessage('Imagen Agregada Exitosamente!!!')
+        setAddImage(<></>);
+        window.location.reload();
+        
         setTimeout(() => {
-          setAddImage(<></>);
-          router.refresh();
-          router.push('/proyects');
+          showToastMessage('Imagen Agregada Exitosamente!!!');  
         }, 2000);
+        
+        // setTimeout(() => {
+        //   setAddImage(<></>);
+        //   router.refresh();
+        //   router.push('/proyects');
+        // }, 2000);
       }
       else{
         showToastMessageError('La imagen no pudo ser agregada');

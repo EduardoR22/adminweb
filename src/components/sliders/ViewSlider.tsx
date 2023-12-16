@@ -5,27 +5,37 @@ import { ChevronLeftIcon, ChevronRightIcon, PencilSquareIcon } from "@heroicons/
 import Link from "next/link"
 import Delete from "./Delete"
 
-export default function ViewSlider({slider, token}: {slider:any, token:string}){
+// export default function ViewSlider({slider, token}: {slider:any, token:string}){
+export default function ViewSlider({sliders, token, indexStart}: 
+              {sliders:any, token:string, indexStart:number}){
   
-  const sliderP = [
-    // '/cr7.jpg',
-    // '/CR7_2.jpg'
-    slider.image
-  ]
+  // const sliderP = [
+  //   // '/cr7.jpg',
+  //   // '/CR7_2.jpg'
+  //   slider.image
+  // ]
   
-  const [img, setImg] = useState(sliderP[0]);
-  const [index, setIndex] = useState(0);
+  //const [img, setImg] = useState(sliderP[0]);
+  const [index, setIndex] = useState(indexStart);
+  const [slider, setSlider] = useState<any>(sliders[indexStart]);
 
   const timer = setTimeout(() => {
-    if(index >= sliderP.length - 1){
+    if(index >= sliders.length - 1){
       setIndex(0);
     }else{
       setIndex(index + 1);
     }
+    // if(index >= sliderP.length - 1){
+    //   setIndex(0);
+    // }else{
+    //   setIndex(index + 1);
+    // }
   }, 5000);
 
   useEffect(() => {
-    setImg(sliderP[index]);
+    // setImg(sliderP[index]);
+    // return () => clearTimeout(timer);
+    setSlider(sliders[index]);
     return () => clearTimeout(timer);
   }, [index])
 
@@ -33,23 +43,33 @@ export default function ViewSlider({slider, token}: {slider:any, token:string}){
     if(index > 0){
       setIndex(index -1);
     }else{
-      setIndex(sliderP.length -1);
+      setIndex(sliders.length -1);
     }
+    // if(index > 0){
+    //   setIndex(index -1);
+    // }else{
+    //   setIndex(sliderP.length -1);
+    // }
   }
 
   const Next = () => {
-    if(index < sliderP.length - 1){
+    if(index < sliders.length - 1){
       setIndex(index+1)
     }else{
       setIndex(0);
     }
+    // if(index < sliderP.length - 1){
+    //   setIndex(index+1)
+    // }else{
+    //   setIndex(0);
+    // }
   }
 
   return(
     <>
       <div className="pt-20">
-        <div className="flex justify-center h-80 w-full">
-          <img src={img} alt="slider" className="w-full h-full" />
+        <div className="flex justify-center w-full">
+          <img src={slider.image} alt="slider" className="w-full h-auto" />
           {slider.features.map((feature:string, index:number) => (
             <p className={`w-2/3 absolute text-xl text-white font-bold`} style={{top:`${(index * 50)+140}px`}} 
               key={index}>{feature}</p>

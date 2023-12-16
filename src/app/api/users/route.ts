@@ -163,32 +163,40 @@ export async function removeUser(id:string, auth_token:string) {
   }
 }
 
-//export async function createUser(user:FormData, auth_token:string){
-export async function createUser(user:any, auth_token:string){
-  const url=`${process.env.NEXT_PUBLIC_API_URL}/users`;
-  const config = {
-    headers: { 
-      'Content-Type': 'application/json',
-      //'Content-Type': 'multipart/form-data',
-      'Authorization': `Bearer ${auth_token}`
+export async function createUserPhoto(user:FormData, auth_token:string){
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/v1/users/userWithPhoto`;
+  try {
+    const res = await axios.post(url, user, {
+      headers: {
+        'Authorization': `Bearer ${auth_token}`,
+        'Content-Type': 'multipart/form-data',
+      }
+    })
+    if(res.status === 201){
+      return res.status;
+    }else{
+      return res.statusText;
     }
-  };
-  try {            
-    const res = await axios.post(url, user, config)
-    .then( (response) => {      
-      if(!response){          
-        throw new Error('Algo salió mal con la solicitud');                      
-      } else {
-        if(response.status === 204) {        
-            return 204;
-          }        
-        }          
-        return response.status;
-      })
-      .catch( (err) => {          
-        console.log(err);
-      });
-  } catch (error:any) {
-    return error;    
+  } catch (error) {
+    return 'Ocurrio un problema al crear usuario con foto';
+  }
+}
+
+  export async function createUser(user:any, auth_token:string){
+  const url=`${process.env.NEXT_PUBLIC_API_URL}/users`;
+  try {
+    const res = await axios.post(url, JSON.stringify(user), {
+      headers: {
+        'Authorization': `Bearer ${auth_token}`,
+        'Content-Type': 'application/json',
+      }
+    })
+    if(res.status === 201){
+      return res.status;
+    }else{
+      return res.statusText;
+    }
+  } catch (error) {
+    return 'Ocurrio un error al crear usuario..'
   }
 }

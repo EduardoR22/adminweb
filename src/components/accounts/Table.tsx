@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import {CreditCardIcon} from '@heroicons/react/24/solid';
 import Image from 'next/image';
 import Delete from '../Delete';
 import Pagination from '../Pagination';
@@ -13,7 +12,7 @@ export default function Table({children, users, token, link} : {children:any, us
   
   const [search, setSearch] = useState('');
   const [currentPage, setCurrentPage] = useState(0);
-  const [num_rows, setNumRows] = useState(3);
+  const [num_rows, setNumRows] = useState(10);
   const [length, setLength] = useState(users.length); 
   const [filter, setFilter] = useState(users.slice(currentPage, currentPage + num_rows));
   const [height, setHeight] = useState<string>(((60 * num_rows) + 50).toString());
@@ -39,11 +38,10 @@ export default function Table({children, users, token, link} : {children:any, us
   }
 
   const IndexPages = [
-    {value: 1, text: '1'},
-    {value: 2, text: '2'},
-    {value: 3, text: '3'},
-    {value: 4, text: '4'},
-    {value: 5, text: '5'},
+    {value: 10, text: '10'},
+    {value: 25, text: '25'},
+    {value: 50, text: '50'},
+    {value: 100, text: '100'},
   ]
 
   return (
@@ -68,7 +66,6 @@ export default function Table({children, users, token, link} : {children:any, us
               <th className='w-20 border-b border-slate-400'>Eliminar</th>
               <th className='w-28 text-start border-b border-slate-400'>Nombre / Usuario</th>
               <th className='w-28 text-start border-b border-slate-400'>Perfil / Status</th>
-              <th className='w-20 border-b border-slate-400'>Detalle</th>
             </tr>
           </thead>
           <tbody>
@@ -76,7 +73,9 @@ export default function Table({children, users, token, link} : {children:any, us
               <tr key={user._id} className=''>
                 <td className='pt-3'>
                   <Link href={`/users/${user._id}/details`}>
-                    <Image src={user.photo} alt='profile' width={50} height={40} className='rounded-full' />
+                    {user.photo? 
+                        <Image src={user.photo} alt={user.name.split(' ')[0]} width={50} height={40} className='rounded-full' /> 
+                        : <p>{user.name.split(' ')[0]}</p>}
                   </Link>
                 </td>
                 <td> 
@@ -94,11 +93,6 @@ export default function Table({children, users, token, link} : {children:any, us
                   <div className='flex items-center'>
                     <div className={`w-4 h-4 ${user.status ? 'bg-green-500' : 'bg-red-500'} mr-2`}></div>
                     <p>{user.role}</p>
-                  </div>
-                </td>
-                <td>
-                  <div className='flex justify-center'>
-                    <CreditCardIcon width={25} height={25} className='text-gray-300' />
                   </div>
                 </td>
               </tr>

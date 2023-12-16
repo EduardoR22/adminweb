@@ -8,7 +8,8 @@ import ViewReview from "./ViewReview";
 import { useRouter } from "next/navigation";
 import { getReviewsByProyect } from "@/app/api/reviews/route";
 
-export default function ListReviews({proyects, token, idP}: {proyects:any, token:string, idP:string}){
+export default function ListReviews({proyects, token, idP, image}: 
+                          {proyects:any, token:string, idP:string, image:string}){
   
   const [search, setSearch] = useState('');
   const [currentPage, setCurrentPage] = useState(0);
@@ -47,15 +48,15 @@ export default function ListReviews({proyects, token, idP}: {proyects:any, token
     {value: 100, text: '100'},
   ]
 
-  const changeReview = (idProyect:string) =>{
-    router.push(`/reviews?idp=${idProyect}`);
+  const changeReview = (idProyect:string, img:string) =>{
+    router.push(`/reviews?idp=${idProyect}&&img=${img}`);
     setTimeout(() => {
       window.location.reload();
     }, 2000);
   }
 
   const [reviews, setReviews] = useState<any>();
-  const getReviewsProyect = async (idProyect:string) => {
+  const getReviewsProyect = async (idProyect:string, img:string) => {
     try {
       const res = await getReviewsByProyect(token, idProyect);
       setReviews(res);
@@ -63,7 +64,7 @@ export default function ListReviews({proyects, token, idP}: {proyects:any, token
         return <h1>{reviews}</h1>
       
       if(res.length > 0){
-        setViewReview(<ViewReview reviews={res} width="w-full" token={token} />)
+        setViewReview(<ViewReview reviews={res} width="w-full" image={img} token={token} />)
       }else{
         setViewReview(<h1>No hay reviews..</h1>)
       }
@@ -73,10 +74,9 @@ export default function ListReviews({proyects, token, idP}: {proyects:any, token
   }
 
   useEffect(() => {
-    console.log('helllp')
     setViewReview(<></>)
-    if(idP !== ''){
-      getReviewsProyect(idP);
+    if(idP !== '' && image !== ''){
+      getReviewsProyect(idP, image);
     }
   }, []);
 
@@ -91,17 +91,18 @@ export default function ListReviews({proyects, token, idP}: {proyects:any, token
             <tr className="text-gray-400 text-sm border-b border-gray-500">
               <th className="w-20">&nbsp;</th>
               <th className="w-20">Estatus</th>
-              <th className="w-56 text-left">Nombre / Telefono</th>
+              <th className="w-56 text-left">Nombre / Subtitulo</th>
               <th className="w-28 text-left">Total reseñas</th>
               <th className="w-20 text-left">Reseñas</th>
             </tr>
           </thead>
           <tbody>
             {proyects.map((proyect:any) => (
-              <tr key={proyect._id} onClick={() => changeReview(proyect._id)} className="cursor-pointer">
+              <tr key={proyect._id} onClick={() => changeReview(proyect._id, proyect.images[0].photo)} 
+                  className="cursor-pointer">
                 <td>
                   <div className="flex justify-center">
-                    <Image src={'/profile.jpg'} alt="profile" width={30} height={30} />
+                    <Image src={proyect.images[0].photo} alt="profile" width={30} height={30} />
                   </div>
                 </td>
                 <td>

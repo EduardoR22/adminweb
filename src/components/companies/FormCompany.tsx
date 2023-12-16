@@ -23,7 +23,8 @@ export default function FormCompany({token, company}:
   if(company !== ''){
     nameC = company.name;
     emailC = company.email;
-    phoneC = company.phoneNumber[0].phone;
+    //phoneC = company.phoneNumber[0].phone;
+    phoneC = company.phoneNumber[0]? company.phoneNumber[0].phone : '';
     addressC = company.address;
   }
 

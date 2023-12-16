@@ -4,14 +4,13 @@ import NavBar from "@/components/Navigation/NavBar"
 import { cookies } from "next/headers"
 import { getProyects } from "../api/proyects/route"
 
-export default async function Reviews({searchParams}: {searchParams:{idp:string}}){
+export default async function Reviews({searchParams}: {searchParams:{idp:string, img:string}}){
   
   const cookiestore = cookies();
   const token = cookiestore.get('token')?.value || '';
   
   const idP = searchParams.idp? searchParams.idp : '';
-
-  console.log('idp',idP)
+  const img = searchParams.img? searchParams.img : '';
 
   let proyects;
   try {
@@ -33,13 +32,12 @@ export default async function Reviews({searchParams}: {searchParams:{idp:string}
 
   //console.log(reviews);
 
-  console.log(proyects.data.data);
   return(
     <>
       <NavBar />
       <div className="p-10">
         <h1 className="font-semibold text-gray-900">Reviews</h1>
-        <ListReviews proyects={proyects.data.data} token={token} idP={idP} />
+        <ListReviews proyects={proyects.data.data} token={token} idP={idP} image={img} />
       </div>
     </>
   )

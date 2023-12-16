@@ -52,59 +52,61 @@ export default function Table({companies, token}: {companies:any, token:string})
           <Button styleB="text-white w-36 rounded-full bg-blue-950 hover:bg-blue-500" textB="Nuevo" typeB="Button" />
         </Link>
       </div>
-      <div className="flex justify-center mt-10" style={{height:`${height}px`}}>
-        <table>
-          <thead>
-            <tr className="border-b border-gray-600 text-gray-400">
-              <td className="w-12">Status</td>
-              <td className="w-20">Logo</td>
-              <td className="w-56">Nombre</td>
-              <td className="w-56">Telefono</td>
-              <td className="w-20">Id</td>
-              <td className="w-16">&nbsp;</td>
-            </tr>
-          </thead>
-          <tbody>
-            {filter.map((company: any) => (
-              <tr key={company._id}>
-                <td>
-                  <div className="flex justify-center items-center">
-                    <div className="rounded-full bg-green-700 w-4 h-4"></div>
-                  </div>
-                </td>
-                <td>
-                  <Image src={company.logo} alt="logo" width={50} height={50} />
-                </td>
-                <td>
-                  <div>
-                    <p>{company.name}</p>
-                    <p className="text-gray-400 text-xs">{company.email}</p>
-                  </div>
-                </td>
-                <td>
-                  <div>
-                    <p>{company.phoneNumber[0] === undefined? '': company.phoneNumber[0].phone}</p>
-                    <p className="text-gray-400 text-xs">{company.address}</p>
-                  </div>
-                </td>
-                <td>
-                  <div>
-                    <p>2323</p>
-                    <p className="text-gray-400 text-xs">12 oct</p>
-                  </div>
-                </td>
-                <td>
-                  <div className="flex items-center justify-center">
-                    <Link href={`/companies/${company._id}/edit`}>
-                      <PencilSquareIcon width={30} height={30} className="text-gray-400" />
-                    </Link>
-                    <DeleteCompany company={company} token={token} />
-                  </div>
-                </td>
+      <div className="mt-10" style={{height:`${height}px`}}>
+        <div className="flex justify-center">
+          <table>
+            <thead>
+              <tr className="border-b border-gray-600 text-gray-400">
+                <td className="w-12">Status</td>
+                <td className="w-20">Logo</td>
+                <td className="w-56">Nombre</td>
+                <td className="w-56">Telefono</td>
+                <td className="w-20">Id</td>
+                <td className="w-16">&nbsp;</td>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {filter.map((company: any) => (
+                <tr key={company._id}>
+                  <td>
+                    <div className="flex justify-center items-center">
+                      <div className="rounded-full bg-green-700 w-4 h-4"></div>
+                    </div>
+                  </td>
+                  <td>
+                    <Image src={company.logo} alt="logo" width={50} height={50} />
+                  </td>
+                  <td>
+                    <div>
+                      <p>{company.name}</p>
+                      <p className="text-gray-400 text-xs">{company.email}</p>
+                    </div>
+                  </td>
+                  <td>
+                    <div>
+                      <p>{company.phoneNumber[0] === undefined? '': company.phoneNumber[0].phone}</p>
+                      <p className="text-gray-400 text-xs">{company.address}</p>
+                    </div>
+                  </td>
+                  <td>
+                    <div>
+                      <p>2323</p>
+                      <p className="text-gray-400 text-xs">12 oct</p>
+                    </div>
+                  </td>
+                  <td>
+                    <div className="flex items-center justify-center">
+                      <Link href={`/companies/${company._id}/edit`}>
+                        <PencilSquareIcon width={30} height={30} className="text-gray-400" />
+                      </Link>
+                      <DeleteCompany company={company} token={token} />
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
       <div className='flex justify-center items-center mt-3 w-9/12'>
         <Pagination IndexPages={IndexPages} currentPage={currentPage} num_rows={num_rows} 

@@ -53,7 +53,7 @@ export default function ClientsList({children, users, token, link} : {children:a
           <Searcher search={search} searchChange={onSearchChange} placeholder='Buscar cliente' />
         </div>
         <Link href={link} >
-          <Button styleB='mr-10 bg-blue-600 text-white hover:bg-blue-500' textB='Nuevo' typeB='button'/>
+          <Button styleB='mr-10 w-36 bg-blue-600 text-white hover:bg-blue-500' textB='Nuevo' typeB='button'/>
         </Link>
       </div>
       <div className='flex justify-between flex-wrap mt-10' style={{height: `${height}px`}}>

@@ -40,7 +40,7 @@ export default function Table({contacts, token}: {contacts:any, token:string}){
   ];
 
   useEffect(() => {
-    setHeight(`h-${num_rows * 12}`);
+    setHeight((num_rows * 100).toString());
   }, [num_rows])
 
   return(
@@ -48,33 +48,35 @@ export default function Table({contacts, token}: {contacts:any, token:string}){
       <div className="flex justify-end mr-10">
         <Searcher search={search} searchChange={onSearchChange} placeholder="Buscar contacto" />
       </div>
-      <div className={`flex justify-center mt-10 ${height}`}>
-        <table>
-          <thead>
-            <tr className="border-b border-gray-600 text-gray-400">
-              <td className="w-48">Nombre</td>
-              <td className="w-32">Telefono</td>
-              <td className="w-48">Email</td>
-              <td className="w-60">Comentario</td>
-              <td className="w-28">&nbsp;</td>
-            </tr>
-          </thead>
-          <tbody>
-            {filter.map((contact:any) => (
-              <tr key={contact._id}>
-                <td>{contact.name}</td>
-                <td>{contact.phone}</td>
-                <td>
-                  <p>{contact.email}</p>
-                </td>
-                <td>{contact.message}</td>
-                <td className="pl-3">
-                  <ChangeStatus status={contact.statusContact} token={token} idContact={contact._id} />
-                </td>
-              </tr>            
-            ))}
-          </tbody>
-        </table>
+      <div className={'mt-10'} style={{height: `${height}px`}}>
+        <div className="flex justify-center">
+          <table>
+            <thead>
+              <tr className="border-b border-gray-600 text-gray-400">
+                <td className="w-48">Nombre</td>
+                <td className="w-32">Telefono</td>
+                <td className="w-48">Email</td>
+                <td className="w-60">Comentario</td>
+                <td className="w-28">&nbsp;</td>
+              </tr>
+            </thead>
+            <tbody>
+              {filter.map((contact:any) => (
+                <tr key={contact._id}>
+                  <td>{contact.name}</td>
+                  <td>{contact.phone}</td>
+                  <td>
+                    <p>{contact.email}</p>
+                  </td>
+                  <td>{contact.message}</td>
+                  <td className="pl-3">
+                    <ChangeStatus status={contact.statusContact} token={token} idContact={contact._id} />
+                  </td>
+                </tr>            
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
       <div className='flex justify-center items-center mt-3 w-9/12'>
         <Pagination IndexPages={IndexPages} currentPage={currentPage} num_rows={num_rows} 
