@@ -97,7 +97,7 @@ export default function ListProyects({proyects, services, token}: {proyects: any
                   </td>
                   <td className="p-0">
                     <div>
-                      <p className="text-gray-800 m-0">2023</p>
+                      <p className="text-gray-800 m-0">{proyect.year? proyect.year: 'Sin año'}</p>
                       <p className="text-gray-400 m-0">{proyect.address}</p>
                     </div>
                   </td>

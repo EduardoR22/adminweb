@@ -37,8 +37,6 @@ export default function SelectText({updateCount, pushText, valueFeat, bandPlus, 
 
   const deleteFeat = () => {
     deleteFeature(index);
-    console.log('aquiii')
-    console.log(index);
   }
 
   return(
@@ -52,7 +50,7 @@ export default function SelectText({updateCount, pushText, valueFeat, bandPlus, 
         </div>
         <CheckCircleIcon width={40} height={40} className={`text-red-500 cursor-pointer ${saved? 'invisible': ''}`} onClick={save} />
         <PlusCircleIcon width={40} height={40} className={`text-green-500 cursor-pointer ${add? 'invisible': ''} ${bandPlus? '': 'invisible'} ${bandShow? '': 'invisible'}`} onClick={onPlus} />
-        <TrashIcon width={40} height={40} onClick={deleteFeat} className="text-red-500 cursor-pointer" />
+        <TrashIcon width={40} height={40} onClick={deleteFeat} className={`text-red-500 cursor-pointer ${saved? '': 'invisible'}`} />
         {/* <button type="button" onClick={deleteFeat}>delete</button> */}
       </div>
       {!ok? (

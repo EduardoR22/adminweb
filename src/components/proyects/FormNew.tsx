@@ -104,6 +104,8 @@ export default function FormNew({token, tittle, subtitle, address, features, seg
       if(tittle === ''){
         try{
           if(files){
+            console.log('new proyect');
+            console.log(formData.getAll('photos'))
             let res = await createProyectImage(formData, token);
             if(res === 201){
               showToastMessage('Proyecto creado exitosamente!');
@@ -112,7 +114,7 @@ export default function FormNew({token, tittle, subtitle, address, features, seg
                 //router.refresh();
                 //router.push('/proyects');
                 window.location.reload();
-              }, 500);
+              }, 1500);
             }
           }else{
             let res = await createProyect(proyect, token);
