@@ -54,25 +54,25 @@ export async function createProyectImage(project:FormData, auth_token:string){
     }
   };
 
-  console.log('backkk');
-  console.log(project.getAll('photos'));
+  // console.log('backkk');
+  // console.log(project.getAll('photos'));
 
-  return 200;
+  // return 200;
 
-  // try {            
-  //   const res = await axios.post(url, project, config)
+  try {            
+    const res = await axios.post(url, project, config)
     
-  //   if(!res){
-  //     throw new Error('Algo salió mal con la solicitud');
-  //   }else{
-  //     if(res.status === 201) {        
-  //         return 201;
-  //       }        
-  //     }          
-  //     return res.data.status;      
-  //   }catch (error:any) {
-  //   return error;    
-  // }
+    if(!res){
+      throw new Error('Algo salió mal con la solicitud');
+    }else{
+      if(res.status === 201) {        
+          return 201;
+        }        
+      }          
+      return res.data.status;      
+    }catch (error:any) {
+    return error;    
+  }
 }
 
 export async function getProyect(id:string, auth_token:string) {

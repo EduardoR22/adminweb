@@ -60,7 +60,7 @@ export default function Table({companies, token}: {companies:any, token:string})
                 <td className="w-12">Status</td>
                 <td className="w-20">Logo</td>
                 <td className="w-56">Nombre</td>
-                <td className="w-56">Telefono</td>
+                <td className="w-56">Telefono/Direccion </td>
                 <td className="w-20">Id</td>
                 <td className="w-16">&nbsp;</td>
               </tr>
@@ -84,7 +84,8 @@ export default function Table({companies, token}: {companies:any, token:string})
                   </td>
                   <td>
                     <div>
-                      <p>{company.phoneNumber[0] === undefined? '': company.phoneNumber[0].phone}</p>
+                      {/* <p>{company.phoneNumber[0] === undefined? '': company.phoneNumber[0].phone}</p> */}
+                      <p>{company.phoneNumber? company.phoneNumber: ''}</p>
                       <p className="text-gray-400 text-xs">{company.address}</p>
                     </div>
                   </td>

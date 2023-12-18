@@ -1,5 +1,3 @@
-//"use client"
-
 import Image from "next/image"
 import { PencilIcon} from "@heroicons/react/24/solid"
 import ShowImage from "./ShowImage"
@@ -31,7 +29,7 @@ export default function ViewProyect({width, proyect, token, services}:
         <div className="w-5/12 flex">
           <Image src={proyect.images? proyect.images[0].photo: '/public/img.jpg'} alt="image" width={30} height={30} />
           <div className="ml-5">
-            <p className="text-gray-800 text-xs">{proyect.segment}</p>
+            {/* <p className="text-gray-800 text-xs">{proyect.segment}</p> */}
             <p className="text-gray-400 text-xs">Año {proyect.year? proyect.year:''}</p>
           </div>
         </div>

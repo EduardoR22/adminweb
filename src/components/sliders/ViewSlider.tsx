@@ -5,36 +5,34 @@ import { ChevronLeftIcon, ChevronRightIcon, PencilSquareIcon } from "@heroicons/
 import Link from "next/link"
 import Delete from "./Delete"
 
-// export default function ViewSlider({slider, token}: {slider:any, token:string}){
 export default function ViewSlider({sliders, token, indexStart}: 
               {sliders:any, token:string, indexStart:number}){
   
-  // const sliderP = [
-  //   // '/cr7.jpg',
-  //   // '/CR7_2.jpg'
-  //   slider.image
-  // ]
-  
-  //const [img, setImg] = useState(sliderP[0]);
   const [index, setIndex] = useState(indexStart);
   const [slider, setSlider] = useState<any>(sliders[indexStart]);
 
-  const timer = setTimeout(() => {
-    if(index >= sliders.length - 1){
-      setIndex(0);
-    }else{
-      setIndex(index + 1);
-    }
-    // if(index >= sliderP.length - 1){
-    //   setIndex(0);
-    // }else{
-    //   setIndex(index + 1);
-    // }
-  }, 5000);
+  // const timer = setTimeout(() => {
+  //   if(index >= sliders.length - 1){
+  //     setIndex(0);
+  //   }else{
+  //     setIndex(index + 1);
+  //   }
+  //   // if(index >= sliderP.length - 1){
+  //   //   setIndex(0);
+  //   // }else{
+  //   //   setIndex(index + 1);
+  //   // }
+  // }, 5000);
 
   useEffect(() => {
-    // setImg(sliderP[index]);
-    // return () => clearTimeout(timer);
+    const timer = setTimeout(() => {
+      if(index >= sliders.length - 1){
+        setIndex(0);
+      }else{
+        setIndex(index + 1);
+      }
+    }, 5000);
+    
     setSlider(sliders[index]);
     return () => clearTimeout(timer);
   }, [index])
@@ -45,11 +43,6 @@ export default function ViewSlider({sliders, token, indexStart}:
     }else{
       setIndex(sliders.length -1);
     }
-    // if(index > 0){
-    //   setIndex(index -1);
-    // }else{
-    //   setIndex(sliderP.length -1);
-    // }
   }
 
   const Next = () => {
@@ -58,11 +51,6 @@ export default function ViewSlider({sliders, token, indexStart}:
     }else{
       setIndex(0);
     }
-    // if(index < sliderP.length - 1){
-    //   setIndex(index+1)
-    // }else{
-    //   setIndex(0);
-    // }
   }
 
   return(
@@ -74,7 +62,6 @@ export default function ViewSlider({sliders, token, indexStart}:
             <p className={`w-2/3 absolute text-xl text-white font-bold`} style={{top:`${(index * 50)+140}px`}} 
               key={index}>{feature}</p>
           ))}
-          {/* <p className="w-2/3 absolute top-96">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi illo officia dolorum magnam quas dolorem molestias, temporibus unde iste ea explicabo repellendus! Culpa dignissimos eaque accusamus quasi illum tenetur quaerat!</p> */}
           <ChevronLeftIcon width={40} height={40} onClick={Previous}
             className="absolute left-4 top-60 text-white cursor-pointer"
           />

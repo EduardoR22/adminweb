@@ -114,7 +114,7 @@ export default function FormNew({token, tittle, subtitle, address, features, seg
                 //router.refresh();
                 //router.push('/proyects');
                 window.location.reload();
-              }, 1500);
+              }, 2000);
             }
           }else{
             let res = await createProyect(proyect, token);
@@ -250,10 +250,6 @@ export default function FormNew({token, tittle, subtitle, address, features, seg
                 {segments.map((segmen:any) => (
                   <option value={segmen._id}>{segmen.name}</option>
                 ))}
-                {/* <option value="INDUSTRIAL">Industrial</option>
-                <option value="COMERCIAL">Comercial</option>
-                <option value="INSTITUCIONAL">Institucional</option>
-                <option value="PARTICULAR">Particular</option> */}
               </select>
             </div>
           </div>

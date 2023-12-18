@@ -24,7 +24,8 @@ export default function FormCompany({token, company}:
     nameC = company.name;
     emailC = company.email;
     //phoneC = company.phoneNumber[0].phone;
-    phoneC = company.phoneNumber[0]? company.phoneNumber[0].phone : '';
+    //phoneC = company.phoneNumber[0]? company.phoneNumber[0].phone : '';
+    phoneC = company.phoneNumber? company.phoneNumber : '';
     addressC = company.address;
   }
 
@@ -54,15 +55,17 @@ export default function FormCompany({token, company}:
       formData.append('email', email);
       formData.append('address', address);
       formData.append('logo', file);
+      formData.append('phoneNumber', phone);
 
       const companyData = {
         name,
         email,
         address,
-        phoneNumber: {
-          "type": "trabajo",
-          phone
-        },
+        phoneNumber: phone
+        // phoneNumber: {
+        //   "type": "trabajo",
+        //   phone
+        // },
       }
       
       if(company === ''){
@@ -134,19 +137,19 @@ export default function FormCompany({token, company}:
     },       
   });
 
-  const onFileChange = (e: any) => {
+  // const onFileChange = (e: any) => {
 
-    if(e.target.files && e.target.files.length > 0) {
-      const file = e.target.files[0];
-      if(file.type.includes("image")) {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        setFile(file);
-      } else {
-        showToastMessageError('Esta no es una imagen!, favor de agregar imagen');
-      }
-    }
-  }
+  //   if(e.target.files && e.target.files.length > 0) {
+  //     const file = e.target.files[0];
+  //     if(file.type.includes("image")) {
+  //       const reader = new FileReader();
+  //       reader.readAsDataURL(file);
+  //       setFile(file);
+  //     } else {
+  //       showToastMessageError('Esta no es una imagen!, favor de agregar imagen');
+  //     }
+  //   }
+  // }
 
   return(
     <>
