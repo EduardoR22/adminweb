@@ -28,7 +28,7 @@ export default function Table({children, sliders, token, link} : {children:any, 
   }, [search, currentPage, num_rows])
 
   useEffect(() => {
-    setHeight((90 * num_rows).toString());
+    setHeight((170 * num_rows).toString());
   }, [num_rows])
 
   const onSearchChange = (value: string) => {
@@ -45,19 +45,19 @@ export default function Table({children, sliders, token, link} : {children:any, 
 
   return (
     <>
-      <div className='flex justify-between'>
-        <div className='flex'>
+      <div className='flex flex-wrap-reverse justify-between'>
+        <div className='flex w-80'>
           {children}
           <Searcher search={search} searchChange={onSearchChange} placeholder='Buscar slider' />
         </div>
         <Link href={link} >
-          <Button styleB='mr-10 w-36 bg-blue-950 text-white hover:bg-blue-500' textB='Nuevo' typeB='button'/>
+          <Button styleB='md:mr-5 mb-5 w-36 bg-blue-950 text-white hover:bg-blue-500' textB='Nuevo' typeB='button'/>
         </Link>
       </div>
       <div style={{height: `${height}px`}}>
         <table className='mt-5'>
           <thead className='text-gray-400'>
-            <tr className='border-b'>
+            <tr className='border-b bg-slate-200'>
               <th className='w-16 text-start border-b border-slate-400'>Foto</th>
               <th className='w-8 text-start border-b border-slate-400'>&nbsp;</th>
               <th className='w-48 text-start border-b border-slate-400'>Titulo</th>
@@ -66,8 +66,8 @@ export default function Table({children, sliders, token, link} : {children:any, 
             </tr>
           </thead>
           <tbody>
-            {filter.map( (slider: any) => (
-              <tr key={slider._id}>
+            {filter.map( (slider: any, index:number) => (
+              <tr key={slider._id} className={`${index%2===0? 'bg-white':'bg-blue-100'}`}>
                 <td>
                 <Image src={slider.user? slider.user.photo : '/images.jpg'} alt={slider.user? slider.user.name.split(' ')[0]: 'user'} width={50} height={40} className='rounded-full' />
                 </td>
@@ -78,12 +78,12 @@ export default function Table({children, sliders, token, link} : {children:any, 
                 </td>
                 <td>
                   <div>
-                    <p>{slider.title}</p>
+                    <p className='text-slate-800'>{slider.title}</p>
                   </div>
                 </td>
                 <td>
-                  <div className=''>
-                    <ul>
+                  <div className='p-3'>
+                    <ul className='list-disc text-slate-700'>
                       {slider.features.map((feature: string, index: number) => (
                         <li key={index}>{feature}</li>
                       ))}

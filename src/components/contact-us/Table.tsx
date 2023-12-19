@@ -21,7 +21,7 @@ export default function Table({contacts, token}: {contacts:any, token:string}){
       setLength(contacts.length)
       setFilter(contacts.slice(currentPage, currentPage + num_rows))
     }else{
-      const filtered = contacts.filter( (user: any) => user.name.toLowerCase().includes(search.toLowerCase()));
+      const filtered = contacts.filter( (contact: any) => contact.name.toLowerCase().includes(search.toLowerCase()));
       setLength(filtered.length);
       setFilter(filtered.slice(currentPage, currentPage + num_rows));
     }
@@ -45,14 +45,16 @@ export default function Table({contacts, token}: {contacts:any, token:string}){
 
   return(
     <>
-      <div className="flex justify-end mr-10">
-        <Searcher search={search} searchChange={onSearchChange} placeholder="Buscar contacto" />
+      <div className="flex justify-end mr-10 mt-5">
+        <div className="w-80">
+          <Searcher search={search} searchChange={onSearchChange} placeholder="Buscar contacto" />
+        </div>
       </div>
       <div className={'mt-10'} style={{height: `${height}px`}}>
         <div className="flex justify-center">
           <table>
             <thead>
-              <tr className="border-b border-gray-600 text-gray-400">
+              <tr className="border-b border-gray-600 text-gray-400 bg-slate-200">
                 <td className="w-48">Nombre</td>
                 <td className="w-32">Telefono</td>
                 <td className="w-48">Email</td>
@@ -61,14 +63,14 @@ export default function Table({contacts, token}: {contacts:any, token:string}){
               </tr>
             </thead>
             <tbody>
-              {filter.map((contact:any) => (
-                <tr key={contact._id}>
+              {filter.map((contact:any, index:number) => (
+                <tr key={contact._id} className={`${index%2===0? 'bg-white':'bg-slate-200'}`}>
                   <td>{contact.name}</td>
                   <td>{contact.phone}</td>
                   <td>
                     <p>{contact.email}</p>
                   </td>
-                  <td>{contact.message}</td>
+                  <td className="p-1 text-slate-700">{contact.message}</td>
                   <td className="pl-3">
                     <ChangeStatus status={contact.statusContact} token={token} idContact={contact._id} />
                   </td>

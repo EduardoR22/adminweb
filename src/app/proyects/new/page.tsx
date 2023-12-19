@@ -39,7 +39,8 @@ export default async function New(){
   return(
     <>
       <NavBar />
-      <ContainerForm img="/projects.jpg" subtitle="Proyecto a publicar" title="Nuevo Proyecto" width="w-2/3">
+      <ContainerForm img="/projects.jpg" subtitle="Proyecto a publicar" 
+        title="Nuevo Proyecto" width="w-full md:w-2/3">
         <FormNew token={token} address="" features="" id="" seg="" subtitle="" 
                   tittle="" services={services} user={user._id} company={company} segments={segments} />
       </ContainerForm>

@@ -46,13 +46,15 @@ export default function Table({children, users, token, link} : {children:any, us
 
   return (
     <>
-      <div className='flex justify-between'>
+      <div className='flex flex-wrap-reverse justify-between'>
         <div className='flex'>
           {children}
-          <Searcher search={search} searchChange={onSearchChange} placeholder='Buscar usuario' />
+          <div className='w-80'>
+            <Searcher search={search} searchChange={onSearchChange} placeholder='Buscar usuario' />
+          </div>
         </div>
         <Link href={link} >
-          <Button styleB='mr-10 bg-blue-600 text-white hover:bg-blue-500' textB='Nuevo' typeB='button'/>
+          <Button styleB='mr-10 w-36 mb-5 bg-blue-600 text-white hover:bg-blue-500' textB='Nuevo' typeB='button'/>
         </Link>
       </div>
       

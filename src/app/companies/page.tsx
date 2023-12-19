@@ -22,7 +22,7 @@ export default async function companies(){
   return(
     <>
       <NavBar />
-      <ContainerForm img="" subtitle="" title="" width="w-7/12 pl-10 pr-5">
+      <ContainerForm img="" subtitle="" title="" width="w-full md:w-9/12 pl-10 pr-5">
         <Table companies={companies} token={token} />
       </ContainerForm>
     </>

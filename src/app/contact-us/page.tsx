@@ -41,7 +41,8 @@ export default async function ContactUs({searchParams}: {searchParams: {[opc:str
           <NavTab opt={searchParams.opc} />
         </div>
       </div>
-      <ContainerForm title="Reportes de contactos" subtitle="Atencion de reportes por contacto" img="/contacts.jpg" width="w-3/4">
+      <ContainerForm title="Reportes de contactos" subtitle="Atencion de reportes por contacto" 
+        img="/contacts.jpg" width="w-full md:w-3/4">
         <Table contacts={contacts} token={token} />
       </ContainerForm>
     </>

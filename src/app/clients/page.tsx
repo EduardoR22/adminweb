@@ -25,7 +25,7 @@ export default async function Clients(){
   return(
     <>
       <NavBar />
-      <ContainerForm img="" subtitle="" title="" width="w-10/12 pl-10">
+      <ContainerForm img="" subtitle="" title="" width="w-full md:w-10/12 pl-10">
         {table}
       </ContainerForm>
     </>

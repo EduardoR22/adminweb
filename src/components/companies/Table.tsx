@@ -22,7 +22,7 @@ export default function Table({companies, token}: {companies:any, token:string})
       setLength(companies.length)
       setFilter(companies.slice(currentPage, currentPage + num_rows))
     }else{
-      const filtered = companies.filter( (user: any) => user.name.toLowerCase().includes(search.toLowerCase()));
+      const filtered = companies.filter( (company: any) => company.name.toLowerCase().includes(search.toLowerCase()));
       setLength(filtered.length);
       setFilter(filtered.slice(currentPage, currentPage + num_rows));
     }
@@ -46,17 +46,19 @@ export default function Table({companies, token}: {companies:any, token:string})
 
   return(
     <>
-      <div className="flex justify-between">
-        <Searcher search={search} searchChange={onSearchChange} placeholder="Buscar compañia" />
+      <div className="flex flex-wrap-reverse justify-between">
+        <div className="w-80">
+          <Searcher search={search} searchChange={onSearchChange} placeholder="Buscar compañia" />
+        </div>
         <Link href={'/companies/new'}>
-          <Button styleB="text-white w-36 rounded-full bg-blue-950 hover:bg-blue-500" textB="Nuevo" typeB="Button" />
+          <Button styleB="text-white w-36 mb-5 rounded-full bg-blue-950 hover:bg-blue-500" textB="Nuevo" typeB="Button" />
         </Link>
       </div>
       <div className="mt-10" style={{height:`${height}px`}}>
         <div className="flex justify-center">
           <table>
             <thead>
-              <tr className="border-b border-gray-600 text-gray-400">
+              <tr className="bg-slate-200 border-b border-gray-600 text-gray-400">
                 <td className="w-12">Status</td>
                 <td className="w-20">Logo</td>
                 <td className="w-56">Nombre</td>
@@ -66,8 +68,8 @@ export default function Table({companies, token}: {companies:any, token:string})
               </tr>
             </thead>
             <tbody>
-              {filter.map((company: any) => (
-                <tr key={company._id}>
+              {filter.map((company: any, index:number) => (
+                <tr key={company._id} className={`${index%2===0? 'bg-white': 'bg-slate-200'}`}>
                   <td>
                     <div className="flex justify-center items-center">
                       <div className="rounded-full bg-green-700 w-4 h-4"></div>
@@ -77,14 +79,13 @@ export default function Table({companies, token}: {companies:any, token:string})
                     <Image src={company.logo} alt="logo" width={50} height={50} />
                   </td>
                   <td>
-                    <div>
+                    <div className="p-1">
                       <p>{company.name}</p>
                       <p className="text-gray-400 text-xs">{company.email}</p>
                     </div>
                   </td>
                   <td>
                     <div>
-                      {/* <p>{company.phoneNumber[0] === undefined? '': company.phoneNumber[0].phone}</p> */}
                       <p>{company.phoneNumber? company.phoneNumber: ''}</p>
                       <p className="text-gray-400 text-xs">{company.address}</p>
                     </div>

@@ -2,6 +2,8 @@ import ViewProyect from "@/components/proyects/ViewProyect"
 import { getProyect } from "@/app/api/proyects/route";
 import { cookies } from "next/headers";
 import NavBar from "@/components/Navigation/NavBar";
+import { getServices } from "@/app/api/services/route";
+import { getSegments } from "@/app/api/proyects/route";
 
 export default async function Proyect({params}: {params: {id:string}}){
   
@@ -29,12 +31,22 @@ export default async function Proyect({params}: {params: {id:string}}){
     )
   }
 
+  let services;
+  try {
+    services = await getServices(token);
+    if(typeof(services) === 'string'){
+      return <h1>{services}</h1>
+    }
+  } catch (error) {
+    return <h1>Ocurrio un problema al consultar servicios!!!</h1>
+  }
+  
   return(
     <>
       <NavBar />
       <div className="flex justify-center">
-        <div className="w-2/3 p-10">
-          <ViewProyect token={token} width="w-full" proyect={proyect.data.data} />
+        <div className="w-full md:w-2/3 p-10">
+          <ViewProyect token={token} width="w-full" proyect={proyect.data.data} services={services} />
         </div>
       </div>
     </>

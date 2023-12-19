@@ -23,8 +23,6 @@ export default function FormCompany({token, company}:
   if(company !== ''){
     nameC = company.name;
     emailC = company.email;
-    //phoneC = company.phoneNumber[0].phone;
-    //phoneC = company.phoneNumber[0]? company.phoneNumber[0].phone : '';
     phoneC = company.phoneNumber? company.phoneNumber : '';
     addressC = company.address;
   }
@@ -77,7 +75,7 @@ export default function FormCompany({token, company}:
               setTimeout(() =>{
                 router.push('/companies')
                 //window.location.reload();
-              }, 2000)
+              }, 1000)
               setTimeout(() =>{
                 window.location.reload();
               }, 2500)
@@ -90,7 +88,7 @@ export default function FormCompany({token, company}:
               showToastMessage(`Compañia creada exitosamente!`);
               setTimeout(() =>{
                 router.push('/companies')
-              }, 2000)
+              }, 1000)
               setTimeout(() => {
                 window.location.reload();
               }, 2500);
@@ -109,7 +107,7 @@ export default function FormCompany({token, company}:
               showToastMessage(`Compañia actualizada exitosamente!`);
               setTimeout(() =>{
                 router.push('/companies')
-              }, 2000)
+              }, 1000)
               setTimeout(() => {
                 window.location.reload();
               }, 2500);

@@ -29,7 +29,7 @@ export default async function Sliders(){
   return(
     <>
       <NavBar />
-      <ContainerForm img="" subtitle="" title="" width="w-7/12 pl-10">
+      <ContainerForm img="" subtitle="" title="" width="w-full md:w-7/12 pl-10">
         {table}
       </ContainerForm>
     </>

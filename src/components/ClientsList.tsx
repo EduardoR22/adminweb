@@ -30,7 +30,7 @@ export default function ClientsList({children, users, token, link} : {children:a
   }, [search, currentPage, num_rows])
 
   useEffect(() => {
-    setHeight((160 * Math.ceil(num_rows / 3)).toString());
+    setHeight((200 * num_rows).toString());
   }, [num_rows])
 
   const onSearchChange = (value: string) => {
@@ -47,18 +47,18 @@ export default function ClientsList({children, users, token, link} : {children:a
 
   return (
     <>
-      <div className='flex justify-between'>
-        <div className='flex'>
+      <div className='flex justify-between flex-wrap-reverse'>
+        <div className='flex w-80'>
           {children}
           <Searcher search={search} searchChange={onSearchChange} placeholder='Buscar cliente' />
         </div>
         <Link href={link} >
-          <Button styleB='mr-10 w-36 bg-blue-600 text-white hover:bg-blue-500' textB='Nuevo' typeB='button'/>
+          <Button styleB='mb-5 md:mt-0 mr-10 w-36 bg-blue-600 text-white hover:bg-blue-500' textB='Nuevo' typeB='button'/>
         </Link>
       </div>
-      <div className='flex justify-between flex-wrap mt-10' style={{height: `${height}px`}}>
+      <div className='flex flex-wrap mt-10' style={{height: `${height}px`}}>
         {filter.map((client: any) => (
-          <div key={client._id} className='mt-2'>
+          <div key={client._id} className='mt-2 mx-5'>
             <div className='flex justify-end'>
               <p>{client.name}</p>
               <Link href={`/clients/${client._id}/edit`}>

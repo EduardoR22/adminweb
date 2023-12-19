@@ -1,10 +1,9 @@
 "use client"
 
-import { Bars3Icon, ChartBarIcon, Cog8ToothIcon } from "@heroicons/react/24/solid"
+import { Bars3Icon, Cog8ToothIcon } from "@heroicons/react/24/solid"
 import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
-//import { getCookie } from "cookies-next";
 import { useRouter } from "next/navigation"
 import RemoveCookies from "../RemoveCookies"
 
@@ -29,26 +28,7 @@ export default function NavBarClient({user}: {user:any}){
   //let user;
   
   const router = useRouter();
-  // try {
-  //   const userCookie: any = getCookie('user');
-  //   user = JSON.parse(userCookie);
-
-  //   if(user){
-  //     name = user.name;
-  //     role = user.role;
-  //     photo = user.photo;
-  //     id = user._id;
-  //     ok = true;
-  //   }else{
-  //     return <h1>Error el usuario no ha iniciado sesion</h1>
-  //   }
-  // } catch (error) {
-  //     //router.push('/login');
-  //     return (
-  //       <h1>Error el usuario no se encuentra registrado..</h1>
-  //     )
-  // }
-
+  
   function logOut(){
     RemoveCookies();
     router.push('/login');
@@ -57,9 +37,9 @@ export default function NavBarClient({user}: {user:any}){
   return(
     <>
       <nav className="bg-blue-950 top-0 flex-wrap z-[20] mx-auto flex w-full items-center justify-between">
-        <Bars3Icon width={30} height={30} className="sm:hidden" onClick={toggleNavBar} />
+        <Bars3Icon width={40} height={40} className="md:hidden cursor-pointer ml-2 rounded-md p-1 bg-slate-500 text-white" onClick={toggleNavBar} />
         <Image src={'/icono.jpg'} alt="logo" width={50} height={50} priority />
-        <div className="w-1/12 sm:w-9/12 flex justify-end">
+        <div className="w-1/12 md:w-9/12 flex justify-end">
           <div className="hidden w-full text-white md:flex justify-between ">
             <NavLinks role={role} /> 
           </div>
@@ -77,7 +57,7 @@ export default function NavBarClient({user}: {user:any}){
         </div>
       </nav>
       {isOpen && (
-          <div className="flex text-gray-200 bg-stone-400 sm:hidden flex-col items-start pl-2  basis-full">
+          <div className="flex text-gray-200 bg-stone-400 md:hidden flex-col items-start pl-2  basis-full">
             <NavLinks role={role} />
           </div>
         )}

@@ -7,6 +7,7 @@ import { EllipsisHorizontalCircleIcon } from "@heroicons/react/24/solid";
 import ViewProyect from "./ViewProyect";
 import Button from "../Button";
 import Link from "next/link";
+import { number } from "yup";
 
 export default function ListProyects({proyects, services, token}: {proyects: any, token: string, services:any[]}){
   
@@ -29,7 +30,7 @@ export default function ListProyects({proyects, services, token}: {proyects: any
   }, [search, currentPage, num_rows])
 
   useEffect(() => {
-    setHeight((75 * num_rows).toString());
+    setHeight((105 * num_rows).toString());
   }, [num_rows])
 
   useEffect(() =>{
@@ -55,30 +56,31 @@ export default function ListProyects({proyects, services, token}: {proyects: any
   }
   
   return(
-    <div className="flex mt-5">
-      <div className="w-2/3">
-        <div className="flex justify-between">
-          <div className="w-1/3">
+    <div className="flex flex-wrap mt-5">
+      <div className="w-full md:w-2/3">
+        <div className="flex flex-wrap-reverse justify-between">
+          <div className="w-80 mb-5">
             <Searcher search={search} searchChange={onSearchChange} placeholder="Buscar proyecto" />
           </div>
           <Link href='/proyects/new'>
-            <Button textB="Nuevo" typeB="Button" styleB="text-white w-36 bg-blue-950 hover:bg-blue-500 mr-10" />
+            <Button textB="Nuevo" typeB="Button" styleB="mb-5 text-white w-36 bg-blue-950 hover:bg-blue-500 mr-10" />
           </Link>
         </div>
         <div style={{height: `${height}px`}}>
           <table className="mt-5">
             <thead>
-              <tr className="text-gray-400 text-sm border-b border-gray-500">
+              <tr className="text-gray-400 text-sm border-b border-gray-500 bg-slate-200">
                 <th className="w-20">Usr</th>
                 <th className="w-20">Activo</th>
-                <th className="w-56 text-left">Proyecto / Caracteristica</th>
-                <th className="w-40 text-left">Año / Ubicacion</th>
+                <th className="w-64 text-left">Proyecto / Caracteristica</th>
+                <th className="w-44 text-left">Año / Ubicacion</th>
                 {/* <th className="w-20 text-left">Foto</th> */}
               </tr>
             </thead>
             <tbody>
-              {filter.map((proyect: any) => (
-                <tr key={proyect._id} onClick={() =>changeProyect(proyect)} className="cursor-pointer">
+              {filter.map((proyect: any, index:number) => (
+                <tr key={proyect._id} onClick={() =>changeProyect(proyect)} 
+                  className={`${index%2===0? 'cursor-pointer bg-white': 'cursor-pointer bg-blue-100'}`}>
                   <td className="p-0">
                     <div className="flex justify-center m-0">
                       <Image src={proyect.user.photo} alt="profile" width={30} height={30} />
@@ -96,7 +98,7 @@ export default function ListProyects({proyects, services, token}: {proyects: any
                     </div>
                   </td>
                   <td className="p-0">
-                    <div>
+                    <div className="pl-1">
                       <p className="text-gray-800 m-0">{proyect.year? proyect.year: 'Sin año'}</p>
                       <p className="text-gray-400 m-0">{proyect.address}</p>
                     </div>
@@ -113,7 +115,7 @@ export default function ListProyects({proyects, services, token}: {proyects: any
                       length={length}/>
         </div>
       </div>
-      <div className="w-1/3">
+      <div className="w-full md:w-1/3 mt-10 md:mt-0">
         {/* <ViewProyect width="w-full" /> */}
         {viewProyect}
       </div>

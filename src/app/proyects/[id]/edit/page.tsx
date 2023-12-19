@@ -3,6 +3,7 @@ import ContainerForm from "@/components/ContainerForm";
 import { cookies } from "next/headers";
 import { getProyect, getSegments } from "@/app/api/proyects/route";
 import NavBar from "@/components/Navigation/NavBar";
+import { getServices } from "@/app/api/services/route";
 
 export default async function Edit({params}: {params:{id:string}}){
   
@@ -38,13 +39,24 @@ export default async function Edit({params}: {params:{id:string}}){
     return <h1>Ocurrio un problema al consultar servicios!!!</h1>
   }
 
+  let services;
+  try {
+    services = await getServices(token);
+    if(typeof(services) === 'string'){
+      return <h1>{services}</h1>
+    }
+  } catch (error) {
+    return <h1>Ocurrio un problema al consultar servicios!!!</h1>
+  }
+
   return(
     <>
       <NavBar />
-      <ContainerForm img="/projects.jpg" subtitle="Proyecto a modificar" title="Modificar Proyecto" width="w-2/3">
+      <ContainerForm img="/projects.jpg" subtitle="Proyecto a modificar" title="Modificar Proyecto" 
+        width="w-full md:w-2/3">
         <FormNew token={token} address={proyect.data.data.address} features={proyect.data.data.features} 
                   seg={proyect.data.data.segment} subtitle={proyect.data.data.subtitle} 
-                  tittle={proyect.data.data.title} id={id} services='' user={user._id} 
+                  tittle={proyect.data.data.title} id={id} services={services} user={user._id} 
                   company={user.company} segments={segments} />
       </ContainerForm>
     </>

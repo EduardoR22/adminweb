@@ -33,7 +33,7 @@ export default function ListReviews({proyects, token, idP, image}:
   }, [search, currentPage, num_rows])
 
   useEffect(() => {
-    setHeight((75 * num_rows).toString());
+    setHeight((95 * num_rows).toString());
   }, [num_rows])
 
   const onSearchChange = (value: string) => {
@@ -81,63 +81,65 @@ export default function ListReviews({proyects, token, idP, image}:
   }, []);
 
   return(
-    <div className="flex mt-5">
-      <div className="w-2/3">
+    <div className="flex flex-wrap mt-5">
+      <div className="w-full md:w-2/3">
         <div className="flex">
-          <div className="w-1/3"><Searcher search={search} searchChange={onSearchChange} placeholder="Buscar review" /></div>
+          <div className="w-80"><Searcher search={search} searchChange={onSearchChange} placeholder="Buscar review" /></div>
         </div>
-        <table className="mt-5">
-          <thead>
-            <tr className="text-gray-400 text-sm border-b border-gray-500">
-              <th className="w-20">&nbsp;</th>
-              <th className="w-20">Estatus</th>
-              <th className="w-56 text-left">Nombre / Subtitulo</th>
-              <th className="w-28 text-left">Total reseñas</th>
-              <th className="w-20 text-left">Reseñas</th>
-            </tr>
-          </thead>
-          <tbody>
-            {proyects.map((proyect:any) => (
-              <tr key={proyect._id} onClick={() => changeReview(proyect._id, proyect.images[0].photo)} 
-                  className="cursor-pointer">
-                <td>
-                  <div className="flex justify-center">
-                    <Image src={proyect.images[0].photo} alt="profile" width={30} height={30} />
-                  </div>
-                </td>
-                <td>
-                  <div className="flex justify-center items-center text-green-600">
-                    <EllipsisHorizontalCircleIcon width={40} height={25} />
-                  </div>
-                </td>
-                <td>
-                  <div>
-                    <p className="text-gray-800">{proyect.title}</p>
-                    <p className="text-gray-400">{proyect.subtitle}</p>
-                  </div>
-                </td>
-                <td>
-                  <div>
-                    {/* <p className="text-gray-800 text-center">{review.rating}</p>
-                    <p className="text-gray-400">2023-07-20</p> */}
-                  </div>
-                </td>
-                <td>
-                  <div className="flex items-center">
-                    {/* <Rating defaultValue={review.ratingAverage} precision={0.5} readOnly /> */}
-                  </div>
-                </td>
+        <div style={{height:`${height}px`}}>
+          <table className="mt-5">
+            <thead>
+              <tr className="text-gray-400 text-sm border-b border-gray-500 bg-slate-200">
+                <th className="w-20 py-1">&nbsp;</th>
+                <th className="w-20">Estatus</th>
+                <th className="w-56 text-left">Nombre / Subtitulo</th>
+                <th className="w-28 text-left">Total reseñas</th>
+                <th className="w-20 text-left">Reseñas</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {proyects.map((proyect:any, index:number) => (
+                <tr key={proyect._id} onClick={() => changeReview(proyect._id, proyect.images[0].photo)} 
+                    className={`${index%2===0? 'cursor-pointer bg-white':'cursor-pointer bg-slate-200'}`}>
+                  <td>
+                    <div className="flex justify-center">
+                      <Image src={proyect.images[0].photo} alt="profile" width={30} height={30} />
+                    </div>
+                  </td>
+                  <td>
+                    <div className="flex justify-center items-center text-green-600">
+                      <EllipsisHorizontalCircleIcon width={40} height={25} />
+                    </div>
+                  </td>
+                  <td>
+                    <div className="py-1">
+                      <p className="text-gray-800">{proyect.title}</p>
+                      <p className="text-gray-400">{proyect.subtitle}</p>
+                    </div>
+                  </td>
+                  <td>
+                    <div>
+                      {/* <p className="text-gray-800 text-center">{review.rating}</p>
+                      <p className="text-gray-400">2023-07-20</p> */}
+                    </div>
+                  </td>
+                  <td>
+                    <div className="flex items-center">
+                      {/* <Rating defaultValue={review.ratingAverage} precision={0.5} readOnly /> */}
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
         <div className="flex justify-center items-center mt-3">
           <Pagination IndexPages={IndexPages} currentPage={currentPage} num_rows={num_rows} 
                       setCurrentPage={setCurrentPage} setNumRows={setNumRows} 
                       length={length}/>
         </div>
       </div>
-      <div className="w-1/3">
+      <div className="w-full md:w-1/3 mt-7 md:mt-0 ">
         {viewReview}
       </div>
     </div>
