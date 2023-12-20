@@ -118,10 +118,10 @@ export default function FormAccount({token, companies}: {token:string, companies
 
   return(
     <>
-      <form className="bg-white rounded shadow-md px-8 pt-6 pb-8" 
+      <form className="bg-white rounded shadow-md px-1 sm:px-8 pt-6 pb-8" 
         onSubmit={formikPass.handleSubmit}>
-        <div className="flex">
-          <div className="w-1/2 px-5">
+        <div className="flex flex-wrap">
+          <div className="w-full sm:w-1/2 px-1 sm:px-5">
             <div className="mb-4 text-gray-700">
               <label className="block text-sm font-medium text-gray-500" htmlFor="name">
                 Nombre
@@ -141,67 +141,8 @@ export default function FormAccount({token, companies}: {token:string, companies
                 <p>{formikPass.errors.name}</p>
               </div>
             ) : null}
-            <div className="mb-4 text-gray-700">
-              <label className="block text-sm font-medium text-gray-500" htmlFor="email">
-                Usuario
-              </label>
-              <input 
-                className="shadow appearance-none border rounded w-full mt-2 py-4 px-3 text-base text-gray-500 leading-tight font-sans font-ligth focus:outline-none focus:shadow-outline"
-                id="email"
-                type="email"
-                placeholder="email@gmail.com"
-                value={formikPass.values.email}
-                onChange={formikPass.handleChange}
-                onBlur={formikPass.handleChange}>
-              </input>
-            </div>
-            {formikPass.touched.email && formikPass.errors.email ? (
-              <div className="my-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-4">
-                <p>{formikPass.errors.email}</p>
-              </div>
-            ) : null}
-            <div className="mb-4 text-gray-700">
-              <label className="block text-sm font-medium text-gray-500" htmlFor="">
-                Perfil
-              </label>
-              <select className="bg-white mt-2 outline-none outline-0 shadow appearance-none 
-                      border rounded w-full py-4 px-3 text-base text-gray-500 leading-tight 
-                      font-sans font-ligth focus:outline-none focus:shadow-outline"
-                onChange={handleSelect}
-              >
-                <option value="admin">Admin</option>
-                <option value="user">User</option>
-              </select>
-            </div>
-            <div className="space-y-1 justify-center">
-              <div className="shrink-0 self-center">
-                  <label htmlFor="" className='text-gray-500 mb-3'>Foto</label>
-                  <div className='flex'>
-                    <Image    
-                        className="rounded-full"                      
-                        src={'/photo'}
-                        alt={'nameU'}
-                        width={56}
-                        height={56}                                    
-                        priority={true}                                    
-                    />
-                    <div className='border rounded-md border-gray-200 relative p-4 w-5/6'>
-                      <input 
-                        type="file" 
-                        id="photo" 
-                        name="photo" 
-                        //value={formik.values.photo}
-                        onChange={onFileChange}
-                        //onBlur={formik.handleChange}
-                        className="opacity-0 absolute inset-0	">                                            
-                      </input>
-                      <p className='text-center	'>Cambiar Foto</p>
-                    </div>  
-                  </div>
-              </div>
-            </div>
           </div>
-          <div className="w-1/2">
+          <div className="w-full sm:w-1/2 px-1 sm:px-5">
             <div className="mb-4 text-gray-700">
               <label className="block text-sm font-medium text-gray-500" htmlFor="password">
                 Contraseña
@@ -221,6 +162,31 @@ export default function FormAccount({token, companies}: {token:string, companies
                 <p>{formikPass.errors.password}</p>
               </div>
             ) : null}
+          </div>
+        </div>
+        <div className="flex flex-wrap">
+          <div className="w-full sm:w-1/2 px-1 sm:px-5">
+            <div className="mb-4 text-gray-700">
+              <label className="block text-sm font-medium text-gray-500" htmlFor="email">
+                Usuario
+              </label>
+              <input 
+                className="shadow appearance-none border rounded w-full mt-2 py-4 px-3 text-base text-gray-500 leading-tight font-sans font-ligth focus:outline-none focus:shadow-outline"
+                id="email"
+                type="email"
+                placeholder="email@gmail.com"
+                value={formikPass.values.email}
+                onChange={formikPass.handleChange}
+                onBlur={formikPass.handleChange}>
+              </input>
+            </div>
+            {formikPass.touched.email && formikPass.errors.email ? (
+              <div className="my-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-4">
+                <p>{formikPass.errors.email}</p>
+              </div>
+            ) : null}
+          </div>
+          <div className="w-full sm:w-1/2 px-1 sm:px-5">
             <div className="mb-4 text-gray-700">
               <label className="block text-sm font-medium text-gray-500" htmlFor="passwordConfirm">
                 Confirmar Contraseña
@@ -240,6 +206,26 @@ export default function FormAccount({token, companies}: {token:string, companies
                 <p>{formikPass.errors.passwordConfirm}</p>
               </div>
             ) : null}
+          </div>
+        </div>
+
+        <div className="flex flex-wrap">
+          <div className="w-full sm:w-1/2 px-1 sm:px-5">
+            <div className="mb-4 text-gray-700">
+              <label className="block text-sm font-medium text-gray-500" htmlFor="">
+                Perfil
+              </label>
+              <select className="bg-white mt-2 outline-none outline-0 shadow appearance-none 
+                      border rounded w-full py-4 px-3 text-base text-gray-500 leading-tight 
+                      font-sans font-ligth focus:outline-none focus:shadow-outline"
+                onChange={handleSelect}
+              >
+                <option value="admin">Admin</option>
+                <option value="user">User</option>
+              </select>
+            </div>
+          </div>
+          <div className="w-full sm:w-1/2 px-1 sm:px-5">
             <div className="space-y-1 justify-center">
               <div className="shrink-0 self-center">
                   <label htmlFor="" className='text-gray-500'>Compañias</label>
@@ -258,8 +244,39 @@ export default function FormAccount({token, companies}: {token:string, companies
             </div>
           </div>
         </div>
+        <div className="flex mt-2">
+          <div className="w-full sm:w-1/2 px-1 sm:px-5">
+            <div className="space-y-1 justify-center">
+              <div className="shrink-0 self-center">
+                  <label htmlFor="" className='text-gray-500 mb-3'>Foto</label>
+                  <div className='flex'>
+                    <Image    
+                        className="rounded-full"                      
+                        src={'/photo'}
+                        alt={'nameU'}
+                        width={56}
+                        height={56}                                    
+                        priority={true}                                    
+                    />
+                    <div className='border rounded-md border-gray-200 relative p-4 w-full'>
+                      <input 
+                        type="file" 
+                        id="photo" 
+                        name="photo" 
+                        //value={formik.values.photo}
+                        onChange={onFileChange}
+                        //onBlur={formik.handleChange}
+                        className="opacity-0 absolute inset-0	">                                            
+                      </input>
+                      <p className='text-center	'>Cambiar Foto</p>
+                    </div>  
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div className="flex justify-center mt-3">
-          <Button styleB="rounded-full bg-blue-600 w-1/5 text-white hover:bg-blue-500" textB="Guardar" typeB="submit" />
+          <Button styleB="rounded-full bg-blue-600 w-36 text-white hover:bg-blue-500" textB="Guardar" typeB="submit" />
         </div>
       </form>
     </>

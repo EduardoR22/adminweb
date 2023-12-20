@@ -1,6 +1,7 @@
 import { Rating } from "@mui/material"
 import { useState } from "react"
 import { updateReview } from "@/app/api/reviews/route";
+import Alert, {showToastMessageError} from "../Alert";
 
 export default function ShowReview({width, review, token}: {width:string, review:any, token:string}){
   
@@ -18,9 +19,7 @@ export default function ShowReview({width, review, token}: {width:string, review
     try {
       const res = await updateReview(token, review._id, data);
       if(res !== 200){
-        console.log(res);
-      }else{
-        console.log('exitooo');
+        showToastMessageError('Error al actualizar review!!');
       }
     } catch (error) {
       //agregar mensaje de error
@@ -30,6 +29,7 @@ export default function ShowReview({width, review, token}: {width:string, review
 
   return(
     <>
+      <Alert />
       <div className={`${width} flex justify-between`} key={review._id}>
         <div className="flex">
           <Rating defaultValue={review.ratingAverage} precision={0.5} readOnly />

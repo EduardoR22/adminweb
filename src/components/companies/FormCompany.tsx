@@ -152,10 +152,10 @@ export default function FormCompany({token, company}:
   return(
     <>
       <Alert />
-      <form className="bg-white rounded shadow-md px-8 pt-6 pb-8" 
+      <form className="bg-white rounded shadow-md sm:px-8 pt-6 pb-8" 
         onSubmit={formikPass.handleSubmit}>
         <div className="flex justify-center flex-wrap">
-          <div className="w-1/2 min-w-max px-5">
+          <div className="w-full sm:w-1/2 min-w-max px-1 sm:px-5">
             <div className="mb-4 text-gray-700">
               <label className="block text-sm font-medium text-gray-500" htmlFor="name">
                 Nombre
@@ -165,6 +165,7 @@ export default function FormCompany({token, company}:
                 id="name"
                 type="text"
                 placeholder="Nombre empresa"
+                autoFocus
                 value={formikPass.values.name}
                 onChange={formikPass.handleChange}
                 onBlur={formikPass.handleChange}>
@@ -214,7 +215,7 @@ export default function FormCompany({token, company}:
               </div>
             ) : null}
           </div>
-          <div className="w-1/2 min-w-max px-5">
+          <div className="w-full sm:w-1/2 min-w-max px-1 sm:px-5">
             <div className="mb-4 text-gray-700">
               <label className="block text-sm font-medium text-gray-500" htmlFor="address">
                 Direccion

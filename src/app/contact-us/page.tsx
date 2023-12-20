@@ -37,7 +37,7 @@ export default async function ContactUs({searchParams}: {searchParams: {[opc:str
     <>
       <NavBar />
       <div className="flex justify-center mt-2">
-        <div className="flex px-4 shadow-lg shadow-gray-400">
+        <div className="flex sm:px-4 shadow-lg shadow-gray-400">
           <NavTab opt={searchParams.opc} />
         </div>
       </div>

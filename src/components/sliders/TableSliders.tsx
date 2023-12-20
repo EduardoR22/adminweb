@@ -46,9 +46,11 @@ export default function Table({children, sliders, token, link} : {children:any, 
   return (
     <>
       <div className='flex flex-wrap-reverse justify-between'>
-        <div className='flex w-80'>
+        <div className='flex flex-wrap'>
           {children}
-          <Searcher search={search} searchChange={onSearchChange} placeholder='Buscar slider' />
+          <div className='w-76'>
+            <Searcher search={search} searchChange={onSearchChange} placeholder='Buscar slider' />
+          </div>
         </div>
         <Link href={link} >
           <Button styleB='md:mr-5 mb-5 w-36 bg-blue-950 text-white hover:bg-blue-500' textB='Nuevo' typeB='button'/>
@@ -58,9 +60,9 @@ export default function Table({children, sliders, token, link} : {children:any, 
         <table className='mt-5'>
           <thead className='text-gray-400'>
             <tr className='border-b bg-slate-200'>
-              <th className='w-16 text-start border-b border-slate-400'>Foto</th>
+              <th className='hidden sm:flex w-16 text-start border-b border-slate-400'>Foto</th>
               <th className='w-8 text-start border-b border-slate-400'>&nbsp;</th>
-              <th className='w-48 text-start border-b border-slate-400'>Titulo</th>
+              <th className='w-20 sm:w-48 text-start border-b border-slate-400'>Titulo</th>
               <th className='w-56 text-start border-b border-slate-400'>Caracteristicas</th>
               <th className='w-40 text-start border-b border-slate-400'>imagen</th>
             </tr>
@@ -68,7 +70,7 @@ export default function Table({children, sliders, token, link} : {children:any, 
           <tbody>
             {filter.map( (slider: any, index:number) => (
               <tr key={slider._id} className={`${index%2===0? 'bg-white':'bg-blue-100'}`}>
-                <td>
+                <td className='hidden sm:flex'>
                 <Image src={slider.user? slider.user.photo : '/images.jpg'} alt={slider.user? slider.user.name.split(' ')[0]: 'user'} width={50} height={40} className='rounded-full' />
                 </td>
                 <td> 
@@ -108,7 +110,7 @@ export default function Table({children, sliders, token, link} : {children:any, 
         </table>
       </div>
 
-      <div className='flex justify-center items-center mt-3 w-9/12'>
+      <div className='flex justify-center items-center mt-3 w-full sm:w-9/12'>
         <Pagination IndexPages={IndexPages} currentPage={currentPage} num_rows={num_rows} 
                       setCurrentPage={setCurrentPage} setNumRows={setNumRows} 
                       length={length}/>

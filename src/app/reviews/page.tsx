@@ -3,6 +3,7 @@ import NavBar from "@/components/Navigation/NavBar"
 //import { getReviews } from "../api/reviews/route"
 import { cookies } from "next/headers"
 import { getProyects } from "../api/proyects/route"
+import { getReviewsByProyect } from "../api/reviews/route"
 
 export default async function Reviews({searchParams}: {searchParams:{idp:string, img:string}}){
   
@@ -21,23 +22,27 @@ export default async function Reviews({searchParams}: {searchParams:{idp:string,
     return <h1>Error al obtener proyectos con reviews</h1>
   }
   
-  // let reviews;
-  // try {
-  //   reviews = await getReviews(token);
-  //   if(typeof(reviews) === 'string') 
-  //     return <h1>{reviews}</h1> 
-  // } catch (error) {
-  //   return <h1>Error al obtener reviews</h1>
-  // }
+  let reviews;
+  try {
+    if(idP!== ''){
+      reviews = await getReviewsByProyect(token, idP);
+      if(typeof(reviews) === 'string') 
+        return <h1>{reviews}</h1>  
+    } 
+  } catch (error) {
+    return <h1>Error al obtener reviews</h1>
+  }
 
   //console.log(reviews);
+
+  if(!reviews) reviews=''
 
   return(
     <>
       <NavBar />
-      <div className="p-10">
+      <div className="sm:p-10">
         <h1 className="font-semibold text-gray-900">Reviews</h1>
-        <ListReviews proyects={proyects.data.data} token={token} idP={idP} image={img} />
+        <ListReviews proyects={proyects.data.data} token={token} idP={idP} image={img} reviewsP={reviews} />
       </div>
     </>
   )

@@ -117,10 +117,10 @@ export default function FormClient({name, linkWeb, id, token, user, company}:
   return(
     <>
       <Alert />
-      <form className="bg-white rounded shadow-md px-8 pt-6 pb-8" 
+      <form className="w-full bg-white rounded shadow-md sm:px-2 px-4 pt-6 pb-8" 
         onSubmit={formikPass.handleSubmit}>
-        <div className="flex">
-          <div className="w-1/2 px-5">
+        <div className="flex flex-wrap">
+          <div className="w-full">
             <div className="mb-4 text-gray-700">
               <label className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-gray-500" htmlFor="name">
                 Cliente
@@ -130,6 +130,7 @@ export default function FormClient({name, linkWeb, id, token, user, company}:
                 id="client"
                 type="text"
                 placeholder="Honda planta celaya"
+                autoFocus
                 value={formikPass.values.client}
                 onChange={formikPass.handleChange}
                 onBlur={formikPass.handleChange}>
@@ -141,7 +142,7 @@ export default function FormClient({name, linkWeb, id, token, user, company}:
               </div>
             ) : null}
           </div>
-          <div className="w-1/2">
+          <div className="w-full">
             <div className="mb-4 text-gray-700">
               <label className="block text-sm font-medium text-gray-500" htmlFor="passwordConfirm">
                 Sitio Web
@@ -163,13 +164,13 @@ export default function FormClient({name, linkWeb, id, token, user, company}:
             ) : null}
           </div>
         </div>
-        <div className="px-4">
+        <div className="">
           <p className="text-gray-500 mb-3 font-medium text-sm">Logotipo</p>
           <Upload setFile={setFile} />
         </div>
-        <div className="flex flex-col items-center justify-center mt-3">
+        <div className="flex flex-col items-center justify-center mt-3 space-y-3">
           <p className='text-xs font-sans font-thin mt-5'>Adjunte una fotografia con un aspecto cuadrado (640x640 píxeles).</p>
-          <Button styleB="rounded-full bg-blue-600 w-1/5 text-white hover:bg-blue-500" textB="Guardar" typeB="submit" />
+          <Button styleB="rounded-full bg-blue-600 w-36 text-white hover:bg-blue-500" textB="Guardar" typeB="submit" />
         </div>
       </form>
     </>

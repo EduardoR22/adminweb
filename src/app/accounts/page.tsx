@@ -31,7 +31,7 @@ export default async function Users(){
   return(
     <>
       <NavBar />
-      <ContainerForm img="" subtitle="" title="" width="w-full md:w-9/12 pl-10">
+      <ContainerForm img="" subtitle="" title="" width="w-full md:w-9/12 px-1 sm:pl-10">
         {table}
       </ContainerForm>
     </>

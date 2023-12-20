@@ -63,14 +63,14 @@ export default function ViewSlider({sliders, token, indexStart}:
               key={index}>{feature}</p>
           ))}
           <ChevronLeftIcon width={40} height={40} onClick={Previous}
-            className="absolute left-4 top-60 text-white cursor-pointer"
+            className="absolute bg-slate-700 rounded-md hover:bg-slate-500 left-4 top-60 text-white cursor-pointer"
           />
           <ChevronRightIcon width={40} height={40} onClick={Next}
-            className="absolute right-4 top-60 text-white cursor-pointer"
+            className="absolute bg-slate-700 rounded-md hover:bg-slate-500 right-4 top-60 text-white cursor-pointer"
           />
           <Link href={`/sliders/${slider._id}/edit`}>
             <PencilSquareIcon width={30} height={30} 
-              className="absolute right-16" 
+              className="absolute right-16 hover:text-slate-500" 
             />
           </Link>
           <Delete token={token} slider={slider} />

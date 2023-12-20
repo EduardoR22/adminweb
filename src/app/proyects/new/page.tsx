@@ -42,7 +42,8 @@ export default async function New(){
       <ContainerForm img="/projects.jpg" subtitle="Proyecto a publicar" 
         title="Nuevo Proyecto" width="w-full md:w-2/3">
         <FormNew token={token} address="" features="" id="" seg="" subtitle="" 
-                  tittle="" services={services} user={user._id} company={company} segments={segments} />
+                  tittle="" services={services} user={user._id} company={company} 
+                  segments={segments} year="" />
       </ContainerForm>
     </>
   )

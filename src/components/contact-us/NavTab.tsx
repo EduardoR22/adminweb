@@ -7,7 +7,7 @@ export default function NavTab({opt}: {opt:string}){
   const option = (opt === '2'? 2: (opt === '3'? 3 : (opt === '4'? 4 : 1))) 
   return(
     <>
-      <div className="flex mb-3">
+      <div className="flex mb-3 flex-wrap">
         <div onClick={() => {
           router.push('/contact-us')
           setTimeout(() => {

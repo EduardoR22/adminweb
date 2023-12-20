@@ -57,7 +57,7 @@ export default async function Edit({params}: {params:{id:string}}){
         <FormNew token={token} address={proyect.data.data.address} features={proyect.data.data.features} 
                   seg={proyect.data.data.segment} subtitle={proyect.data.data.subtitle} 
                   tittle={proyect.data.data.title} id={id} services={services} user={user._id} 
-                  company={user.company} segments={segments} />
+                  company={user.company} segments={segments} year={proyect.data.data.year? proyect.data.data.year: ''} />
       </ContainerForm>
     </>
   )

@@ -200,10 +200,10 @@ export default function FormSlider({token, slider, user, company}:
   return(
     <>
       <Alert></Alert>
-      <form className="bg-white rounded shadow-md px-8 pt-6 pb-8" 
+      <form className="bg-white rounded shadow-md px-1 md:px-8 pt-6 pb-8" 
         onSubmit={formikPass.handleSubmit}>
         <div className="flex flex-wrap">
-          <div className="w-full md:w-1/2 md:px-5">
+          <div className="w-full md:w-1/2 md:px-2">
             <div className="mb-4 text-gray-700">
               <label className="block text-sm font-medium text-gray-500" htmlFor="name">
                 Titulo
@@ -212,6 +212,77 @@ export default function FormSlider({token, slider, user, company}:
                 className="shadow appearance-none border rounded w-full mt-2 py-4 px-3 text-base text-gray-500 leading-tight font-sans font-ligth focus:outline-none focus:shadow-outline"
                 id="title"
                 type="text"
+                autoFocus
+                placeholder="Honda planta celaya"
+                value={formikPass.values.title}
+                onChange={formikPass.handleChange}
+                onBlur={formikPass.handleChange}>
+              </input>
+            </div>
+            {formikPass.touched.title && formikPass.errors.title ? (
+              <div className="my-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-4">
+                <p>{formikPass.errors.title}</p>
+              </div>
+            ) : null}
+          </div>
+          <div className="w-full md:w-1/2 md:px-2">
+            <div className="mt-2 md:mt-0 mb-4 text-gray-700">
+              <label className="block text-sm font-medium text-gray-500" htmlFor="name">
+                Link
+              </label>
+              <input 
+                className="shadow appearance-none border rounded w-full mt-2 py-4 px-3 text-base text-gray-500 leading-tight font-sans font-ligth focus:outline-none focus:shadow-outline"
+                id="link"
+                type="text"
+                placeholder="https://dominio.com"
+                value={formikPass.values.link}
+                onChange={formikPass.handleChange}
+                onBlur={formikPass.handleChange}>
+              </input>
+            </div>
+            {formikPass.touched.link && formikPass.errors.link ? (
+              <div className="my-2 bg-red-100 border-l-4 border-red-500 text-red-700 p-4">
+                <p>{formikPass.errors.link}</p>
+              </div>
+            ) : null}
+          </div>
+        </div>
+        <div className="flex flex-wrap">
+          <div className="w-full md:w-1/2 md:px-2">
+            <div className="">
+              <p className="text-gray-500 mb-3 font-medium text-sm">Fotografia</p>
+              <Upload setFile={setFile} />
+            </div>    
+          </div>
+          <div className="w-full md:w-1/2">
+            <div className="mb-4 text-gray-700">
+              <label className="block text-sm font-medium text-gray-500" htmlFor="passwordConfirm">
+                Caracteristicas
+              </label>
+              {upFeatures.map((elements) => (
+                elements
+              ))}
+            </div>            
+          </div>
+        </div>
+        <div className="flex flex-col items-center justify-center mt-3 space-y-2">
+          <p className='text-center text-xs font-sans font-thin mt-5'>Adjunte una fotografia con un aspecto 21:9 (2560x1080píxeles).</p>
+          <Button styleB="rounded-full bg-blue-600 w-36 text-white hover:bg-blue-500 mt-1" textB="Guardar" typeB="submit" />
+        </div>
+      </form>
+      {/* <form className="bg-white rounded shadow-md px-1 md:px-8 pt-6 pb-8" 
+        onSubmit={formikPass.handleSubmit}>
+        <div className="flex flex-wrap">
+          <div className="w-full md:w-1/2 md:px-2">
+            <div className="mb-4 text-gray-700">
+              <label className="block text-sm font-medium text-gray-500" htmlFor="name">
+                Titulo
+              </label>
+              <input 
+                className="shadow appearance-none border rounded w-full mt-2 py-4 px-3 text-base text-gray-500 leading-tight font-sans font-ligth focus:outline-none focus:shadow-outline"
+                id="title"
+                type="text"
+                autoFocus
                 placeholder="Honda planta celaya"
                 value={formikPass.values.title}
                 onChange={formikPass.handleChange}
@@ -260,9 +331,9 @@ export default function FormSlider({token, slider, user, company}:
         </div>
         <div className="flex flex-col items-center justify-center mt-3">
           <p className='text-xs font-sans font-thin mt-5'>Adjunte una fotografia con un aspecto 21:9 (2560x1080píxeles).</p>
-          <Button styleB="rounded-full bg-blue-600 w-1/5 text-white hover:bg-blue-500 mt-1" textB="Guardar" typeB="submit" />
+          <Button styleB="rounded-full bg-blue-600 w-36 text-white hover:bg-blue-500 mt-1" textB="Guardar" typeB="submit" />
         </div>
-      </form>
+      </form> */}
     </>
   )
 }

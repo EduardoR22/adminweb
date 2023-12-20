@@ -18,12 +18,11 @@ export default async function New(){
     return <h1>Ocurrio un error al consultar las compañias..</h1>
   }
 
-  console.log(companies);
   return(
     <>
       <NavBar />
       <ContainerForm img="/account.jpg" subtitle="Creacion de nueva cuenta" 
-                      title="Nueva Cuenta" width="w-2/3"
+                      title="Nueva Cuenta" width="w-full md:w-2/3"
       >
         <FormAccount token={token} companies={companies} />
       </ContainerForm>

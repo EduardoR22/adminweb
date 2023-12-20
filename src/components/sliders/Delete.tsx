@@ -9,18 +9,10 @@ import Alert from '@/components/Alert';
 import { removeSlider } from '@/app/api/sliders/route';
 
 export default function Delete({token, slider} : {token : string, slider: any}){
-  
-  // console.log('slider eliminarr');
-  // console.log(slider._id);
-  //console.log(slider)
-
   const router = useRouter()
 
-   const deleteSlider = async (id:string, name:string)  => {
-    
-    console.log('deleteslider');
-    console.log(id);
-
+  const deleteSlider = async (id:string, name:string)  => {
+  
     confirmAlert({
       title: 'Confirmacion para eliminar Slider?',
       message: `Desea eliminar slider ${name}`,
@@ -28,7 +20,6 @@ export default function Delete({token, slider} : {token : string, slider: any}){
       {
         label: 'Si',
         onClick: async () => {
-          //let res = await removeUser(id, token);
           let res = undefined;
 
           switch('user'){
@@ -85,7 +76,7 @@ export default function Delete({token, slider} : {token : string, slider: any}){
         deleteSlider(slider._id, slider.title)
         router.refresh()
         }}>
-        <TrashIcon width={30} height={30} className="text-red-700"/>
+        <TrashIcon width={30} height={30} className="text-red-700 hover:text-red-500"/>
       </button>
     </>
   )

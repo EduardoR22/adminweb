@@ -37,7 +37,7 @@ export default async function Edit({params}: {params: {id: string}}){
   return (
     <>
       <NavBar />
-      <ContainerForm title="Actualizar slider" subtitle="Imagenes de slider" img="/image.jpg" width="w-2/3">
+      <ContainerForm title="Actualizar slider" subtitle="Imagenes de slider" img="/image.jpg" width="w-full sm:w-10/12">
         <FormSlider token={token} slider={slider.data.data.data} user={user._id} company={user.company} />
       </ContainerForm>
     </>

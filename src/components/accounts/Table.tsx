@@ -47,9 +47,9 @@ export default function Table({children, users, token, link} : {children:any, us
   return (
     <>
       <div className='flex flex-wrap-reverse justify-between'>
-        <div className='flex'>
+        <div className='flex flex-wrap'>
           {children}
-          <div className='w-80'>
+          <div className='w-76'>
             <Searcher search={search} searchChange={onSearchChange} placeholder='Buscar usuario' />
           </div>
         </div>
@@ -60,14 +60,15 @@ export default function Table({children, users, token, link} : {children:any, us
       
       <p className='mt-10 font-semibold'>Usuarios todos</p>
 
-      <div className='' style={{height: `${height}px`}}>
-        <table className='mt-5 w-11/12'>
+      {/* <div className='' style={{height: `${height}px`}}> */}
+      <div>
+        <table className='mt-5 w-full sm:w-11/12'>
           <thead className='text-gray-400'>
             <tr className='border-b'>
               <th className='w-16 border-b border-slate-400'>Foto</th>
               <th className='w-20 border-b border-slate-400'>Eliminar</th>
-              <th className='w-28 text-start border-b border-slate-400'>Nombre / Usuario</th>
-              <th className='w-28 text-start border-b border-slate-400'>Perfil / Status</th>
+              <th className='w-20 sm:w-28 text-start border-b border-slate-400'>Nombre / Usuario</th>
+              <th className='hidden sm:flex w-20 sm:w-28 text-start border-b border-slate-400'>Perfil / Status</th>
             </tr>
           </thead>
           <tbody>
@@ -86,15 +87,15 @@ export default function Table({children, users, token, link} : {children:any, us
                   </div>
                 </td>
                 <td>
-                  <div>
+                  <div className='text-xs sm:text-base'>
                     <p>{user.name}</p>
                     <p className='text-gray-400'>{user.email}</p>
                   </div>
                 </td>
-                <td>
+                <td className='hidden sm:flex'>
                   <div className='flex items-center'>
                     <div className={`w-4 h-4 ${user.status ? 'bg-green-500' : 'bg-red-500'} mr-2`}></div>
-                    <p>{user.role}</p>
+                    <p className='text-xs sm:text-base'>{user.role}</p>
                   </div>
                 </td>
               </tr>
@@ -103,7 +104,7 @@ export default function Table({children, users, token, link} : {children:any, us
         </table>
       </div>
 
-      <div className='flex justify-center items-center mt-3 w-9/12'>
+      <div className='flex justify-center items-center mt-3 w-full sm:w-9/12'>
         <Pagination IndexPages={IndexPages} currentPage={currentPage} num_rows={num_rows} 
                       setCurrentPage={setCurrentPage} setNumRows={setNumRows} 
                       length={length}/>

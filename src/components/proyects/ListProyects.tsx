@@ -59,14 +59,15 @@ export default function ListProyects({proyects, services, token}: {proyects: any
     <div className="flex flex-wrap mt-5">
       <div className="w-full md:w-2/3">
         <div className="flex flex-wrap-reverse justify-between">
-          <div className="w-80 mb-5">
+          <div className="w-76 space-y-3">
             <Searcher search={search} searchChange={onSearchChange} placeholder="Buscar proyecto" />
           </div>
           <Link href='/proyects/new'>
             <Button textB="Nuevo" typeB="Button" styleB="mb-5 text-white w-36 bg-blue-950 hover:bg-blue-500 mr-10" />
           </Link>
         </div>
-        <div style={{height: `${height}px`}}>
+        {/* <div style={{height: `${height}px`}}> */}
+        <div>  
           <table className="mt-5">
             <thead>
               <tr className="text-gray-400 text-sm border-b border-gray-500 bg-slate-200">
@@ -87,7 +88,7 @@ export default function ListProyects({proyects, services, token}: {proyects: any
                     </div>
                   </td>
                   <td className="p-0">
-                    <div className="flex justify-center items-center text-green-600 m-0">
+                    <div className={`flex justify-center items-center ${proyect.status? 'text-green-600': 'text-red-600'} m-0`}>
                       <EllipsisHorizontalCircleIcon width={40} height={25} />
                     </div>
                   </td>

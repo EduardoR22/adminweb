@@ -47,20 +47,24 @@ export default function ClientsList({children, users, token, link} : {children:a
 
   return (
     <>
-      <div className='flex justify-between flex-wrap-reverse'>
-        <div className='flex w-80'>
+      {/* <div className='flex justify-between flex-wrap-reverse'> */}
+      <div className='flex flex-row flex-wrap-reverse justify-between p-1 mb-3'>
+        <div className='flex flex-wrap'>
           {children}
-          <Searcher search={search} searchChange={onSearchChange} placeholder='Buscar cliente' />
+          <div className='w-76'>
+            <Searcher search={search} searchChange={onSearchChange} placeholder='Buscar cliente' />
+          </div>
         </div>
         <Link href={link} >
           <Button styleB='mb-5 md:mt-0 mr-10 w-36 bg-blue-600 text-white hover:bg-blue-500' textB='Nuevo' typeB='button'/>
         </Link>
       </div>
-      <div className='flex flex-wrap mt-10' style={{height: `${height}px`}}>
+      {/* <div className='flex flex-wrap mt-10' style={{height: `${height}px`}}> */}
+      <div className='grid gap-10 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4  mt-10'>
         {filter.map((client: any) => (
           <div key={client._id} className='mt-2 mx-5'>
-            <div className='flex justify-end'>
-              <p>{client.name}</p>
+            <div className='flex justify-center space-x-2'>
+              <p className='font-ligth text-base text-cyan-700 text-center'>{client.name}</p>
               <Link href={`/clients/${client._id}/edit`}>
                 <PencilIcon width={20} height={20} className='text-green-500' />
               </Link>
@@ -71,7 +75,8 @@ export default function ClientsList({children, users, token, link} : {children:a
         ))}
       </div>
 
-      <div className='flex justify-center items-center mt-3 w-9/12'>
+      {/* <div className='flex justify-center items-center mt-3 w-9/12'> */}
+      <div className='flex justify-center items-center pb-2 space-y-6'>  
         <Pagination IndexPages={IndexPages} currentPage={currentPage} num_rows={num_rows} 
                       setCurrentPage={setCurrentPage} setNumRows={setNumRows} 
                       length={length}/>

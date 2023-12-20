@@ -16,7 +16,7 @@ export default function New(){
   return(
     <>
       <NavBar />
-      <ContainerForm title="Nuevo slider" subtitle="Imagenes de slider" width="w-2/3" img="/image.jpg">
+      <ContainerForm title="Nuevo slider" subtitle="Imagenes de slider" width="w-full sm:w-10/12" img="/image.jpg">
         <FormSlider token={token} slider='' user={user._id} company={user.company} />
       </ContainerForm>
     </>

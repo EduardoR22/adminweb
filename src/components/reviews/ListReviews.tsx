@@ -8,8 +8,8 @@ import ViewReview from "./ViewReview";
 import { useRouter } from "next/navigation";
 import { getReviewsByProyect } from "@/app/api/reviews/route";
 
-export default function ListReviews({proyects, token, idP, image}: 
-                          {proyects:any, token:string, idP:string, image:string}){
+export default function ListReviews({proyects, token, idP, image, reviewsP}: 
+                          {proyects:any, token:string, idP:string, image:string, reviewsP:any}){
   
   const [search, setSearch] = useState('');
   const [currentPage, setCurrentPage] = useState(0);
@@ -26,7 +26,7 @@ export default function ListReviews({proyects, token, idP, image}:
       setLength(proyects.length)
       setFilter(proyects.slice(currentPage, currentPage + num_rows))
     }else{
-      const filtered = proyects.filter( (proyect: any) => proyect.name.toLowerCase().includes(search.toLowerCase()));
+      const filtered = proyects.filter( (proyect: any) => proyect.title.toLowerCase().includes(search.toLowerCase()));
       setLength(filtered.length);
       setFilter(filtered.slice(currentPage, currentPage + num_rows));
     }
@@ -52,32 +52,43 @@ export default function ListReviews({proyects, token, idP, image}:
     router.push(`/reviews?idp=${idProyect}&&img=${img}`);
     setTimeout(() => {
       window.location.reload();
-    }, 2000);
+    }, 1100);
   }
 
-  const [reviews, setReviews] = useState<any>();
-  const getReviewsProyect = async (idProyect:string, img:string) => {
-    try {
-      const res = await getReviewsByProyect(token, idProyect);
-      setReviews(res);
-      if(typeof(res) === 'string')
-        return <h1>{reviews}</h1>
+  // const [reviews, setReviews] = useState<any>();
+  // const getReviewsProyect = async (idProyect:string, img:string) => {
+  //   try {
+  //     const res = await getReviewsByProyect(token, idProyect);
+  //     setReviews(res);
+  //     if(typeof(res) === 'string')
+  //       return <h1>{reviews}</h1>
       
-      if(res.length > 0){
-        setViewReview(<ViewReview reviews={res} width="w-full" image={img} token={token} />)
+  //     if(res.length > 0){
+  //       setViewReview(<ViewReview reviews={res} width="w-full" image={img} token={token} />)
+  //     }else{
+  //       setViewReview(<h1>No hay reviews..</h1>)
+  //     }
+  //   } catch (error) {
+  //     return <h1>Error al obtener las reviews del proyecto...</h1>
+  //   }
+  // }
+
+  useEffect(() => {
+    // setViewReview(<></>)
+    // if(idP !== '' && image !== ''){
+    //   getReviewsProyect(idP, image);
+    // }
+
+    if(typeof(reviewsP)==='string'){
+      setViewReview(<h1>{reviewsP}</h1>)
+    }else{
+      if(reviewsP.length > 0){
+        setViewReview(<ViewReview reviews={reviewsP} width='w-full' image={image} token={token} />)
       }else{
         setViewReview(<h1>No hay reviews..</h1>)
       }
-    } catch (error) {
-      return <h1>Error al obtener las reviews del proyecto...</h1>
     }
-  }
 
-  useEffect(() => {
-    setViewReview(<></>)
-    if(idP !== '' && image !== ''){
-      getReviewsProyect(idP, image);
-    }
   }, []);
 
   return(
@@ -86,7 +97,8 @@ export default function ListReviews({proyects, token, idP, image}:
         <div className="flex">
           <div className="w-80"><Searcher search={search} searchChange={onSearchChange} placeholder="Buscar review" /></div>
         </div>
-        <div style={{height:`${height}px`}}>
+        {/* <div style={{height:`${height}px`}}> */}
+        <div>
           <table className="mt-5">
             <thead>
               <tr className="text-gray-400 text-sm border-b border-gray-500 bg-slate-200">
@@ -98,7 +110,7 @@ export default function ListReviews({proyects, token, idP, image}:
               </tr>
             </thead>
             <tbody>
-              {proyects.map((proyect:any, index:number) => (
+              {filter.map((proyect:any, index:number) => (
                 <tr key={proyect._id} onClick={() => changeReview(proyect._id, proyect.images[0].photo)} 
                     className={`${index%2===0? 'cursor-pointer bg-white':'cursor-pointer bg-slate-200'}`}>
                   <td>

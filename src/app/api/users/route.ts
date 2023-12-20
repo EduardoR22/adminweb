@@ -134,33 +134,46 @@ export async function getUsers(auth_token:string){
 
 export async function removeUser(id:string, auth_token:string) {
   const url=`${process.env.NEXT_PUBLIC_API_URL}/api/v1/users/${id}`;
-  const requestOptions = {
-    method: 'DELETE',
-    headers: { 
-      'Authorization': `Bearer ${auth_token}`
-    }
-  };
-
-  console.log(url);
-
-  try {            
-    const res = await fetch(url, requestOptions)
-    .then( (response) => {      
-      if(!response.ok){          
-        throw new Error('Algo salió mal con la solicitud');                      
-      } else {
-        if(response.status === 204) {        
-            return 204;
-          }        
-        }          
-        return response.status;
-      })
-      .catch( (err) => {          
-        console.log(err);
-      });
-  } catch (error:any) {
-    return error;    
+  
+  try {
+    const res = await axios.delete(url, {
+      headers: {
+        'Authorization': `Bearer ${auth_token}`,
+      }
+    })
+    if(res.status=== 204) return 204;
+    else return res.statusText;
+  } catch (error) {
+    return 'Ocurrio un error al eliminar usuario!';
   }
+  
+  // const requestOptions = {
+  //   method: 'DELETE',
+  //   headers: { 
+  //     'Authorization': `Bearer ${auth_token}`
+  //   }
+  // };
+
+  // console.log(url);
+
+  // try {            
+  //   const res = await fetch(url, requestOptions)
+  //   .then( (response) => {      
+  //     if(!response.ok){          
+  //       throw new Error('Algo salió mal con la solicitud');                      
+  //     } else {
+  //       if(response.status === 204) {        
+  //           return 204;
+  //         }        
+  //       }          
+  //       return response.status;
+  //     })
+  //     .catch( (err) => {          
+  //       console.log(err);
+  //     });
+  // } catch (error:any) {
+  //   return error;    
+  // }
 }
 
 export async function createUserPhoto(user:FormData, auth_token:string){

@@ -56,22 +56,22 @@ export default function Table({contacts, token}: {contacts:any, token:string}){
             <thead>
               <tr className="border-b border-gray-600 text-gray-400 bg-slate-200">
                 <td className="w-48">Nombre</td>
-                <td className="w-32">Telefono</td>
+                <td className="w-32 hidden sm:flex">Telefono</td>
                 <td className="w-48">Email</td>
                 <td className="w-60">Comentario</td>
-                <td className="w-28">&nbsp;</td>
+                <td className="w-28 hidden sm:flex">&nbsp;</td>
               </tr>
             </thead>
             <tbody>
               {filter.map((contact:any, index:number) => (
                 <tr key={contact._id} className={`${index%2===0? 'bg-white':'bg-slate-200'}`}>
-                  <td>{contact.name}</td>
-                  <td>{contact.phone}</td>
-                  <td>
+                  <td className="text-xs sm:text-base text-slate-700">{contact.name}</td>
+                  <td className="hidden sm:flex sm:items-center text-xs sm:text-base text-slate-700">{contact.phone}</td>
+                  <td className="text-xs sm:text-base text-slate-700">
                     <p>{contact.email}</p>
                   </td>
-                  <td className="p-1 text-slate-700">{contact.message}</td>
-                  <td className="pl-3">
+                  <td className="p-1 text-xs sm:text-base text-slate-700">{contact.message}</td>
+                  <td className="pl-3 hidden sm:flex">
                     <ChangeStatus status={contact.statusContact} token={token} idContact={contact._id} />
                   </td>
                 </tr>            
@@ -80,7 +80,7 @@ export default function Table({contacts, token}: {contacts:any, token:string}){
           </table>
         </div>
       </div>
-      <div className='flex justify-center items-center mt-3 w-9/12'>
+      <div className='flex justify-center items-center mt-3 w-full sm:w-9/12'>
         <Pagination IndexPages={IndexPages} currentPage={currentPage} num_rows={num_rows} 
                       setCurrentPage={setCurrentPage} setNumRows={setNumRows} 
                       length={length}/>

@@ -42,7 +42,7 @@ export default function SelectText({updateCount, pushText, valueFeat, bandPlus, 
   return(
     <>
       <div className="flex items-center mt-2">
-        <div>
+        <div className="w-full">
           <input type="text" value={text} onChange={(e) => setText(e.target.value)} 
               className="shadow appearance-none border rounded w-full py-4 px-3 text-base
                text-gray-500 leading-tight font-sans font-ligth focus:outline-none focus:shadow-outline"

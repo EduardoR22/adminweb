@@ -27,31 +27,18 @@ export default function Delete({token, user} : {token : string, user: any}){
       {
         label: 'Si',
         onClick: async () => {
-          //let res = await removeUser(id, token);
-          let res = undefined;
-
-          switch('user'){
-            case 'user':
-              try {
-                res = await removeUser(id, token);
-                console.log(id);
-                console.log(res)
-              } catch (error) {
-                console.log('Error al eliminar usuario');
-              }
-            break;
-          }
-
-          if(res != undefined) {
+          try {
+            const res = await removeUser(id, token);
             if(res === 204) {
               showToastMessage('Usuario eliminado exitosamente!');
-            } else {
-              showToastMessageError(res);
+              setTimeout(() => {
+                window.location.reload();
+              }, 1500);
             }
-          }else {
-          showToastMessageError('El usuario no pudo ser eliminado..');
+            else showToastMessageError(res.toString());
+          } catch (error) {
+            showToastMessageError('Error al eliminar usuario..');
           }
-          router.refresh()
         }           
       },
       {

@@ -15,6 +15,7 @@ export default function Searcher({search, searchChange, placeholder}:
         type="text"
         value={search}
         placeholder={placeholder}
+        autoFocus
         onChange={(e) => {searchChange(e.target.value)}}  
       />
     </div>
