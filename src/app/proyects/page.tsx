@@ -25,8 +25,8 @@ export default async function Proyects(){
   return (
     <>
       <NavBar />
-      <div className="p-1 md:p-10">
-        <h1 className="font-semibold text-gray-900">Proyectos</h1>
+      <div className="p-1 md:px-10">
+        {/* <h1 className="font-semibold text-gray-900">Proyectos</h1> */}
         <ListProyects proyects={proyects.data.data} token={token} services={services} />
       </div>
     </>

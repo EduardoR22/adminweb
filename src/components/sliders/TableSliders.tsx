@@ -80,12 +80,12 @@ export default function Table({children, sliders, token, link} : {children:any, 
                 </td>
                 <td>
                   <div>
-                    <p className='text-slate-800'>{slider.title}</p>
+                    <p className='text-slate-800 text-xs sm:text-base'>{slider.title}</p>
                   </div>
                 </td>
                 <td>
                   <div className='p-3'>
-                    <ul className='list-disc text-slate-700'>
+                    <ul className='list-disc text-slate-700 text-xs sm:text-base'>
                       {slider.features.map((feature: string, index: number) => (
                         <li key={index}>{feature}</li>
                       ))}
@@ -95,12 +95,13 @@ export default function Table({children, sliders, token, link} : {children:any, 
                 <td>
                   <div className=''>
                     <Link href={`/sliders/${slider._id}`}>
-                      <Image 
+                      <img src={slider.image} alt='image' className='w-full' />
+                      {/* <Image 
                         src={slider.image}
                         alt='imagen'
                         width={60}
                         height={30}
-                      />
+                      /> */}
                     </Link>
                   </div>
                 </td>

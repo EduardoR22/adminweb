@@ -59,7 +59,7 @@ export default function Login({}) {
               target="_blank"
               rel="noopener noreferrer"
               >
-                <img src='/nuevoLogo.jpg' alt='Logo' className='w-48' />         
+                <img src='/logoActualizado.jpg' alt='Logo' className='' />         
                 {/* <Image
                   src="/nuevoLogo.jpg"
                   alt="Logo"

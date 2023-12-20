@@ -27,8 +27,8 @@ export default function DeleteService({token, service} : {token : string, servic
                 showToastMessage('Servicio eliminado exitosamente!');
                 setTimeout(() =>{
                   router.refresh();
-                  router.push('/issues');
-                }, 2000)
+                  router.push('/issues?opc=2');
+                }, 1000)
               } else {
                 showToastMessageError(res.toString());
               }

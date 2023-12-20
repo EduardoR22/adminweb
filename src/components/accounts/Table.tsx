@@ -92,7 +92,7 @@ export default function Table({children, users, token, link} : {children:any, us
                     <p className='text-gray-400'>{user.email}</p>
                   </div>
                 </td>
-                <td className='hidden sm:flex'>
+                <td className='hidden sm:flex pl-2'>
                   <div className='flex items-center'>
                     <div className={`w-4 h-4 ${user.status ? 'bg-green-500' : 'bg-red-500'} mr-2`}></div>
                     <p className='text-xs sm:text-base'>{user.role}</p>

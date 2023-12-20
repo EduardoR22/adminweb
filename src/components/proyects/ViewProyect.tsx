@@ -12,7 +12,7 @@ export default function ViewProyect({width, proyect, token, services}:
     <div className="flex flex-col">
       <div className={`${width} flex justify-between`}>
         {/* <Image src={proyect.images? proyect.images[0].photo: '/public/img.jpg'} alt="image" width={30} height={30} /> */}
-        <img src={proyect.images? proyect.images[0].photo: '/public/img.jpg'} alt="image" className="w-20" />
+        <img src={proyect.images? proyect.images[0].photo: '/public/img.jpg'} alt="image" className="w-24 max-h-20" />
         <Link href={`/proyects/${proyect._id}`}>
           <div>
             <p className="text-gray-800">{proyect.title}</p>

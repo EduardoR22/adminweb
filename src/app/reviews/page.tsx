@@ -40,8 +40,7 @@ export default async function Reviews({searchParams}: {searchParams:{idp:string,
   return(
     <>
       <NavBar />
-      <div className="sm:p-10">
-        <h1 className="font-semibold text-gray-900">Reviews</h1>
+      <div className="px-1 sm:px-10">
         <ListReviews proyects={proyects.data.data} token={token} idP={idP} image={img} reviewsP={reviews} />
       </div>
     </>

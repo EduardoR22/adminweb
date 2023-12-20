@@ -11,7 +11,7 @@ export default function ViewReview({width, reviews, token, image}:
     return <h1>No se encuentran reviews del proyecto..</h1>
   
   return(
-    <div className="flex flex-col">
+    <div className="flex flex-col mx-1">
       <div className={`${width} flex`}>
         <Image src={image} alt="image" width={30} height={30} />
         <div className="ml-5">

@@ -19,7 +19,7 @@ export default function Reviews({review}: {review:any}){
       </div>
       <div>
         <textarea value={review.review} readOnly 
-            className="resize-none p-5 w-full bg-slate-300 rounded-md ml-2 mr-8 mt-2" />
+            className="resize-none p-5 w-full bg-slate-300 rounded-md mt-2" />
       </div>
     </>
   )

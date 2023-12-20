@@ -49,7 +49,7 @@ export default function FormSlider({token, slider, user, company}:
       const arrElements = upFeatures;
       arrElements.splice(indexDelete, 1, <></>);
       setUpFeatures(arrElements);
-      setCountFiles(countFiles - 1);
+      //setCountFiles(countFiles - 1);
     }
   }, [indexDelete])
 
@@ -59,7 +59,7 @@ export default function FormSlider({token, slider, user, company}:
         let bandShow = true;
         if(index === 4) bandShow=false;
         setUpFeatures((oldArray) => [...oldArray, <SelectText pushText={pushFeature} index={index} 
-          deleteFeature={deleteFeature} updateCount={updateCount} valueFeat={feature} 
+          deleteFeature={deleteFeature} updateCount={updateCount} valueFeat={feature} key={index}
           bandPlus={index === slider.features.length-1 ? true: false} bandShow={bandShow} />])
       })
     }
@@ -79,7 +79,7 @@ export default function FormSlider({token, slider, user, company}:
               || (slider !== '' && count < 5 && !bandDelete && bandEdit && (features.length === upFeatures.length))){
                 
       setUpFeatures((oldArray) => [...oldArray, <SelectText pushText={pushFeature} deleteFeature={deleteFeature}
-        updateCount={updateCount} valueFeat="" bandPlus={true} index={upFeatures.length} bandShow={bandShow} />])
+        updateCount={updateCount} valueFeat="" bandPlus={true} index={upFeatures.length} bandShow={bandShow} key={upFeatures.length} />])
     }
 
     setBandDelete(false);

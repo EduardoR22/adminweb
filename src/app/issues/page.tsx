@@ -33,9 +33,9 @@ export default async function Issues({searchParams}: {searchParams: {[opc:string
       return(
         <>
           {Nav}
-          <div className="flex justify-center pt-4">
+          <div className="flex justify-center pt-2 px-2">
             <div>
-              <div className="mt-4 flex justify-end">
+              <div className="flex justify-end">
                 <Modal newIssue={true} issue='' token={token} id="" />
               </div>
               <table className="mt-2 border border-blue-200">
@@ -43,7 +43,7 @@ export default async function Issues({searchParams}: {searchParams: {[opc:string
                   <tr className="">
                     <td className="w-28 py-2 pl-2">Categoria</td>
                     <td className="w-40 py-2">Issue</td>
-                    <td className="w-32 p-2">Rating</td>
+                    <td className="w-24 sm:w-32 p-2">Rating</td>
                     <td className="w-16">&nbsp;</td>
                   </tr>
                 </thead>
@@ -53,7 +53,7 @@ export default async function Issues({searchParams}: {searchParams: {[opc:string
                       <td className="py-1 pl-2 text-slate-600">{issue.category}</td>
                       <td className="py-1 text-slate-600">{issue.issue}</td>
                       <td className="py-1">
-                        <div className="flex">
+                        <div className="flex flex-wrap">
                           <StarIcon width={20} height={20} className={`${issue.rating >= 1? 'text-yellow-500': 'text-slate-500'}`} />
                           <StarIcon width={20} height={20} className={`${issue.rating >= 2? 'text-yellow-500': 'text-slate-500'}`} />
                           <StarIcon width={20} height={20} className={`${issue.rating >= 3? 'text-yellow-500': 'text-slate-500'}`} />
@@ -79,14 +79,12 @@ export default async function Issues({searchParams}: {searchParams: {[opc:string
     }else{
       
       services = await getServices(token);
-
-      console.log(services);
       return(
         <>
           {Nav}
           <div className="flex justify-center pt-4">
             <div>
-              <div className="mt-4 flex justify-end">
+              <div className="flex justify-end">
                 <ModalService newService={true} service='' token={token} id="" />
               </div>
               <table className="mt-2 border border-blue-200">

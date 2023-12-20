@@ -52,7 +52,7 @@ export default function ListReviews({proyects, token, idP, image, reviewsP}:
     router.push(`/reviews?idp=${idProyect}&&img=${img}`);
     setTimeout(() => {
       window.location.reload();
-    }, 1200);
+    }, 1300);
   }
 
   // const [reviews, setReviews] = useState<any>();
@@ -93,7 +93,7 @@ export default function ListReviews({proyects, token, idP, image, reviewsP}:
 
   return(
     <div className="flex flex-wrap mt-5">
-      <div className="w-full md:w-2/3">
+      <div className="w-full md:w-2/3 xl:w-1/2">
         <div className="flex">
           <div className="w-80"><Searcher search={search} searchChange={onSearchChange} placeholder="Buscar review" /></div>
         </div>

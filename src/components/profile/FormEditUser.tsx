@@ -11,9 +11,13 @@ import { setCookie } from 'cookies-next';
 import Button from '../Button';
 
 export default function FormEditUser({usr, token} : {usr:any, token: string}){
-  const {photo, nameU, emailU, _id }: {photo:string, nameU:string, emailU:string, _id:string} = usr.data.data
+  const photo:string = usr.data.data.photo;
+  const nameU:string = usr.data.data.name;
+  const emailU:string = usr.data.data.email;
+  const _id = usr.data.data._id;
   const [file, setFile] : any = useState();
-  const [bandUpdate, setBandUpdate] = useState<boolean>(false);
+  
+  const router = useRouter();
 
   const formik = useFormik({
     initialValues: {
@@ -41,8 +45,10 @@ export default function FormEditUser({usr, token} : {usr:any, token: string}){
         showToastMessage(`Usuario ${name} modificado exitosamente!`);            
         setCookie('user', res.data.data.user);
         setTimeout(() => {
-          setBandUpdate(true);
-        }, 2000)                
+          //setBandUpdate(true);
+          router.refresh();
+          router.push('/');
+        }, 1000)
       } else {
         showToastMessageError(res);
       }                            
@@ -60,11 +66,6 @@ export default function FormEditUser({usr, token} : {usr:any, token: string}){
           showToastMessageError('Esta no es una imagen!, favor de agregar imagen');
         }
       }
-  }
-
-  if(bandUpdate){
-    const router = useRouter();
-    router.push('/');
   }
 
   return (
@@ -132,7 +133,7 @@ export default function FormEditUser({usr, token} : {usr:any, token: string}){
             </div>
         </div>
       </div>
-      <Button textB='Guardar usuario' typeB='submit' 
+      <Button textB='Guardar' typeB='submit' 
         styleB='w-36 mt-5 border border-blue-600 bg-blue-600 text-white transition-colors hover:bg-blue-500' 
       />
     </form>      

@@ -45,12 +45,13 @@ export default function Table({contacts, token}: {contacts:any, token:string}){
 
   return(
     <>
-      <div className="flex justify-end mr-10 mt-5">
-        <div className="w-80">
+      <div className="flex justify-end mr-10 mt-1">
+        <div className="w-76">
           <Searcher search={search} searchChange={onSearchChange} placeholder="Buscar contacto" />
         </div>
       </div>
-      <div className={'mt-10'} style={{height: `${height}px`}}>
+      {/* <div className={'mt-3'} style={{height: `${height}px`}}> */}
+      <div className="mt-3 px-1">  
         <div className="flex justify-center">
           <table>
             <thead>

@@ -47,7 +47,7 @@ export default function NavBarClient({user}: {user:any}){
         
         <div className="flex items-center">
           <div className="flex justify-around items-center w-20 text-white">
-            <p className="text-2xl"> | </p>
+            <p className="invisible md:visible text-2xl"> | </p>
             {/* <Link href={'/'}><ChartBarIcon width={30} height={30} /></Link> */}
             <Link href={'/issues'}><Cog8ToothIcon width={30} height={30} /></Link>
           </div>
@@ -77,12 +77,12 @@ export default function NavBarClient({user}: {user:any}){
 const NavLinks = ({role}: {role:string}) => {
   return(
     <>
-      <Link href={'/proyects'}>PROYECTOS</Link>
-      <Link href={'/sliders'}>SLIDERS</Link>
-      <Link href={'/clients'}>CLIENTES</Link>
-      <Link href={'/reviews'}>REVIEWS</Link>
-      <Link href={'/contact-us'}>CONTACTOS</Link>
-      {role === 'admin'? <><Link href={'/companies'}>COMPAÑIAS</Link> <Link href={'/accounts'}>CUENTAS</Link> </>: ''}
+      <Link href={'/proyects'} className="text-sm lg:text-base">PROYECTOS</Link>
+      <Link href={'/sliders'} className="text-sm lg:text-base">SLIDERS</Link>
+      <Link href={'/clients'} className="text-sm lg:text-base">CLIENTES</Link>
+      <Link href={'/reviews'} className="text-sm lg:text-base">REVIEWS</Link>
+      <Link href={'/contact-us'} className="text-sm lg:text-base">CONTACTOS</Link>
+      {role === 'admin'? <><Link href={'/companies'} className="text-sm lg:text-base">COMPAÑIAS</Link> <Link href={'/accounts'} className="text-sm lg:text-base">CUENTAS</Link> </>: ''}
     </>
   )
 };

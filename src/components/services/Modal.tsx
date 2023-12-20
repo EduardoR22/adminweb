@@ -31,7 +31,7 @@ export default function Modal({newService, service, token, id}:
           setTimeout(() => {
             setShowModal(false);
             router.refresh();
-          }, 3000)
+          }, 100)
         }else{
           showToastMessageError(res.toString());
         }
@@ -47,7 +47,7 @@ export default function Modal({newService, service, token, id}:
           setTimeout(() => {
             setShowModal(false);
             router.refresh();
-          }, 3000)
+          }, 100)
         }else{
           showToastMessageError(res.toString());
         }
@@ -61,7 +61,7 @@ export default function Modal({newService, service, token, id}:
     <>
       {newService? (
         <button
-          className="bg-blue-950 text-white active:bg-blue-500 font-bold text-sm px-4 py-2 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+          className="bg-blue-950 text-white active:bg-blue-500 hover:bg-blue-500 font-bold text-sm w-36 py-2 rounded-md shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
           type="button"
           onClick={() => setShowModal(true)}
         >

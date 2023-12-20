@@ -63,7 +63,7 @@ export default function ListProyects({proyects, services, token}: {proyects: any
             <Searcher search={search} searchChange={onSearchChange} placeholder="Buscar proyecto" />
           </div>
           <Link href='/proyects/new'>
-            <Button textB="Nuevo" typeB="Button" styleB="mb-5 text-white w-36 bg-blue-950 hover:bg-blue-500 mr-10" />
+            <Button textB="Nuevo" typeB="Button" styleB="mb-5 text-white w-36 bg-blue-950 hover:bg-blue-500 sm:mr-10" />
           </Link>
         </div>
         {/* <div style={{height: `${height}px`}}> */}
@@ -116,7 +116,7 @@ export default function ListProyects({proyects, services, token}: {proyects: any
                       length={length}/>
         </div>
       </div>
-      <div className="w-full md:w-1/3 mt-10 md:mt-0">
+      <div className="w-full md:w-1/3 mt-10 px-1 md:mt-0">
         {/* <ViewProyect width="w-full" /> */}
         {viewProyect}
       </div>

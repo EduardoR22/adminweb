@@ -38,7 +38,7 @@ export default function FormNew({token, tittle, subtitle, address, features, seg
   useEffect(() => {
     if(services !== ''){
       setUpFiles((oldArray) => [...oldArray, <AddImage updateCount={updateCount} 
-        pushFile={pushFile} pushService={pushService}
+        pushFile={pushFile} pushService={pushService} key={countFiles}
         services={services}
       />])
     }
@@ -235,8 +235,8 @@ export default function FormNew({token, tittle, subtitle, address, features, seg
                 onChange={handleSelect}
                 value={segment}
               >
-                {segments.map((segmen:any) => (
-                  <option value={segmen._id}>{segmen.name}</option>
+                {segments.map((segmen:any, index:number) => (
+                  <option value={segmen._id} key={index}>{segmen.name}</option>
                 ))}
               </select>
             </div>
