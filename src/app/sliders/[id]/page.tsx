@@ -27,21 +27,4 @@ export default async function Slider({params}: {params:{id:string}}){
   } catch (error) {
     return <h1 className=" text-center text-red-500">Error al consulta sliders</h1>
   }
-
-  // let slider;
-  // try {
-  //   slider = await getSlider(token, id);
-  //   if(typeof(slider) !== 'string'){
-  //     return(
-  //       <>
-  //         <NavBar />
-  //         <ViewSlider slider={slider.data.data.data} token={token} />
-  //       </>
-  //     )    
-  //   }else{
-  //     console.log(slider);
-  //   }
-  // } catch (error) {
-  //   console.log(error);
-  // }
 }

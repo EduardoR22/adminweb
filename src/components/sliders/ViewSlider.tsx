@@ -56,17 +56,17 @@ export default function ViewSlider({sliders, token, indexStart}:
   return(
     <>
       <div className="pt-20">
-        <div className="flex justify-center w-full">
+        <div className="flex justify-center relative w-full">
           <img src={slider.image} alt="slider" className="w-full h-auto" />
           {slider.features.map((feature:string, index:number) => (
-            <p className={`w-2/3 absolute text-xl text-white font-bold`} style={{top:`${(index * 50)+140}px`}} 
+            <p className={`w-2/3 absolute text-xl text-white font-bold`} style={{top:`${(index * 50)}px`}} 
               key={index}>{feature}</p>
           ))}
-          <ChevronLeftIcon width={40} height={40} onClick={Previous}
-            className="absolute bg-slate-700 rounded-md hover:bg-slate-500 left-4 top-60 text-white cursor-pointer"
+          <ChevronLeftIcon onClick={Previous}
+            className="absolute w-8 h-8 bg-slate-700 rounded-md hover:bg-slate-500 left-4 top-16 sm:top-28 lg:top-44 text-white cursor-pointer"
           />
-          <ChevronRightIcon width={40} height={40} onClick={Next}
-            className="absolute bg-slate-700 rounded-md hover:bg-slate-500 right-4 top-60 text-white cursor-pointer"
+          <ChevronRightIcon onClick={Next}
+            className="absolute w-8 h-8 bg-slate-700 rounded-md hover:bg-slate-500 right-4 top-16 sm:top-28 lg:top-44 text-white cursor-pointer"
           />
           <Link href={`/sliders/${slider._id}/edit`}>
             <PencilSquareIcon width={30} height={30} 
