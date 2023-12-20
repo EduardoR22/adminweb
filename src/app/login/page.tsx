@@ -58,15 +58,16 @@ export default function Login({}) {
               href="#"
               target="_blank"
               rel="noopener noreferrer"
-              >         
-                <Image
-                  src="/logo.jpg"
+              >
+                <img src='/nuevoLogo.jpg' alt='Logo' className='w-48' />         
+                {/* <Image
+                  src="/nuevoLogo.jpg"
                   alt="Logo"
                   width={150}
                   height={27}                                    
                   //className='w-auto h-auto'
                   priority={true}                                    
-                />
+                /> */}
               </a>
               <label htmlFor="email" className="relative block mt-10 pb-2 border-b-2 border-gray-400">
                 <EnvelopeIcon className="pointer-events-none w-8 h-8 absolute top-1/2 transform -translate-y-1/2 left-1 text-gray-400" />

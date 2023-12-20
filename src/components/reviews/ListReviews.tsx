@@ -52,7 +52,7 @@ export default function ListReviews({proyects, token, idP, image, reviewsP}:
     router.push(`/reviews?idp=${idProyect}&&img=${img}`);
     setTimeout(() => {
       window.location.reload();
-    }, 1100);
+    }, 1200);
   }
 
   // const [reviews, setReviews] = useState<any>();
