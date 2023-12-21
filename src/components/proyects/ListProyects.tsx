@@ -57,7 +57,7 @@ export default function ListProyects({proyects, services, token}: {proyects: any
   
   return(
     <div className="flex flex-wrap mt-5">
-      <div className="w-full md:w-2/3">
+      <div className="w-full md:w-2/3 xl:w-1/2">
         <div className="flex flex-wrap-reverse justify-between">
           <div className="w-76 space-y-3">
             <Searcher search={search} searchChange={onSearchChange} placeholder="Buscar proyecto" />
@@ -75,7 +75,7 @@ export default function ListProyects({proyects, services, token}: {proyects: any
                 <th className="w-20">Activo</th>
                 <th className="w-64 text-left">Proyecto / Caracteristica</th>
                 <th className="w-44 text-left">Año / Ubicacion</th>
-                {/* <th className="w-20 text-left">Foto</th> */}
+                <th className="w-44 text-left">Cliente</th>
               </tr>
             </thead>
             <tbody>
@@ -104,6 +104,7 @@ export default function ListProyects({proyects, services, token}: {proyects: any
                       <p className="text-gray-400 m-0">{proyect.address}</p>
                     </div>
                   </td>
+                  <td>{proyect.client? proyect.client.name: 'Sin cliente'}</td>
                   {/* <td><Image src={proyect.images[0]} alt="photo" width={30} height={30} /></td> */}
                 </tr>
               ))}

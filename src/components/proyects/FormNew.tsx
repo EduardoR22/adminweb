@@ -10,16 +10,18 @@ import { useRouter } from 'next/navigation';
 import AddImage from './AddImage';
 
 export default function FormNew({token, tittle, subtitle, address, features, seg, id, services, 
-                                  user, company, segments, year}: 
+                                  user, company, segments, year, clients, idClient}: 
                                 {token:string, tittle:string, subtitle:string, address:string, 
                                 features:string, seg:string, id:string, services:any, 
-                                user:string, company:string, segments:any, year:string}){
+                                user:string, company:string, segments:any, year:string, 
+                                clients:any, idClient:string}){
   
   const [segment, setSegment] = useState<string>(seg === ''? segments[0]._id: seg);
   const [upFiles, setUpFiles] = useState<any[]>([]);
   const [countFiles, setCountFiles] = useState(0);
   const [files, setFiles] = useState<any[]>([]);
   const [arrServices, setArrServices] = useState<string[]>([])
+  const [client, setClient] = useState(idClient === ''? clients[0]._id:idClient);
 
   const pushFile = (file: any) => {
     setFiles(((oldFile) => [...oldFile, file] ));
@@ -81,12 +83,15 @@ export default function FormNew({token, tittle, subtitle, address, features, seg
       formData.append('user', user);
       formData.append('company', company);
       formData.append('year', year);
+      formData.append('client', client);
 
       files.map((file:any) => {
         formData.append('photos', file);
       })
       
       arrServices.map((service:string) => {
+        console.log('servicee');
+        console.log(service);
         formData.append('services', service);
       })
 
@@ -98,7 +103,8 @@ export default function FormNew({token, tittle, subtitle, address, features, seg
         features,
         user,
         company,
-        year        
+        year,
+        client
       };
 
       if(tittle === ''){
@@ -151,6 +157,11 @@ export default function FormNew({token, tittle, subtitle, address, features, seg
   const handleSelect = (event: any) => {
     const target = event.target as HTMLButtonElement;
     setSegment(target.value);
+  }
+
+  const clientSelect = (event: any) => {
+    const target = event.target as HTMLButtonElement;
+    setClient(target.value);
   }
 
   return(
@@ -242,7 +253,7 @@ export default function FormNew({token, tittle, subtitle, address, features, seg
             </div>
           </div>
         </div>
-        <div className="flex">
+        <div className="flex flex-wrap">
           <div className="w-full sm:w-1/2 px-3 sm-px-5">
             <div className="mb-4 text-gray-700">
               <label className="block text-sm font-medium text-gray-500" htmlFor="year">
@@ -263,6 +274,23 @@ export default function FormNew({token, tittle, subtitle, address, features, seg
                 <p>{formikPass.errors.year}</p>
               </div>
             ) : null}
+          </div>
+          <div className="w-full sm:w-1/2 px-3 sm-px-5">
+            <div className="mb-4 text-gray-700">
+              <label className="block text-sm font-medium text-gray-500" htmlFor="client">
+                Cliente
+              </label>
+              <select className="bg-white mt-2 outline-none outline-0 shadow appearance-none border 
+                      rounded w-full py-4 px-3 text-base text-gray-500 leading-tight font-sans 
+                      font-ligth focus:outline-none focus:shadow-outline"
+                onChange={clientSelect}
+                value={client}
+              >
+                {clients.map((clien:any, index:number) => (
+                  <option value={clien._id} key={index}>{clien.name}</option>
+                ))}
+              </select>
+            </div>
           </div>
           {/* <div className="w-1/2"></div> */}
         </div>

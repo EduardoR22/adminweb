@@ -54,11 +54,13 @@ export async function createProyectImage(project:FormData, auth_token:string){
     }
   };
 
-  // console.log('backkk');
-  // console.log(project.getAll('photos'));
-
-  // return 200;
-
+  // console.log('url');
+  // console.log(url);
+  // console.log('data');
+  // //console.log(project.get('client'));
+  // console.log('service send')
+  // console.log(project.getAll('services'));
+  //return 300;
   try {            
     const res = await axios.post(url, project, config)
     

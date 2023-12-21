@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import NavBar from "@/components/Navigation/NavBar";
 import { getServices } from "@/app/api/services/route";
 import { getSegments } from "@/app/api/proyects/route";
+import { getClients } from "@/app/api/clients/route";
 
 export default async function New(){
   
@@ -36,6 +37,19 @@ export default async function New(){
     return <h1>Ocurrio un problema al consultar servicios!!!</h1>
   }
 
+  let clients;
+  try {
+    clients = await getClients(token);
+    if(typeof(clients)=== 'string'){
+      return <h1>{clients}</h1>
+    }
+  } catch (error) {
+    return <h1 className="text-center text-red-500">Ocurrio un problema al consultar clientes!!</h1>
+  }
+
+  console.log('aqui clientss')
+  console.log(clients.data.data);
+
   return(
     <>
       <NavBar />
@@ -43,7 +57,7 @@ export default async function New(){
         title="Nuevo Proyecto" width="w-full md:w-2/3">
         <FormNew token={token} address="" features="" id="" seg="" subtitle="" 
                   tittle="" services={services} user={user._id} company={company} 
-                  segments={segments} year="" />
+                  segments={segments} year="" clients={clients.data.data} idClient="" />
       </ContainerForm>
     </>
   )

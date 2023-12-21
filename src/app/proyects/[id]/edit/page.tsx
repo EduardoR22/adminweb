@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { getProyect, getSegments } from "@/app/api/proyects/route";
 import NavBar from "@/components/Navigation/NavBar";
 import { getServices } from "@/app/api/services/route";
+import { getClients } from "@/app/api/clients/route";
 
 export default async function Edit({params}: {params:{id:string}}){
   
@@ -49,6 +50,16 @@ export default async function Edit({params}: {params:{id:string}}){
     return <h1>Ocurrio un problema al consultar servicios!!!</h1>
   }
 
+  let clients;
+  try {
+    clients = await getClients(token);
+    if(typeof(clients)=== 'string'){
+      return <h1>{clients}</h1>
+    }
+  } catch (error) {
+    return <h1 className="text-center text-red-500">Ocurrio un problema al consultar clientes!!</h1>
+  }
+
   return(
     <>
       <NavBar />
@@ -57,7 +68,8 @@ export default async function Edit({params}: {params:{id:string}}){
         <FormNew token={token} address={proyect.data.data.address} features={proyect.data.data.features} 
                   seg={proyect.data.data.segment} subtitle={proyect.data.data.subtitle} 
                   tittle={proyect.data.data.title} id={id} services={services} user={user._id} 
-                  company={user.company} segments={segments} year={proyect.data.data.year? proyect.data.data.year: ''} />
+                  company={user.company} segments={segments} year={proyect.data.data.year? proyect.data.data.year: ''} 
+                  clients={clients.data.data} idClient=""/>
       </ContainerForm>
     </>
   )
