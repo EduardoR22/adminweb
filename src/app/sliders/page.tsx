@@ -3,7 +3,7 @@ import ContainerForm from "@/components/ContainerForm";
 import ArrowReturn from "@/components/ArrowReturn";
 import Table from "@/components/sliders/TableSliders";
 import NavBar from "@/components/Navigation/NavBar";
-import { getSliders } from "../api/sliders/route";
+import { getSliders } from "../api/sliders/routeSliders";
 
 export default async function Sliders(){
   const cookieStore = cookies();

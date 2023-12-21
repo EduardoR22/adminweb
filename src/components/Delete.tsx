@@ -2,7 +2,7 @@
 
 import { TrashIcon } from '@heroicons/react/24/solid';
 import {confirmAlert} from 'react-confirm-alert';
-import { removeUser } from '@/app/api/users/route';
+import { removeUser } from '@/app/api/users/routeUsers';
 import {showToastMessage, showToastMessageError, showToastMessageWarning, showToastMessageInfo} from "@/components/Alert";
 import { useRouter } from 'next/navigation';
 import 'react-confirm-alert/src/react-confirm-alert.css';

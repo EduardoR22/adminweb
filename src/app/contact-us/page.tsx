@@ -4,7 +4,7 @@ import Table from "@/components/contact-us/Table";
 import NavTab from "@/components/contact-us/NavTab";
 import ContainerForm from "@/components/ContainerForm";
 import NavBar from "@/components/Navigation/NavBar";
-import { getContactUs } from "../api/contact-us/route";
+import { getContactUs } from "../api/contact-us/routeContact";
 
 export default async function ContactUs({searchParams}: {searchParams: {[opc:string]: string}}){
   

@@ -2,8 +2,8 @@ import ListReviews from "@/components/reviews/ListReviews"
 import NavBar from "@/components/Navigation/NavBar"
 //import { getReviews } from "../api/reviews/route"
 import { cookies } from "next/headers"
-import { getProyects } from "../api/proyects/route"
-import { getReviewsByProyect } from "../api/reviews/route"
+import { getProyects } from "../api/proyects/routeProyects"
+import { getReviewsByProyect } from "../api/reviews/routeReviews"
 
 export default async function Reviews({searchParams}: {searchParams:{idp:string, img:string}}){
   

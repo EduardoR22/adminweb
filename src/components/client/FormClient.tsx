@@ -2,7 +2,7 @@
 
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { createClient, updateClient, createClientPhoto, updateClientLogo } from "@/app/api/clients/route";
+import { createClient, updateClient, createClientPhoto, updateClientLogo } from "@/app/api/clients/routeClient";
 import { showToastMessage, showToastMessageError } from "@/components/Alert";
 import Button from "@/components/Button";
 import Upload from "@/components/Upload";

@@ -1,8 +1,8 @@
 import ListProyects from "@/components/proyects/ListProyects"
 import NavBar from "@/components/Navigation/NavBar"
-import { getProyects } from "../api/proyects/route"
+import { getProyects } from "../api/proyects/routeProyects"
 import { cookies } from "next/headers"
-import { getServices } from "../api/services/route"
+import { getServices } from "../api/services/routeServices"
 
 export default async function Proyects(){
   

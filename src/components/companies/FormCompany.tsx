@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import Alert, { showToastMessageError, showToastMessage } from "@/components/Alert";
 import { useState} from "react";
 import Upload from "../Upload";
-import { createCompany, updateCompany, createCompanyLogo, updateCompanyLogo } from "@/app/api/companies/route";
+import { createCompany, updateCompany, createCompanyLogo, updateCompanyLogo } from "@/app/api/companies/routeCompanies";
 import { useRouter } from "next/navigation";
 
 export default function FormCompany({token, company}: 

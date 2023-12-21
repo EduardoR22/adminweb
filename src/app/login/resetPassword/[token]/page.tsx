@@ -5,7 +5,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Alert, {showToastMessage,showToastMessageError} from "@/components/Alert"
 import { EnvelopeOpenIcon } from '@heroicons/react/24/outline';
-import { resetPassword } from '@/app/api/users/route';
+import { resetPassword } from '@/app/api/users/routeUsers';
 import { useParams, useRouter } from 'next/navigation';
 import { deleteCookie } from "cookies-next";
 import Button from '@/components/Button';

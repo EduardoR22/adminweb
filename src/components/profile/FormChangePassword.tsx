@@ -3,7 +3,7 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import {showToastMessage, showToastMessageError} from "@/components/Alert";
-import {updateMePassword} from '@/app/api/users/route'
+import {updateMePassword} from '@/app/api/users/routeUsers'
 import { useRouter } from 'next/navigation';
 import RemoveCookies from '../RemoveCookies';
 import Button from '../Button';

@@ -2,9 +2,9 @@ import FormNew from "@/components/proyects/FormNew";
 import ContainerForm from "@/components/ContainerForm";
 import { cookies } from "next/headers";
 import NavBar from "@/components/Navigation/NavBar";
-import { getServices } from "@/app/api/services/route";
-import { getSegments } from "@/app/api/proyects/route";
-import { getClients } from "@/app/api/clients/route";
+import { getServices } from "@/app/api/services/routeServices";
+import { getSegments } from "@/app/api/proyects/routeProyects";
+import { getClients } from "@/app/api/clients/routeClient";
 
 export default async function New(){
   

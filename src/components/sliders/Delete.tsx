@@ -6,7 +6,7 @@ import {showToastMessage, showToastMessageError, showToastMessageWarning, showTo
 import { useRouter } from 'next/navigation';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import Alert from '@/components/Alert';
-import { removeSlider } from '@/app/api/sliders/route';
+import { removeSlider } from '@/app/api/sliders/routeSliders';
 
 export default function Delete({token, slider} : {token : string, slider: any}){
   const router = useRouter()

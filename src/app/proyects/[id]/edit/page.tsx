@@ -1,10 +1,10 @@
 import FormNew from "@/components/proyects/FormNew";
 import ContainerForm from "@/components/ContainerForm";
 import { cookies } from "next/headers";
-import { getProyect, getSegments } from "@/app/api/proyects/route";
+import { getProyect, getSegments } from "@/app/api/proyects/routeProyects";
 import NavBar from "@/components/Navigation/NavBar";
-import { getServices } from "@/app/api/services/route";
-import { getClients } from "@/app/api/clients/route";
+import { getServices } from "@/app/api/services/routeServices";
+import { getClients } from "@/app/api/clients/routeClient";
 
 export default async function Edit({params}: {params:{id:string}}){
   

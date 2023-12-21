@@ -1,5 +1,5 @@
 import { HandRaisedIcon, HandThumbUpIcon, HandThumbDownIcon } from "@heroicons/react/24/solid";
-import { updateContactUs } from "@/app/api/contact-us/route";
+import { updateContactUs } from "@/app/api/contact-us/routeContact";
 import Alert, {showToastMessageError} from "../Alert";
 
 export default function ChangeStatus({status, token, idContact}: {status:string, token:string, idContact:string}){

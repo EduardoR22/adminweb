@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { forgotPassword } from '@/app/api/users/route';
+import { forgotPassword } from '@/app/api/users/routeUsers';
 import Alert, {showToastMessage,showToastMessageError} from "@/components/Alert"
 import { EnvelopeOpenIcon } from '@heroicons/react/24/outline';
 import Button from '@/components/Button';

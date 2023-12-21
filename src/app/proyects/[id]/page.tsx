@@ -1,9 +1,9 @@
 import ViewProyect from "@/components/proyects/ViewProyect"
-import { getProyect } from "@/app/api/proyects/route";
+import { getProyect, getSegments } from "@/app/api/proyects/routeProyects";
 import { cookies } from "next/headers";
 import NavBar from "@/components/Navigation/NavBar";
-import { getServices } from "@/app/api/services/route";
-import { getSegments } from "@/app/api/proyects/route";
+import { getServices } from "@/app/api/services/routeServices";
+//import { getSegments } from "@/app/api/proyects/route";
 
 export default async function Proyect({params}: {params: {id:string}}){
   

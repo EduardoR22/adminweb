@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import Button from "@/components/Button";
 import Upload from "@/components/Upload";
 import { useState, useEffect } from "react";
-import { createSlider, updateSlider, createSliderImage, updateSliderImage } from "@/app/api/sliders/route";
+import { createSlider, updateSlider, createSliderImage, updateSliderImage } from "@/app/api/sliders/routeSliders";
 import { showToastMessage, showToastMessageError } from "@/components/Alert";
 import {useRouter} from 'next/navigation'
 import SelectText from "../SelectText";

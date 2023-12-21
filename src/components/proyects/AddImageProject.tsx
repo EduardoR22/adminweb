@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Button from "../Button"
 import AddOnlyImage from "./AddOnlyImage";
-import { insertImage } from "@/app/api/proyects/route";
+import { insertImage } from "@/app/api/proyects/routeProyects";
 import Alert, {showToastMessage, showToastMessageError} from "../Alert";
 import { useRouter } from "next/navigation";
 

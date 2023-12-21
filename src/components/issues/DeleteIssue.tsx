@@ -5,7 +5,7 @@ import {confirmAlert} from 'react-confirm-alert';
 import Alert,{showToastMessage, showToastMessageError, showToastMessageWarning, showToastMessageInfo} from "@/components/Alert";
 import { useRouter } from 'next/navigation';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import { removeIssue } from '@/app/api/issues/route';
+import { removeIssue } from '@/app/api/issues/routeIssues';
 
 export default function DeleteIssue({token, issue} : {token : string, issue: any}){
   

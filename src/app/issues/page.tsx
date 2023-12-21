@@ -1,5 +1,5 @@
-import { getIssues } from "../api/issues/route"
-import { getServices } from "../api/services/route";
+import { getIssues } from "../api/issues/routeIssues"
+import { getServices } from "../api/services/routeServices";
 import { cookies } from "next/headers";
 import { StarIcon, PencilSquareIcon } from "@heroicons/react/24/solid";
 import Modal from "@/components/issues/ModalIssue";

@@ -1,5 +1,5 @@
 import { cookies } from "next/headers"
-import {getUser} from '@/app/api/users/route'
+import {getUser} from '@/app/api/users/routeUsers'
 import ContainerHeaderForm from "@/components/ContainerHeaderForm"
 import FormChangePassword from "@/components/profile/FormChangePassword";
 import ContainerForm from "@/components/ContainerForm";

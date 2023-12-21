@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import ContainerForm from "@/components/ContainerForm";
 import ArrowReturn from "@/components/ArrowReturn";
 import NavBar from "@/components/Navigation/NavBar";
-import { getClients } from "../api/clients/route";
+import { getClients } from "../api/clients/routeClient";
 
 export default async function Clients(){
   

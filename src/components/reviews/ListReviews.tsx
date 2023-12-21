@@ -6,7 +6,7 @@ import Image from "next/image";
 import { EllipsisHorizontalCircleIcon, StarIcon } from "@heroicons/react/24/solid";
 import ViewReview from "./ViewReview";
 import { useRouter } from "next/navigation";
-import { getReviewsByProyect } from "@/app/api/reviews/route";
+import { getReviewsByProyect } from "@/app/api/reviews/routeReviews";
 
 export default function ListReviews({proyects, token, idP, image, reviewsP}: 
                           {proyects:any, token:string, idP:string, image:string, reviewsP:any}){

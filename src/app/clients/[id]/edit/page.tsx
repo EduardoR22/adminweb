@@ -1,7 +1,7 @@
 import ContainerForm from "@/components/ContainerForm";
 import FormClient from "@/components/client/FormClient";
 import { cookies } from "next/headers"
-import { getClient } from "@/app/api/clients/route";
+import { getClient } from "@/app/api/clients/routeClient";
 import NavBar from "@/components/Navigation/NavBar";
 
 export default async function Edit({ params }: { params: { id: string } }){

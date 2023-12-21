@@ -5,7 +5,7 @@ import {confirmAlert} from 'react-confirm-alert';
 import {showToastMessage, showToastMessageError, showToastMessageWarning, showToastMessageInfo} from "@/components/Alert";
 import { useRouter } from 'next/navigation';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import { removeProyect } from '@/app/api/proyects/route';
+import { removeProyect } from '@/app/api/proyects/routeProyects';
 import Alert from '@/components/Alert';
 
 export default function DeleteProyect({token, proyect} : {token : string, proyect: any}){

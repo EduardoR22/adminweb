@@ -5,7 +5,7 @@ import {confirmAlert} from 'react-confirm-alert';
 import Alert,{showToastMessage, showToastMessageError, showToastMessageWarning, showToastMessageInfo} from "@/components/Alert";
 import { useRouter } from 'next/navigation';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import { removeCompany } from '@/app/api/companies/route';
+import { removeCompany } from '@/app/api/companies/routeCompanies';
 
 export default function DeleteCompany({token, company} : {token : string, company: any}){
   

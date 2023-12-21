@@ -3,7 +3,7 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Button from "@/components/Button";
-import { createProyect, updateProyect, createProyectImage } from "@/app/api/proyects/route";
+import { createProyect, updateProyect, createProyectImage } from "@/app/api/proyects/routeProyects";
 import Alert, { showToastMessage, showToastMessageError } from '../Alert';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';

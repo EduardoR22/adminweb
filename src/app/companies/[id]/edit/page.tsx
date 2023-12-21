@@ -1,4 +1,4 @@
-import { getCompany } from "@/app/api/companies/route"
+import { getCompany } from "@/app/api/companies/routeCompanies"
 import { cookies } from "next/headers";
 import NavBar from "@/components/Navigation/NavBar";
 import ContainerForm from "@/components/ContainerForm";

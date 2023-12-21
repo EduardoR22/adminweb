@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { StarIcon, PencilSquareIcon } from "@heroicons/react/24/solid";
-import { createIssue, updateIssue } from "@/app/api/issues/route";
+import { createIssue, updateIssue } from "@/app/api/issues/routeIssues";
 import { useRouter } from "next/navigation";
 import Alert, {showToastMessage, showToastMessageError} from "../Alert";
 

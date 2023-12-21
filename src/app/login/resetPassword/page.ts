@@ -1,8 +1,11 @@
 "use client"
 
 import { useRouter } from "next/navigation"
+import { useEffect } from "react";
 
 export default function ResetPassword(){
   const router = useRouter();
-  router.push('/login');
+  useEffect(() => {
+    router.push('/login');
+  }, [])
 }

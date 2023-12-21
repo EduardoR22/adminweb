@@ -4,7 +4,7 @@ import Image from "next/image"
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Alert, { showToastMessageError, showToastMessage } from "@/components/Alert";
-import { createUser, createUserPhoto } from "@/app/api/users/route";
+import { createUser, createUserPhoto } from "@/app/api/users/routeUsers";
 import { useState} from "react";
 import { useRouter } from "next/navigation";
 

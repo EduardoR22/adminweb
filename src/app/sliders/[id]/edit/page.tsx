@@ -2,7 +2,7 @@ import NavBar from "@/components/Navigation/NavBar";
 import ContainerForm from "@/components/ContainerForm";
 import FormSlider from "@/components/sliders/FormSlider";
 import { cookies } from "next/headers";
-import { getSlider } from "@/app/api/sliders/route";
+import { getSlider } from "@/app/api/sliders/routeSliders";
 
 export default async function Edit({params}: {params: {id: string}}){
   

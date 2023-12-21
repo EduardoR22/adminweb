@@ -1,5 +1,5 @@
 import Table from "@/components/accounts/Table"
-import { getUsers } from "../api/users/route";
+import { getUsers } from "../api/users/routeUsers";
 import { cookies } from "next/headers";
 import ContainerForm from "@/components/ContainerForm";
 import ArrowReturn from "@/components/ArrowReturn";

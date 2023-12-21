@@ -1,6 +1,6 @@
 import { Rating } from "@mui/material"
 import { useState } from "react"
-import { updateReview } from "@/app/api/reviews/route";
+import { updateReview } from "@/app/api/reviews/routeReviews";
 import Alert, {showToastMessageError} from "../Alert";
 
 export default function ShowReview({width, review, token}: {width:string, review:any, token:string}){

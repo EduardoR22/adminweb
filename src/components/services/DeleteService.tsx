@@ -5,7 +5,7 @@ import {confirmAlert} from 'react-confirm-alert';
 import Alert,{showToastMessage, showToastMessageError, showToastMessageWarning, showToastMessageInfo} from "@/components/Alert";
 import { useRouter } from 'next/navigation';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import { removeService } from '@/app/api/services/route';
+import { removeService } from '@/app/api/services/routeServices';
 
 export default function DeleteService({token, service} : {token : string, service: any}){
   

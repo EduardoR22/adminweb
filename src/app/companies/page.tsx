@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import NavBar from "@/components/Navigation/NavBar";
 import ContainerForm from "@/components/ContainerForm";
 import Table from "@/components/companies/Table";
-import { getCompanies } from "../api/companies/route";
+import { getCompanies } from "../api/companies/routeCompanies";
 
 export default async function companies(){
   const cookieStore = cookies();

@@ -1,4 +1,4 @@
-import { getSlider, getSliders } from "@/app/api/sliders/route";
+import { getSlider, getSliders } from "@/app/api/sliders/routeSliders";
 import { cookies } from "next/headers";
 import ViewSlider from "@/components/sliders/ViewSlider";
 import NavBar from "@/components/Navigation/NavBar";

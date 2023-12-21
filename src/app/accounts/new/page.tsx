@@ -2,7 +2,7 @@ import { cookies } from "next/headers"
 import FormAccount from "@/components/accounts/FormAccount";
 import ContainerForm from "@/components/ContainerForm";
 import NavBar from "@/components/Navigation/NavBar";
-import { getCompanies } from "@/app/api/companies/route";
+import { getCompanies } from "@/app/api/companies/routeCompanies";
 
 export default async function New(){
   
