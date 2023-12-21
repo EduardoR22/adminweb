@@ -47,9 +47,6 @@ export default async function New(){
     return <h1 className="text-center text-red-500">Ocurrio un problema al consultar clientes!!</h1>
   }
 
-  console.log('aqui clientss')
-  console.log(clients.data.data);
-
   return(
     <>
       <NavBar />
