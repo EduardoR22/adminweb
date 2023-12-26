@@ -152,7 +152,7 @@ export default function FormCompany({token, company}:
   return(
     <>
       <Alert />
-      <form className="bg-white rounded shadow-md sm:px-8 pt-6 pb-8" 
+      <form className="bg-white rounded shadow-md px-2 sm:px-8 pt-6 pb-8" 
         onSubmit={formikPass.handleSubmit}>
         <div className="flex justify-center flex-wrap">
           <div className="w-full sm:w-1/2 min-w-max px-1 sm:px-5">
