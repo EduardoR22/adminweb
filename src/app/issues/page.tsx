@@ -1,13 +1,14 @@
 import { getIssues } from "../api/issues/routeIssues"
 import { getServices } from "../api/services/routeServices";
 import { cookies } from "next/headers";
-import { StarIcon, PencilSquareIcon } from "@heroicons/react/24/solid";
+import { StarIcon } from "@heroicons/react/24/solid";
 import Modal from "@/components/issues/ModalIssue";
 import DeleteIssue from "@/components/issues/DeleteIssue";
 import NavBar from "@/components/Navigation/NavBar";
 import NavTab from "@/components/issues/NavTabIssues";
 import ModalService from "@/components/services/Modal";
 import DeleteService from "@/components/services/DeleteService";
+import { getCategorys } from "../api/services/routeServices";
 
 export default async function Issues({searchParams}: {searchParams: {[opc:string]: string}}){
   const cookiestore = cookies();
@@ -78,14 +79,27 @@ export default async function Issues({searchParams}: {searchParams: {[opc:string
       )
     }else{
       
-      services = await getServices(token);
+      try {
+        services = await getServices(token);
+      } catch (error) {
+        return <h1>Error al obtener servicios!!</h1>
+      }
+      
+      let categories:any;
+
+      try {
+        categories = await getCategorys();
+      } catch (error) {
+        return <h1>Error al obtener categorias..</h1>
+      }
+      
       return(
         <>
           {Nav}
           <div className="flex justify-center pt-4">
             <div>
               <div className="flex justify-end">
-                <ModalService newService={true} service='' token={token} id="" />
+                <ModalService newService={true} service='' token={token} id="" categories={categories} />
               </div>
               <table className="mt-2 border border-blue-200">
                 <thead className="border-b font-semibold text-slate-700 bg-blue-100">
@@ -106,7 +120,8 @@ export default async function Issues({searchParams}: {searchParams: {[opc:string
                       </td>                      
                       <td className="py-1 pr-2">
                         <div className="flex items-center">
-                          <ModalService newService={false} service={service} token={token} id={service._id}/>
+                          <ModalService newService={false} service={service} token={token} 
+                            id={service._id} categories={categories} />
                           <DeleteService service={service} token={token} />
                         </div>
                       </td>

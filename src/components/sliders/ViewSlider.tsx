@@ -11,19 +11,6 @@ export default function ViewSlider({sliders, token, indexStart}:
   const [index, setIndex] = useState(indexStart);
   const [slider, setSlider] = useState<any>(sliders[indexStart]);
 
-  // const timer = setTimeout(() => {
-  //   if(index >= sliders.length - 1){
-  //     setIndex(0);
-  //   }else{
-  //     setIndex(index + 1);
-  //   }
-  //   // if(index >= sliderP.length - 1){
-  //   //   setIndex(0);
-  //   // }else{
-  //   //   setIndex(index + 1);
-  //   // }
-  // }, 5000);
-
   useEffect(() => {
     const timer = setTimeout(() => {
       if(index >= sliders.length - 1){

@@ -28,7 +28,11 @@ export async function createReview(review:any) {
   console.log(url);
   console.log(JSON.stringify(review));
   try {
-    const res = await axios.post(url, JSON.stringify(review));
+    const res = await axios.post(url, JSON.stringify(review), {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
     if(res.status === 201) return res.status;
     return res.statusText;
   } catch (error) {
