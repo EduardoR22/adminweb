@@ -188,6 +188,7 @@ export default function Modal({newService, service, token, id, categories}:
                       </div>
                       <div className="w-72">
                         <textarea
+                          rows={4}
                           id="description"
                           className="border border-gray-400 outline-none outline-0 p-1 rounded-md 
                             resize-none overflow-hidden w-full" 

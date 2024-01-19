@@ -207,7 +207,7 @@ export default function FormSlider({token, slider, user, company, categories}:
 
   const namePage = [
     {name: 'tablaroca', id: '11111'},
-    {name: 'ceilings', id: '22222'},
+    {name: 'ceillings', id: '22222'},
     {name: 'paintings', id: '33333'},
     {name: 'finishes', id: '444444'},
     {name: 'index', id: '555555'},

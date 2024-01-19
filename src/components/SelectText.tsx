@@ -10,6 +10,7 @@ export default function SelectText({updateCount, pushText, valueFeat, bandPlus, 
   const [saved, setSaved] = useState(false);
   const [add, setAdd] = useState(false);
   const [ok, setOk] = useState<boolean>(true);
+  const [message, setMessage] = useState<string>('');
 
   const onPlus = () =>{
     if(text !== '' && saved){
@@ -25,9 +26,18 @@ export default function SelectText({updateCount, pushText, valueFeat, bandPlus, 
 
   const save = () => {
     if(text !== ''){
-      setSaved(true);
-      pushText(text);
+      if(text.length > 10){
+        setSaved(true);
+        pushText(text);
+      }else{
+        setMessage('* Las caracteristica debe ser mayor a 10 caracteres');
+        setOk(false);
+        setTimeout(() => {
+          setOk(true);
+        }, 2000);
+      }
     }else{
+      setMessage('* El campo no debe estar vacio');
       setOk(false);
       setTimeout(() => {
         setOk(true);
@@ -54,7 +64,7 @@ export default function SelectText({updateCount, pushText, valueFeat, bandPlus, 
         {/* <button type="button" onClick={deleteFeat}>delete</button> */}
       </div>
       {!ok? (
-            <p className="text-red-500">* El campo no debe estar vacio</p>
+            <p className="text-red-500">{message}</p>
           ): ''}
     </>
   )
