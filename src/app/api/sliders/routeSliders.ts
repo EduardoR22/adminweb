@@ -47,9 +47,11 @@ export async function createSlider(dataSlider: any, auth_token: string) {
   return slider.status;
 }
 
-export async function createSliderImage(dataSlider: any, auth_token:string) {
+export async function createSliderImage(dataSlider: FormData, auth_token:string) {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/v1/sliders/sliderWithImage`;
   
+  console.log(dataSlider.get('category'));
+  console.log(dataSlider.get('pagename'));
   try {
     const res = await axios.post(url, dataSlider, {
       headers: {

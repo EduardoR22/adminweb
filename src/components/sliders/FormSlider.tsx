@@ -10,9 +10,11 @@ import { createSlider, updateSlider, createSliderImage, updateSliderImage } from
 import { showToastMessage, showToastMessageError } from "@/components/Alert";
 import {useRouter} from 'next/navigation'
 import SelectText from "../SelectText";
+import PageName from "./PageName";
+import CategoryList from "./CategoryListID";
 
-export default function FormSlider({token, slider, user, company}: 
-                        {token:string, slider: any, user:string, company:string}){
+export default function FormSlider({token, slider, user, company, categories}: 
+                        {token:string, slider: any, user:string, company:string, categories:any}){
   
   const router = useRouter();
   const [file, setFile] = useState<any>();
@@ -22,6 +24,8 @@ export default function FormSlider({token, slider, user, company}:
   const [indexDelete, setIndexDelete] = useState<number>(-1);
   const [bandDelete, setBandDelete] = useState<boolean>(false);
   const [bandEdit, setBandEdit] = useState<boolean>(false);
+  const [categorie, setCategorie] = useState<string>(slider !== ''? slider.category: categories[0]._id);
+  const [pageName, setNamePage] = useState<string>(slider !== ''? slider.pagename: 'tablaroca');
 
   let titleS: string = '';
   let linkS: string = '';
@@ -105,7 +109,9 @@ export default function FormSlider({token, slider, user, company}:
         link,
         features,
         user,
-        company
+        company, 
+        'category': categorie,
+        'pagename':pageName
       }            
       
       const formData = new FormData();
@@ -114,6 +120,8 @@ export default function FormSlider({token, slider, user, company}:
       formData.append('image', file);
       formData.append('user', user);
       formData.append('company', company);
+      formData.append('category', categorie);
+      formData.append('pagename', pageName);
 
       features.map((feat) => {
         if(feat !== ''){
@@ -197,6 +205,14 @@ export default function FormSlider({token, slider, user, company}:
     },       
   });
 
+  const namePage = [
+    {name: 'tablaroca', id: '11111'},
+    {name: 'ceilings', id: '22222'},
+    {name: 'paintings', id: '33333'},
+    {name: 'finishes', id: '444444'},
+    {name: 'index', id: '555555'},
+  ]
+
   return(
     <>
       <Alert></Alert>
@@ -245,6 +261,24 @@ export default function FormSlider({token, slider, user, company}:
                 <p>{formikPass.errors.link}</p>
               </div>
             ) : null}
+          </div>
+        </div>
+        <div className="flex flex-wrap">
+          <div className="w-full md:w-1/2 md:px-2">
+            <div className="mb-4 text-gray-700">
+              <label className="block text-sm font-medium text-gray-500 mb-3" htmlFor="categorie">
+                Categoria
+              </label>
+              <CategoryList categories={categories} category={categorie} setCategory={setCategorie} />
+            </div>
+          </div>
+          <div className="w-full md:w-1/2 md:px-2">
+            <div className="mt-2 md:mt-0 mb-4 text-gray-700">
+              <label className="block text-sm font-medium text-gray-500 mb-3" htmlFor="route">
+                Nombre de pagina
+              </label>
+              <PageName pageName={pageName} pagesName={namePage} setPageName={setNamePage} />
+            </div>
           </div>
         </div>
         <div className="flex flex-wrap">

@@ -3,6 +3,7 @@ import ContainerForm from "@/components/ContainerForm";
 import FormSlider from "@/components/sliders/FormSlider";
 import { cookies } from "next/headers";
 import { getSlider } from "@/app/api/sliders/routeSliders";
+import { getCategorys } from "@/app/api/services/routeServices";
 
 export default async function Edit({params}: {params: {id: string}}){
   
@@ -34,11 +35,19 @@ export default async function Edit({params}: {params: {id: string}}){
     return <h1>Error al obtener los datos del slider</h1>
   }
 
+  let categories;
+  try {
+    categories = await getCategorys();
+  } catch (error) {
+    return <h1>Error al consultar categorias!!</h1>
+  }
+
   return (
     <>
       <NavBar />
       <ContainerForm title="Actualizar slider" subtitle="Imagenes de slider" img="/image.jpg" width="w-full sm:w-10/12">
-        <FormSlider token={token} slider={slider.data.data.data} user={user._id} company={user.company} />
+        <FormSlider token={token} slider={slider.data.data.data} 
+            user={user._id} company={user.company} categories={categories} />
       </ContainerForm>
     </>
   )
