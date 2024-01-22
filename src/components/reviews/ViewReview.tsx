@@ -21,9 +21,12 @@ export default function ViewReview({width, reviews, token, image}:
       </div>
         {reviews.map((review:any) => (
           <div key={review._id}>
-            <div className="flex justify-between mt-7 mb-2 text-slate-700">
-              <p>{review.name}</p>
-              <p>{review.email}</p>
+            <div className="flex justify-between items-center mt-7 mb-2 text-slate-700">
+              <div className="flex items-center flex-wrap">
+                <img className="w-12 rounded-full" src={review.photo} alt="usuario" />
+                <p className="ml-2">{review.name}</p>
+              </div>
+              <p className="ml-2">{review.email}</p>
             </div>
             <ShowReview width={width} review={review} token={token} />
             <Reviews review={review} />

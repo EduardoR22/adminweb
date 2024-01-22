@@ -6,7 +6,7 @@ import Image from "next/image";
 import { EllipsisHorizontalCircleIcon, StarIcon } from "@heroicons/react/24/solid";
 import ViewReview from "./ViewReview";
 import { useRouter } from "next/navigation";
-import { getReviewsByProyect } from "@/app/api/reviews/routeReviews";
+//import { getReviewsByProyect } from "@/app/api/reviews/routeReviews";
 
 export default function ListReviews({proyects, token, idP, image, reviewsP}: 
                           {proyects:any, token:string, idP:string, image:string, reviewsP:any}){
@@ -52,32 +52,10 @@ export default function ListReviews({proyects, token, idP, image, reviewsP}:
     router.push(`/reviews?idp=${idProyect}&&img=${img}`);
     setTimeout(() => {
       window.location.reload();
-    }, 1300);
+    }, 2000);
   }
 
-  // const [reviews, setReviews] = useState<any>();
-  // const getReviewsProyect = async (idProyect:string, img:string) => {
-  //   try {
-  //     const res = await getReviewsByProyect(token, idProyect);
-  //     setReviews(res);
-  //     if(typeof(res) === 'string')
-  //       return <h1>{reviews}</h1>
-      
-  //     if(res.length > 0){
-  //       setViewReview(<ViewReview reviews={res} width="w-full" image={img} token={token} />)
-  //     }else{
-  //       setViewReview(<h1>No hay reviews..</h1>)
-  //     }
-  //   } catch (error) {
-  //     return <h1>Error al obtener las reviews del proyecto...</h1>
-  //   }
-  // }
-
   useEffect(() => {
-    // setViewReview(<></>)
-    // if(idP !== '' && image !== ''){
-    //   getReviewsProyect(idP, image);
-    // }
 
     if(typeof(reviewsP)==='string'){
       setViewReview(<h1>{reviewsP}</h1>)

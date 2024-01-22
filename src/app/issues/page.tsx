@@ -101,22 +101,32 @@ export default async function Issues({searchParams}: {searchParams: {[opc:string
               <div className="flex justify-end">
                 <ModalService newService={true} service='' token={token} id="" categories={categories} />
               </div>
-              <table className="mt-2 border border-blue-200">
+              <table className="mx-1 mt-2 border border-blue-200">
                 <thead className="border-b font-semibold text-slate-700 bg-blue-100">
                   <tr className="">
-                    <td className="w-48 py-2 pl-2">Nombre</td>
-                    <td className="w-16 py-2">Estado</td>
-                    <td className="w-16">&nbsp;</td>
+                    <td className="text-xs sm:text-base w-20 py-2 pl-2">Foto</td>
+                    <td className="text-xs sm:text-base w-32 py-2 pl-2">Categoria</td>
+                    <td className="text-xs sm:text-base w-48 py-2 pl-2">Nombre</td>
+                    <td className="text-xs sm:text-base w-48 py-2 pl-2">Descripci&oacute;n</td>
+                    <td className="text-xs sm:text-base w-16 py-2">Estado</td>
+                    <td className="text-xs sm:text-base w-16">&nbsp;</td>
                   </tr>
                 </thead>
                 <tbody>
                   {services.map((service:any) => (
-                    <tr key={service._id} className="border border-blue-200">
-                      <td className="py-1 pl-2 text-slate-600">{service.name}</td>
-                      <td className="py-1 text-slate-600 flex justify-center items-center">
-                        <div 
-                          className={`rounded-full w-4 h-4 ${service.status? 'bg-green-500':'bg-red-500'}`}
-                        ></div>
+                    <tr key={service._id} className="border-2 border-blue-200">
+                      <td className="text-xs sm:text-base py-0 pl-0">
+                        <img src={service.logo} alt="logo servicio" className="w-16" />
+                      </td>
+                      <td className="text-xs sm:text-base py-1 pl-2 text-slate-600">{service.category? service.category : 'Sin categoria'}</td>
+                      <td className="text-xs sm:text-base py-1 pl-2 text-slate-600">{service.name}</td>
+                      <td className="text-xs sm:text-base py-1 pl-2 text-slate-600">{service.description? service.description: 'Sin descripcion'}</td>
+                      <td className="text-xs sm:text-base py-1 text-slate-600">
+                        <div className="flex justify-center items-center">
+                          <div 
+                            className={`rounded-full w-4 h-4 ${service.status? 'bg-green-500':'bg-red-500'}`}
+                          ></div>
+                        </div>
                       </td>                      
                       <td className="py-1 pr-2">
                         <div className="flex items-center">

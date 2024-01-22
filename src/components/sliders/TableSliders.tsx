@@ -63,6 +63,7 @@ export default function Table({children, sliders, token, link} : {children:any, 
               <th className='hidden sm:flex w-16 text-start border-b border-slate-400'>Foto</th>
               <th className='w-8 text-start border-b border-slate-400'>&nbsp;</th>
               <th className='w-20 sm:w-48 text-start border-b border-slate-400'>Titulo</th>
+              <th className='w-20 sm:w-48 text-start border-b border-slate-400'>Categoria</th>
               <th className='w-56 text-start border-b border-slate-400'>Caracteristicas</th>
               <th className='w-40 text-start border-b border-slate-400'>imagen</th>
             </tr>
@@ -71,7 +72,7 @@ export default function Table({children, sliders, token, link} : {children:any, 
             {filter.map( (slider: any, index:number) => (
               <tr key={slider._id} className={`${index%2===0? 'bg-white':'bg-blue-100'}`}>
                 <td className='hidden sm:flex'>
-                <Image src={slider.user? slider.user.photo : '/images.jpg'} alt={slider.user? slider.user.name.split(' ')[0]: 'user'} width={50} height={40} className='rounded-full' />
+                  <Image src={slider.user? slider.user.photo : '/images.jpg'} alt={slider.user? slider.user.name.split(' ')[0]: 'user'} width={50} height={40} className='rounded-full' />
                 </td>
                 <td> 
                   <div className=' flex justify-center'>
@@ -81,6 +82,11 @@ export default function Table({children, sliders, token, link} : {children:any, 
                 <td>
                   <div>
                     <p className='text-slate-800 text-xs sm:text-base'>{slider.title}</p>
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <p className='text-slate-800 text-xs sm:text-base ml-2'>{slider.category? slider.category.name: 'sin categoria'}</p>
                   </div>
                 </td>
                 <td>
