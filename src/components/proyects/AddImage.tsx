@@ -3,15 +3,18 @@ import Upload from "../Upload"
 import { useState } from "react"
 import { PlusCircleIcon, CheckCircleIcon } from "@heroicons/react/24/solid";
 
-export default function AddImage({updateCount, pushFile, pushService, services}:
+export default function AddImage({updateCount, pushFile, pushService, services, 
+                                  pushSetPanoramic}:
                                 {updateCount: Function, pushFile:Function, 
-                                pushService: Function, services:any[]}){
+                                pushService: Function, services:any[],
+                                pushSetPanoramic:Function}){
   
   const [file, setFile] = useState();
   const [saved, setSaved] = useState(false);
   const [add, setAdd] = useState(false);
   const [ok, setOk] = useState<boolean>(true);
   const [option, setOption] = useState(services[0]._id);
+  const [panoramic, setPanoramic] = useState<boolean>(false);
 
   const onPlus = () =>{
     if(saved){
@@ -30,6 +33,7 @@ export default function AddImage({updateCount, pushFile, pushService, services}:
       setSaved(true);
       pushFile(file);
       pushService(option);
+      pushSetPanoramic(panoramic);
     }else{
       setOk(false);
       setTimeout(() => {
@@ -65,6 +69,23 @@ export default function AddImage({updateCount, pushFile, pushService, services}:
             >{service.name}</option>
           ))}
         </select>
+        <div>
+          <p className="text-center text-sm">Panoramica</p>
+          <div className="inline-flex rounded-md shadow-sm mx-2">
+            <button type="button" className={`px-3 py-1 text-sm border border-green-400 rounded-md 
+                      ${panoramic? 'bg-green-500 text-white': ''}`}
+              onClick={() => setPanoramic(true)}
+            >
+              Si
+            </button>
+            <button type="button" className={`px-3 py-1 text-sm border border-red-400 rounded-md 
+                      ${!panoramic? 'bg-red-500 text-white': ''}`}
+              onClick={() => setPanoramic(false)}
+            >
+              No
+            </button>
+          </div>
+        </div>
         <CheckCircleIcon width={50} height={50} className={`text-red-500 cursor-pointer ${saved? 'invisible': ''}`} onClick={save} />
         <PlusCircleIcon width={50} height={50} className={`text-green-500 cursor-pointer ${add? 'invisible': ''}`} onClick={onPlus} />        
       </div>

@@ -61,6 +61,8 @@ export async function createProyectImage(project:FormData, auth_token:string){
   // console.log('service send')
   // console.log(project.getAll('services'));
   //return 300;
+  console.log(url);
+  console.log(project.getAll('panoramic'));
   try {            
     const res = await axios.post(url, project, config)
     
@@ -73,6 +75,8 @@ export async function createProyectImage(project:FormData, auth_token:string){
       }          
       return res.data.status;      
     }catch (error:any) {
+      console.log(url);
+      console.log(error);
     return error;    
   }
 }

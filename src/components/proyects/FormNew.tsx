@@ -22,6 +22,7 @@ export default function FormNew({token, tittle, subtitle, address, features, seg
   const [files, setFiles] = useState<any[]>([]);
   const [arrServices, setArrServices] = useState<string[]>([])
   const [client, setClient] = useState(idClient === ''? clients[0]._id:idClient);
+  const [panoramic, setPanoramic] = useState<boolean[]>([]);
 
   const pushFile = (file: any) => {
     setFiles(((oldFile) => [...oldFile, file] ));
@@ -29,6 +30,10 @@ export default function FormNew({token, tittle, subtitle, address, features, seg
 
   const pushService = (serv: string) => {
     setArrServices((oldServ) => [...oldServ, serv])
+  }
+
+  const pushPanoramic = (bandPanoramic: boolean) => {
+    setPanoramic((oldBand) => [...oldBand, bandPanoramic]);
   }
 
   const router = useRouter();
@@ -41,7 +46,7 @@ export default function FormNew({token, tittle, subtitle, address, features, seg
     if(services !== ''){
       setUpFiles((oldArray) => [...oldArray, <AddImage updateCount={updateCount} 
         pushFile={pushFile} pushService={pushService} key={countFiles}
-        services={services}
+        services={services} pushSetPanoramic={pushPanoramic}
       />])
     }
   }, [countFiles])
@@ -95,6 +100,13 @@ export default function FormNew({token, tittle, subtitle, address, features, seg
         formData.append('services', service);
       })
 
+      panoramic.map((imgPan) => {
+        const band ={
+          imgPan
+        }
+        formData.append('panoramic', JSON.stringify(band))
+      })
+
       const proyect = {
         title,
         subtitle,
@@ -104,7 +116,7 @@ export default function FormNew({token, tittle, subtitle, address, features, seg
         user,
         company,
         year,
-        client
+        client,
       };
 
       if(tittle === ''){
@@ -115,12 +127,12 @@ export default function FormNew({token, tittle, subtitle, address, features, seg
             let res = await createProyectImage(formData, token);
             if(res === 201){
               showToastMessage('Proyecto creado exitosamente!');
-              router.push('/proyects');
-              setTimeout(() => {
-                //router.refresh();
-                //router.push('/proyects');
-                window.location.reload();
-              }, 2000);
+              // router.push('/proyects');
+              // setTimeout(() => {
+              //   //router.refresh();
+              //   //router.push('/proyects');
+              //   window.location.reload();
+              // }, 2000);
             }
           }else{
             let res = await createProyect(proyect, token);
